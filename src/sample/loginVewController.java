@@ -14,14 +14,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginVewController implements Initializable{
+public class loginVewController implements Initializable{
     @FXML
     private TextField userNameText;
     @FXML
     private PasswordField passwordText;
     private JDBCConnection jdbcConnection;
 
-    public LoginVewController(){
+    public loginVewController(){
         ;
     }
 
