@@ -14,7 +14,7 @@ public class Main extends Application {
         primaryStage_ = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("loginView.fxml"));
         primaryStage_.setTitle("Hello World");
-        primaryStage_.setScene(new Scene(root, 300, 275));
+        primaryStage_.setScene(new Scene(root, 600, 600));
         primaryStage_.show();
     }
 
