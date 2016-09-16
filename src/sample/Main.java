@@ -2,7 +2,6 @@ package sample;
 
 
 import helpers.CMDmeny;
-import helpers.InputHelper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,8 +28,8 @@ public class Main extends Application {
      System.out.println("just for test: ");
       CMDmeny.print();
 
-      int option;
-      option = InputHelper.getIntegerInput( "chose action..");
+      //int option;
+      //option = InputHelper.getIntegerInput( "chose action..");
 
 
 
