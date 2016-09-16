@@ -1,5 +1,9 @@
-package sample;
+package View;
 
+import Interfaces.DBAccess;
+import Model.BikeUser;
+import Model.DBAccessImpl;
+import Model.JDBCConnection;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -12,7 +16,10 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static Model.DBUtil.processException;
 
 public class loginVewController implements Initializable{
     @FXML
@@ -20,6 +27,8 @@ public class loginVewController implements Initializable{
     @FXML
     private PasswordField passwordText;
     private JDBCConnection jdbcConnection;
+    private DBAccess dbAccess = new DBAccessImpl();
+    public BikeUser currentUser;
 
     public loginVewController(){
         ;
@@ -28,30 +37,22 @@ public class loginVewController implements Initializable{
     public void logInClick(Event event) {
         String userName = userNameText.getText();
         String password = passwordText.getText();
+      System.out.println("logInClick");
 
-      //  try {
-          /*  jdbcConnection.connectToDB();
-            currentUser = jdbcConnection.loginQ(userName, password);
-            System.out.println(currentUser.getfName());
-            if (currentUser.getfName() == null) {
-                System.out.println("det har troligtvis blivit fell");
-            } else {*/
-                //loginPane.setVisible(false);
+      try {
+        currentUser = dbAccess.logIn(userName,password);
+      } catch (SQLException e) {
+        processException(e);
 
-
-
-       /* } catch (SQLException e) {
-
-            e.printStackTrace();
-        }*/
-
+      }
     }
 
 
 
     public void showMainGui(ActionEvent actionEvent) {
         try {
-            FXMLLoader newUserLoader = new FXMLLoader(getClass().getResource("mainVew.fxml"));
+            Main m = new Main();
+            FXMLLoader newUserLoader =m.getNewUserLoader();
             Parent newUserRoot = (Parent) newUserLoader.load();
             Scene newUserScean = new Scene(newUserRoot);
             Main.getPrimaryStage().setScene(newUserScean);
@@ -68,6 +69,8 @@ public class loginVewController implements Initializable{
 
     }
 
+  public void newUserClick(ActionEvent actionEvent) {
+    System.out.println("clicked on newUserClick");
 
-
+  }
 }
