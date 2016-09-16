@@ -1,5 +1,9 @@
-package sample;
+package View;
 
+import Interfaces.DBAccess;
+import Model.BikeUser;
+import Model.DBAccessImpl;
+import Model.JDBCConnection;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -20,6 +24,8 @@ public class loginVewController implements Initializable{
     @FXML
     private PasswordField passwordText;
     private JDBCConnection jdbcConnection;
+    private DBAccess dbAccess = new DBAccessImpl();
+    public BikeUser currentUser;
 
     public loginVewController(){
         ;
@@ -28,30 +34,15 @@ public class loginVewController implements Initializable{
     public void logInClick(Event event) {
         String userName = userNameText.getText();
         String password = passwordText.getText();
-
-      //  try {
-          /*  jdbcConnection.connectToDB();
-            currentUser = jdbcConnection.loginQ(userName, password);
-            System.out.println(currentUser.getfName());
-            if (currentUser.getfName() == null) {
-                System.out.println("det har troligtvis blivit fell");
-            } else {*/
-                //loginPane.setVisible(false);
-
-
-
-       /* } catch (SQLException e) {
-
-            e.printStackTrace();
-        }*/
-
+        currentUser = dbAccess.logIn(userName,password);
     }
 
 
 
     public void showMainGui(ActionEvent actionEvent) {
         try {
-            FXMLLoader newUserLoader = new FXMLLoader(getClass().getResource("mainVew.fxml"));
+            Main m = new Main();
+            FXMLLoader newUserLoader =m.getNewUserLoader();
             Parent newUserRoot = (Parent) newUserLoader.load();
             Scene newUserScean = new Scene(newUserRoot);
             Main.getPrimaryStage().setScene(newUserScean);
@@ -67,7 +58,4 @@ public class loginVewController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-
-
-
 }

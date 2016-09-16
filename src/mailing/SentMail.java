@@ -14,7 +14,8 @@ import java.util.Properties;
 
 public interface SentMail extends OnlyOne {
 
-  String AdminEmail = "cykeltur@gmail.com";
+ // String AdminEmail = "cykeltur@gmail.com";
+    String AdminEmail = "flagrans@hotmail.com";
 
   static boolean sendDelRQ(String userNamn, String email){
 
