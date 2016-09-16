@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.loginVewController">
    <children>
-       <AnchorPane layoutY="2.0" prefHeight="621.0" prefWidth="600.0">
+       <AnchorPane layoutY="2.0" prefHeight="621.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
            <children>
                <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="132.0">
                    <menus>
@@ -34,7 +34,7 @@
                        </Menu>
                    </menus>
                </MenuBar>
-            <Label layoutX="299.0" layoutY="10.0" prefHeight="34.0" prefWidth="132.0" text="Bike For Rent! ">
+            <Label layoutX="202.0" layoutY="10.0" prefHeight="34.0" prefWidth="132.0" text="Bike For Rent! " AnchorPane.rightAnchor="266.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -56,17 +56,19 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="userInfoPane" layoutX="19.0" layoutY="40.0" prefHeight="119.0" prefWidth="165.0">
+            <AnchorPane fx:id="userInfoPane" layoutX="19.0" layoutY="40.0" prefHeight="119.0" prefWidth="245.0" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="45.0">
                <children>
                   <Label text="Du är inloggad som: ">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutY="24.0" prefHeight="17.0" prefWidth="138.0" text="userName: Arne Arnesson" />
-                  <Label layoutY="41.0" prefHeight="17.0" prefWidth="66.0" text="level: 10" />
-                  <Label layoutX="-3.0" layoutY="60.0" prefHeight="27.0" prefWidth="145.0" text="Totalt antal lånade cyklar: 2" />
-                  <Label layoutY="87.0" text="Aktuella lån: ingen" />
+                  <Label layoutY="24.0" prefHeight="17.0" text="userName: Arne Arnesson" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
+                  <Label layoutY="41.0" prefHeight="17.0" text="level: 10" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0" />
+                  <Label layoutX="-3.0" layoutY="60.0" prefHeight="17.0" text="Totalt antal lånade cyklar: 2" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="65.0" />
+                  <Label layoutY="87.0" prefHeight="17.0" text="Aktuella lån: ingen" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="85.0" />
+                  <Button layoutX="195.0" layoutY="81.0" mnemonicParsing="false" text="Ändra" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0" />
+                  <Label layoutX="171.0" layoutY="34.0" text="Ändra uppgifter?" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="25.0" />
                </children>
             </AnchorPane>
             <TextField layoutX="209.0" layoutY="223.0" promptText="Ex. Monark, röd" />
@@ -75,11 +77,17 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ImageView fitHeight="109.0" fitWidth="199.0" layoutX="292.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="109.0" fitWidth="199.0" layoutX="292.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="120.0">
                <image>
                   <Image url="@../Image/bike.png" />
                </image>
             </ImageView>
+            <Label layoutX="406.0" layoutY="182.0" text="Vill du se lite statistik? ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button layoutX="404.0" layoutY="223.0" mnemonicParsing="false" text="Visa statistik" />
    
            </children>
        </AnchorPane>
