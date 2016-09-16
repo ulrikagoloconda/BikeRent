@@ -1,11 +1,11 @@
 package View;
-
-
+import helpers.CMDmeny;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mailing.SentMail;
 
 public class Main extends Application {
     private static Stage primaryStage_;
@@ -32,10 +32,14 @@ public class Main extends Application {
     public static void main(String[] args) {
    /*  System.out.println("just for test: ");
       CMDmeny.print();
-
       int option;
       option = InputHelper.getIntegerInput( "chose action..");
       */
+      //int option;
+      //option = InputHelper.getIntegerInput( "chose action..");
+
+      System.out.println("Mail ok = " +  SentMail.sendDelRQ("användare1", "anv1mail@gmail.com"));
+
 
       launch(args);
     }
