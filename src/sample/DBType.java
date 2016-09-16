@@ -5,5 +5,5 @@ package sample;
  * @since 2016-09-15
  */
 public enum DBType { //if we have different database system MYSQL,SQLlite , hd...
-	MYSQL
+	Ulrika, Niklas
 }
