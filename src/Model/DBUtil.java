@@ -16,10 +16,10 @@ public class DBUtil {
 			"jdbc:mysql://localhost/bikerentDB";
 	private static final String CONN_STRING_Niklas =
 			"jdbc:mysql://localhost/bikerentDB";
-	
+	private static Connection tempCon;
 	public static Connection getConnection_Ulrika(BikeType dbType) throws SQLException {
 		switch (dbType) {
-		case MYSQL:
+		//case MYSQL:
 
 			//return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
 
@@ -31,8 +31,8 @@ public class DBUtil {
 	
 	public static Connection getConnection_Niklas(BikeType dbType) throws SQLException {
 		switch (dbType) {
-		case MYSQL:
-			return DriverManager.getConnection(CONN_STRING_Niklas, USERNAME, PASSWORD);
+		//case MYSQL:
+			//return DriverManager.getConnection(CONN_STRING_Niklas, USERNAME, PASSWORD);
 
 		default:
 			return null;
@@ -53,5 +53,26 @@ public class DBUtil {
 		System.err.println("SQL state: " +e.getSQLState());
 		System.err.println("-------------------------------------------------------------------------------\n");
 		
+	}
+
+	public static void tempConnect(){
+		try {
+			tempCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/dresslibrary", "root", "Forfattare1");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static Connection getConnection(){
+		return tempCon;
+	}
+
+	public static void disConnect(){
+		try {
+			tempCon.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

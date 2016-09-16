@@ -19,8 +19,7 @@ public class Bike {
 
     public Bike(){}
 
-    public Bike(int bikeID, int brandID, Year modelYear, String color, int size, BikeType type){
-        this.bikeID = bikeID;
+    public Bike( int brandID, Year modelYear, String color, int size, BikeType type){
         this.brandID = brandID;
         this.modelYear = modelYear;
         this.color=color;
@@ -28,6 +27,17 @@ public class Bike {
         this.type = type;
     }
 
+    public Bike( int brandID, Year modelYear, String color, int size, BikeType type, int bikeID, ByteArrayInputStream image){
+
+        this.brandID = brandID;
+        this.modelYear = modelYear;
+        this.color=color;
+        this.size = size;
+        this.type = type;
+        this.bikeID=bikeID;
+        this.image=image;
+
+    }
     public int getBikeID() {
         return bikeID;
     }

@@ -2,6 +2,7 @@ package Interfaces;
 
 import Model.Bike;
 import Model.BikeType;
+import Model.BikeUser;
 
 import java.io.ByteArrayInputStream;
 import java.time.Year;
@@ -15,5 +16,8 @@ import java.util.ArrayList;
 public interface DBAccess {
     int insertNewBike(ByteArrayInputStream imageStream, int brandID, Year modelYear, String color, int size, BikeType type);
     ArrayList<Bike> selectAvailableBikes();
+    ArrayList<BikeUser> searchUserByWildcard(String search);
+    
+
 
 }
