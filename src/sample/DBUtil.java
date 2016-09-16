@@ -16,7 +16,7 @@ public class DBUtil {
 	public static Connection getConnection_Ulrika(DBType dbType) throws SQLException {
 		switch (dbType) {
 		case MYSQL:
-			return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);		
+			//return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
 
 		default:
 			return null;
