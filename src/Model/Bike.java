@@ -1,6 +1,5 @@
 package Model;
 
-import java.io.ByteArrayInputStream;
 import java.time.Year;
 
 /**
@@ -13,9 +12,10 @@ public class Bike {
     private int brandID;
     private Year modelYear;
     private String color;
-    private ByteArrayInputStream image;
+    private String imagePath;
     private int size;
     private BikeType type;
+    private boolean available;
 
     public Bike(){}
 
@@ -27,7 +27,7 @@ public class Bike {
         this.type = type;
     }
 
-    public Bike( int brandID, Year modelYear, String color, int size, BikeType type, int bikeID, ByteArrayInputStream image){
+    public Bike( int brandID, Year modelYear, String color, int size, BikeType type, int bikeID, String imagePath){
 
         this.brandID = brandID;
         this.modelYear = modelYear;
@@ -35,7 +35,7 @@ public class Bike {
         this.size = size;
         this.type = type;
         this.bikeID=bikeID;
-        this.image=image;
+        this.imagePath=imagePath;
 
     }
     public int getBikeID() {
@@ -70,12 +70,12 @@ public class Bike {
         this.color = color;
     }
 
-    public ByteArrayInputStream getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImage(ByteArrayInputStream image) {
-        this.image = image;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public int getSize() {
@@ -92,5 +92,13 @@ public class Bike {
 
     public void setType(BikeType type) {
         this.type = type;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }

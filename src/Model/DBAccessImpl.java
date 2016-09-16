@@ -4,7 +4,6 @@ import Interfaces.DBAccess;
 import Interfaces.DeleteUser;
 import Interfaces.InsertNewUser;
 
-import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
 import java.time.Year;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess{
 
     @Override
     public ArrayList<Bike> selectAvailableBikes() {
-        return null;
+       return AccessBike.selectAvailableBikes();
     }
 
     @Override

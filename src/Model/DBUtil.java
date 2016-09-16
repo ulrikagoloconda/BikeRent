@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtil {
-static Connection tempCon;
+private  static Connection tempCon;
 
 
 	public static void tempConnect(){
