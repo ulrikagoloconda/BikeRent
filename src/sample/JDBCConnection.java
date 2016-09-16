@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * @author Marcus Vidén Ulrika, Goloconda Fahlén, Jan Eriksson
+ * @author
  * @version 1.0
  * @since 2016-09-15
  */
