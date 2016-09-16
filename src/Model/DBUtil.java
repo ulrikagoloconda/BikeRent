@@ -1,4 +1,4 @@
-package sample;
+package Model;
 /**
  * @author Niklas Karlsson
  * @version 1.0
@@ -17,7 +17,7 @@ public class DBUtil {
 	private static final String CONN_STRING_Niklas =
 			"jdbc:mysql://localhost/bikerentDB";
 	
-	public static Connection getConnection_Ulrika(DBType dbType) throws SQLException {
+	public static Connection getConnection_Ulrika(BikeType dbType) throws SQLException {
 		switch (dbType) {
 		case MYSQL:
 
@@ -29,7 +29,7 @@ public class DBUtil {
 		}
 	}
 	
-	public static Connection getConnection_Niklas(DBType dbType) throws SQLException {
+	public static Connection getConnection_Niklas(BikeType dbType) throws SQLException {
 		switch (dbType) {
 		case MYSQL:
 			return DriverManager.getConnection(CONN_STRING_Niklas, USERNAME, PASSWORD);

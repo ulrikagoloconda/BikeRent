@@ -1,4 +1,4 @@
-package sample;
+package View;
 
 
 import javafx.application.Application;
@@ -14,14 +14,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage_ = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("loginView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/loginView.fxml"));
         primaryStage_.setTitle("Bike Rent");
         primaryStage_.setScene(new Scene(root, 600, 600));
         primaryStage_.show();
     }
 
     public  FXMLLoader getNewUserLoader(){
-        FXMLLoader newUserLoader = new FXMLLoader(getClass().getResource("mainView.fxml"));
+        FXMLLoader newUserLoader = new FXMLLoader(getClass().getResource("../View/mainView.fxml"));
         return newUserLoader;
     }
 

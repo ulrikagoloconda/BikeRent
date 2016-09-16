@@ -1,5 +1,6 @@
-package sample;
+package View;
 
+import Model.JDBCConnection;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
