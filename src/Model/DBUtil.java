@@ -14,7 +14,7 @@ private  static Connection tempCon;
 
 	public static void tempConnect(){
 		try {
-			tempCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/dresslibrary", "root", "Forfattare1");
+			tempCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/bikerentDB", "root", "Forfattare1");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

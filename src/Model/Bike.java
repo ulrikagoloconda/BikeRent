@@ -9,27 +9,27 @@ import java.time.Year;
  */
 public class Bike {
     private int bikeID;
-    private int brandID;
+    private String brandName;
     private Year modelYear;
     private String color;
     private String imagePath;
     private int size;
-    private BikeType type;
+    private String type;
     private boolean available;
 
     public Bike(){}
 
-    public Bike( int brandID, Year modelYear, String color, int size, BikeType type){
-        this.brandID = brandID;
+    public Bike( String brandName, Year modelYear, String color, int size, String type){
+        this.brandName = brandName;
         this.modelYear = modelYear;
         this.color=color;
         this.size = size;
         this.type = type;
     }
 
-    public Bike( int brandID, Year modelYear, String color, int size, BikeType type, int bikeID, String imagePath){
+    public Bike( String brandName, Year modelYear, String color, int size, String type, int bikeID, String imagePath){
 
-        this.brandID = brandID;
+        this.brandName = brandName;
         this.modelYear = modelYear;
         this.color=color;
         this.size = size;
@@ -46,12 +46,12 @@ public class Bike {
         this.bikeID = bikeID;
     }
 
-    public int getBrandID() {
-        return brandID;
+    public String getBrandID() {
+        return brandName;
     }
 
-    public void setBrandID(int brandID) {
-        this.brandID = brandID;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
     public Year getModelYear() {
@@ -86,11 +86,11 @@ public class Bike {
         this.size = size;
     }
 
-    public BikeType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(BikeType type) {
+    public void setType(String type) {
         this.type = type;
     }
 

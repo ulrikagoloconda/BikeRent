@@ -4,10 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Watchable;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
@@ -31,6 +31,8 @@ return 0;
     public static ArrayList<Bike> selectAvailableBikes() {
         ArrayList<Bike> availableBikes = new ArrayList<>();
         try {
+            DBUtil.tempConnect();
+            DBUtil.getConnection().setAutoCommit(false);
             String sql = "SELECT bike.bikeID,bike.modelyear, bike.color, bike.image, bike.size, type.typeName, brand.brandname FROM bike" +
                     "  LEFT OUTER JOIN rentbridge" +
                     "    ON bike.bikeID = rentbridge.bikeID" +
@@ -55,14 +57,20 @@ return 0;
                 String paths = "BikeRent\\src\\Image\\tempImageDir"+i+".jpg";
                 OutputStream out = new FileOutputStream(paths);
                 b.setImagePath(paths);
-                b.setType(rs.getString("typEnum").toString());
-
-
-
+                b.setType(rs.getString("typeName"));
+                b.setBrandName(rs.getString("brandname"));
+                availableBikes.add(b);
             }
+            DBUtil.getConnection().commit();
 
         }catch (Exception e){
+            try {
+                DBUtil.getConnection().rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             e.printStackTrace();
         }
+        return availableBikes;
     }
 }
