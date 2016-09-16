@@ -4,10 +4,12 @@ import Interfaces.DBAccess;
 import Interfaces.DeleteUser;
 import Interfaces.InsertNewUser;
 
+import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Ulrika Goloconda Fahlén
@@ -17,11 +19,51 @@ import java.util.Date;
 public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess{
     @Override
     public int insertNewBike(ByteArrayInputStream imageStream, int brandID, Year modelYear, String color, int size, BikeType type) {
-        return 0;
+        return AccessBike.insertNewBike(imageStream, brandID, modelYear, color, size,  type);
     }
 
     @Override
     public ArrayList<Bike> selectAvailableBikes() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<BikeUser> searchUserByWildcard(String search) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Bike> selectBikeByTypeBrandColor(String brand, String color, BikeType type) {
+        return null;
+    }
+
+    @Override
+    public BikeUser alterUser(String userName, String passw, BikeUser updatedUser) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<String> getAllUserNames() {
+        return null;
+    }
+
+    @Override
+    public boolean deleteBike(int bikeID) {
+        return false;
+    }
+
+    @Override
+    public int averageLoanPerUser() {
+        return 0;
+    }
+
+    @Override
+    public Map<Mounth, Integer> numerOfLoanPerMounnth() {
+        return null;
+    }
+
+    @Override
+    public BikeUser logIn(String userName, String passW) {
         return null;
     }
 
