@@ -1,6 +1,4 @@
-package sample;
-
-
+package View;
 import helpers.CMDmeny;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,14 +9,20 @@ import mailing.SentMail;
 
 public class Main extends Application {
     private static Stage primaryStage_;
+    private static FXMLLoader newUserLoader;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage_ = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("loginView.fxml"));
-        primaryStage_.setTitle("Hello World");
-        primaryStage_.setScene(new Scene(root, 300, 275));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/loginView.fxml"));
+        primaryStage_.setTitle("Bike Rent");
+        primaryStage_.setScene(new Scene(root, 600, 600));
         primaryStage_.show();
+    }
+
+    public  FXMLLoader getNewUserLoader(){
+        FXMLLoader newUserLoader = new FXMLLoader(getClass().getResource("../View/mainView.fxml"));
+        return newUserLoader;
     }
 
     public static Stage getPrimaryStage(){
@@ -26,13 +30,16 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-     System.out.println("just for test: ");
+   /*  System.out.println("just for test: ");
       CMDmeny.print();
-
+      int option;
+      option = InputHelper.getIntegerInput( "chose action..");
+      */
       //int option;
       //option = InputHelper.getIntegerInput( "chose action..");
 
       System.out.println("Mail ok = " +  SentMail.sendDelRQ("användare1", "anv1mail@gmail.com"));
+
 
       launch(args);
     }

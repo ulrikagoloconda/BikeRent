@@ -1,9 +1,12 @@
-package sample;
+package View;
 
+import Model.Bike;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +19,12 @@ import java.util.ResourceBundle;
 public class MainVewController implements Initializable {
     @FXML
     private TableColumn columCykel;
+    @FXML
+    private TableView<Bike> tableBikeView;
+    @FXML
+    private TableColumn<Bike, String> year, status, color, type, model, available;
+   @FXML
+    private TableColumn<Bike, ImageView> image;
 
     public void populateColumns(){
         columCykel.getColumns().add(new Label("Test"));
