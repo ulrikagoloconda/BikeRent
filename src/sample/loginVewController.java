@@ -51,7 +51,8 @@ public class loginVewController implements Initializable{
 
     public void showMainGui(ActionEvent actionEvent) {
         try {
-            FXMLLoader newUserLoader = new FXMLLoader(getClass().getResource("mainVew.fxml"));
+            Main m = new Main();
+            FXMLLoader newUserLoader =m.getNewUserLoader();
             Parent newUserRoot = (Parent) newUserLoader.load();
             Scene newUserScean = new Scene(newUserRoot);
             Main.getPrimaryStage().setScene(newUserScean);

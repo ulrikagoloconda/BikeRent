@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -9,11 +11,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginVewController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.loginVewController">
    <children>
-       <AnchorPane  layoutY="48.0" prefHeight="355.0" prefWidth="600.0">
+       <AnchorPane layoutY="2.0" prefHeight="621.0" prefWidth="600.0">
            <children>
-               <MenuBar layoutX="21.0" layoutY="14.0">
+               <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="132.0">
                    <menus>
                        <Menu mnemonicParsing="false" text="File">
                            <items>
@@ -32,27 +34,54 @@
                        </Menu>
                    </menus>
                </MenuBar>
-            <Label layoutX="116.0" layoutY="82.0" text="Välkommet till Bike Rent! ">
+            <Label layoutX="299.0" layoutY="10.0" prefHeight="34.0" prefWidth="132.0" text="Bike For Rent! ">
                <font>
-                  <Font size="22.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
-            <TableView layoutX="38.0" layoutY="125.0" prefHeight="200.0" prefWidth="445.0">
+            <TableView layoutX="40.0" layoutY="278.0" prefHeight="298.0" prefWidth="525.0">
               <columns>
-                <TableColumn fx:id="columCykel" prefWidth="75.0" text="Cykel" />
+                <TableColumn fx:id="columCykel" prefWidth="75.0" text="Bild" />
                 <TableColumn prefWidth="75.0" text="Årsmodell" />
                   <TableColumn prefWidth="75.0" text="Status" />
-                  <TableColumn prefWidth="115.0" text="Senast renoverad" />
+                  <TableColumn prefWidth="75.0" text="Färg" />
+                  <TableColumn prefWidth="75.0" text="Cykeltyp" />
+                  <TableColumn prefWidth="75.0" text="Modell" />
+                  <TableColumn prefWidth="75.0" text="Ledig?" />
               </columns>
             </TableView>
+            <Button layoutX="38.0" layoutY="223.0" mnemonicParsing="false" text="Sök ledig cykel" />
+            <Label layoutX="40.0" layoutY="182.0" text="Vilka cyklar är lediga?">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="userInfoPane" layoutX="19.0" layoutY="40.0" prefHeight="119.0" prefWidth="165.0">
+               <children>
+                  <Label text="Du är inloggad som: ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutY="24.0" prefHeight="17.0" prefWidth="138.0" text="userName: Arne Arnesson" />
+                  <Label layoutY="41.0" prefHeight="17.0" prefWidth="66.0" text="level: 10" />
+                  <Label layoutX="-3.0" layoutY="60.0" prefHeight="27.0" prefWidth="145.0" text="Totalt antal lånade cyklar: 2" />
+                  <Label layoutY="87.0" text="Aktuella lån: ingen" />
+               </children>
+            </AnchorPane>
+            <TextField layoutX="209.0" layoutY="223.0" promptText="Ex. Monark, röd" />
+            <Label layoutX="209.0" layoutY="182.0" text="Vilken cykel söker du?">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="109.0" fitWidth="199.0" layoutX="292.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/bike.png" />
+               </image>
+            </ImageView>
    
            </children>
        </AnchorPane>
    </children>
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
-</GridPane>
+</AnchorPane>
