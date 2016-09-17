@@ -41,6 +41,7 @@ public class loginVewController implements Initializable{
 
       try {
         currentUser = dbAccess.logIn(userName,password);
+        System.out.println(currentUser.getPhone());
       } catch (SQLException e) {
         processException(e);
 

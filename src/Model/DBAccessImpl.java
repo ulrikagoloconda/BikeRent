@@ -66,7 +66,7 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess{
     public BikeUser logIn(String userName, String passW)  {
       try {
         System.out.println("in the bikeuser login");
-        AccessBike.loginUser(userName,passW);
+        BikeUser LoginUser = AccessBike.loginUser(userName, passW);
       } catch (SQLException e) {
         DBUtil.processException(e);
       }
