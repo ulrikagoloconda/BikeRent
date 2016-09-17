@@ -18,6 +18,7 @@ public class Bike {
     private String type;
     private boolean available;
     private ByteArrayInputStream imageStream;
+    private BikeUser createdBy;
 
     public Bike(){}
 
@@ -114,5 +115,13 @@ public class Bike {
 
     public void setImageStream(ByteArrayInputStream imageStream) {
         this.imageStream = imageStream;
+    }
+
+    public BikeUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(BikeUser createdBy) {
+        this.createdBy = createdBy;
     }
 }
