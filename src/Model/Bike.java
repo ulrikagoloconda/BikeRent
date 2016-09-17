@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.ByteArrayInputStream;
 import java.time.Year;
 
 /**
@@ -16,6 +17,7 @@ public class Bike {
     private int size;
     private String type;
     private boolean available;
+    private ByteArrayInputStream imageStream;
 
     public Bike(){}
 
@@ -100,5 +102,17 @@ public class Bike {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public ByteArrayInputStream getImageStream() {
+        return imageStream;
+    }
+
+    public void setImageStream(ByteArrayInputStream imageStream) {
+        this.imageStream = imageStream;
     }
 }

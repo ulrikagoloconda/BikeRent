@@ -33,13 +33,7 @@ return 0;
         try {
             DBUtil.tempConnect();
             DBUtil.getConnection().setAutoCommit(false);
-            String sql = "SELECT bike.bikeID,bike.modelyear, bike.color, bike.image, bike.size, type.typeName, brand.brandname FROM bike" +
-                    "  LEFT OUTER JOIN rentbridge" +
-                    "    ON bike.bikeID = rentbridge.bikeID" +
-                    "  JOIN brand ON bike.brandid = brand.brandid" +
-                    "  JOIN type ON bike.typeID = type.typeID" +
-                    "WHERE dayOfReturn <> null" +
-                    "      OR dayOfActualReturn <> null";
+            String sql = "CALL search_available_bikes()";
             PreparedStatement ps = DBUtil.getConnection().prepareStatement(sql);
            ResultSet rs =  ps.executeQuery();
             int i = 0;

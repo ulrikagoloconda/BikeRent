@@ -77,7 +77,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ImageView fitHeight="109.0" fitWidth="199.0" layoutX="292.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="120.0">
+            <ImageView fitHeight="92.0" fitWidth="146.0" layoutX="358.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="118.82008361816406">
                <image>
                   <Image url="@../Image/bike.png" />
                </image>
@@ -88,6 +88,7 @@
                </font>
             </Label>
             <Button layoutX="404.0" layoutY="223.0" mnemonicParsing="false" text="Visa statistik" />
+            <Button fx:id="adminBtn" layoutX="434.0" layoutY="15.0" mnemonicParsing="false" onAction="#showAdminView" text="Administrera Bike Rent" />
    
            </children>
        </AnchorPane>

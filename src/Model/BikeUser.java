@@ -9,6 +9,7 @@ import java.time.LocalDate;
  */
 public class BikeUser {
     private int userID;
+    private String userName;
     private String fName;
     private String lName;
     private int memberLevel;
@@ -19,7 +20,8 @@ public class BikeUser {
     public BikeUser(){
 
     }
-    public BikeUser(String fName, String lName, int memberLevel, String email, int phone, LocalDate memberSince){
+    public BikeUser(String userName, String fName, String lName, int memberLevel, String email, int phone, LocalDate memberSince){
+       this.userName = userName;
         this.fName = fName;
         this.lName = lName;
         this.memberLevel = memberLevel;
@@ -82,6 +84,14 @@ public class BikeUser {
 
     public void setMemberSince(LocalDate memberSince) {
         this.memberSince = memberSince;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
 
