@@ -1,13 +1,13 @@
 package Interfaces;
 
-import java.util.Date;
+import java.sql.SQLException;
 
 /**
  * Created by NIK1114 on 2016-09-15.
  */
 public interface InsertNewUser {
 
-  boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone , String username , String passw , Date membersince  );
+  boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone , String username , String passw )throws SQLException ;
   /**
    * TO use the: boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone , String username , String passw , Date membersince  )
    *
@@ -35,6 +35,25 @@ public interface InsertNewUser {
    END//
    DELIMITER ;
 
+   drop FUNCTION insert_new_user;
+   DELIMITER //
+   CREATE FUNCTION insert_new_user(in_fname varchar(50),in_lname varchar(11),in_memberlevel varchar(11),in_email varchar(50),in_phone varchar(11),in_username varchar(11), in_passw varchar(50)) RETURNS smallint(6)
+   BEGIN
+   DECLARE pw VARBINARY(56);
+   DECLARE userNameAvalible VARCHAR(11);
+   if exists(SELECT username FROM bikeuser WHERE userName=in_username)
+   THEN
+   RETURN 0;
+   ELSE
+   INSERT INTO bikeuser (fname, lname, memberlevel, email, phone , username , passw , membersince)
+   VALUES (in_fname, in_lname, in_memberlevel, in_email, in_phone , in_username , AES_ENCRYPT(in_passw,'tackforkaffet') , CURDATE());
+   RETURN 1;
+   END IF;
+   END//
+   DELIMITER ;
+
+   SELECT insert_new_user(
+   'Niklas', 'Karlsson', 0, 'cykeltur@gmail.com', 0703032191 , 'cykeltur1' , 1234);
 
 
    **/

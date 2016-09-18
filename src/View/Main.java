@@ -9,13 +9,18 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private static Stage primaryStage_;
     private static FXMLLoader newUserLoader;
-
+  private static FXMLLoader loginLoader;
+  private static FXMLLoader root;
+  private static Scene loginScene;
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage_ = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../View/loginView.fxml"));
+      loginLoader = new FXMLLoader(getClass().getResource("../View/loginView.fxml"));
+      Parent root = loginLoader.load();
         primaryStage_.setTitle("Bike Rent");
-        primaryStage_.setScene(new Scene(root, 600, 600));
+      loginScene = new Scene(root, 600, 600);
+        primaryStage_.setScene(loginScene);
+
         primaryStage_.show();
     }
 
@@ -26,6 +31,9 @@ public class Main extends Application {
   public  FXMLLoader getMainViewLoader(){
     FXMLLoader newUserLoader = new FXMLLoader(getClass().getResource("../View/mainView.fxml"));
     return newUserLoader;
+  }
+  public  FXMLLoader getLoginViewLoader(){
+    return loginLoader;
   }
 
     public static Stage getPrimaryStage(){

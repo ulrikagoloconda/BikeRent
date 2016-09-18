@@ -22,7 +22,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class newUserVewController implements Initializable{
+public class changeUserVewController implements Initializable{
 
   @FXML
   private TextField userNameText;
@@ -46,7 +46,7 @@ public class newUserVewController implements Initializable{
     private DBAccess dbAccess = new DBAccessImpl();
     public BikeUser currentUser ;
 
-    public newUserVewController(){
+    public changeUserVewController(){
         ;
     }
 

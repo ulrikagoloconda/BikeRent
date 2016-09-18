@@ -3,7 +3,6 @@ package Model;
 import sample.DBType;
 
 import java.sql.*;
-import java.time.LocalDate;
 
 /**
  * Created by NIK1114 on 2016-09-18.
@@ -155,27 +154,52 @@ CALL getUserFromUserName('1');
     return isLoginOK;
   }
 
-  public boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw, LocalDate membersince) throws SQLException  {
+  public static boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw)   {
     // insert_new_user(in_fname varchar(50),in_lname varchar(50),in_memberlevel varchar(50),in_email varchar(50),in_phone varchar(50),in_username varchar(50), in_passw varchar(50)) RETURNS smallint(6)
-     String SQLInsertUser = "{? = call insert_new_user(?, ?, ?, ?, ?, ?, ?, ?)}";
+     String SQLInsertUser = "SELECT insert_new_user(?, ?, ?, ?, ?, ?, ?)";
       ResultSet rs = null;
+    DBType dataBase = null;
+    if(helpers.PCRelated.isThisNiklasPC()){
+      dataBase = DBType.Niklas;
+    }else{
+      dataBase = DBType.Ulrika;
+    }
       try ( //only in java 7 and later!!
             Connection conn = DBUtil.getConnection(dataBase); //database_user type like ENUM and get PW :-);
-            CallableStatement stmt = conn.prepareCall (SQLQueryLogInStage);
+            PreparedStatement stmt = conn.prepareStatement(SQLInsertUser, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ){
-        stmt.registerOutParameter (1, Types.BOOLEAN);
-        stmt.setString(2,userName);
-        stmt.setString(3,passW);
-        stmt.execute();
-        System.out.print("what do we get from check_password T/F: ");
-        isLoginOK =stmt.getBoolean (1); //1 or 0....
-        System.out.println(isLoginOK);
-        //} catch (SQLException e) {
-        //  DBUtil.processException(e);
-        //  return false;
+        /*
+        SELECT insert_new_user(fname, lname, 666, email@c.se, username, passw, ?)
+        in_fname varchar(50),in_lname varchar(11),in_memberlevel varchar(11),in_email varchar(50),in_phone varchar(11),in_username varchar(11), in_passw varchar(50))
+         */
+        //in_fname varchar(50),in_lname varchar(50),in_memberlevel varchar(50),in_email varchar(50),in_phone varchar(50),in_username varchar(50), in_passw varchar(50))
+        stmt.setString(1,fname);
+        stmt.setString(2,lname);
+        stmt.setInt(3,memberlevel);
+        stmt.setString(4,email);
+        stmt.setInt(5,phone);
+        stmt.setString(6,username);
+        stmt.setString(7,passw);
+        rs = stmt.executeQuery();
+        int nrFound = 0;
+        while (rs.next()) {
+          boolean isAddOK =   rs.getBoolean(1);
+          System.out.println("isAddOK : " + isAddOK);
+          return isAddOK;
+        }
+
+        } catch (SQLException e) {
+         DBUtil.processException(e);
+          return false;
       }finally {
-        if(rs != null ) rs.close();
+        if(rs != null ) try {
+          rs.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
       }
-      return isLoginOK;
-    }
+
+    return false;
+  }
 }
+

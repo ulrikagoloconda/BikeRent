@@ -29,7 +29,7 @@ public interface DBAccess {
     Map<Mounth,Integer> numerOfLoanPerMounnth();
     BikeUser logIn(String userName, String passW) throws SQLException;
     boolean isUserAvalible(String userName) throws SQLException;
-    boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw, LocalDate membersince);
+    boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw) throws SQLException;
 
 
 

@@ -8,7 +8,6 @@ import java.io.ByteArrayInputStream;
 import java.sql.SQLException;
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -16,7 +15,7 @@ import java.util.Map;
  * @version 1.0
  * @since 2016-09-16
  */
-public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess{
+public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess {
     @Override
     public int insertNewBike(ByteArrayInputStream imageStream, int brandID, Year modelYear, String color, int size, BikeType type) {
         return AccessBike.insertNewBike(imageStream, brandID, modelYear, color, size,  type);
@@ -71,12 +70,7 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess{
     }
 
     @Override
-    public boolean DeleteUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw, Date membersince) {
-        return false;
-    }
-
-    @Override
-    public boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw, Date membersince) {
+    public boolean DeleteUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw) {
         return false;
     }
 
@@ -84,4 +78,10 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess{
   public boolean isUserAvalible(String userName) throws SQLException{
     return AccessUser.isUserAvalible(userName);
   }
+
+  @Override
+  public boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw)  {
+        System.out.println("in the add user");
+        return AccessUser.InsertNewUser(fname, lname, memberlevel, email, phone, username, passw);
+      }
 }
