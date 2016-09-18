@@ -63,14 +63,11 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess{
     }
 
     @Override
-    public BikeUser logIn(String userName, String passW)  {
-      try {
-        System.out.println("in the bikeuser login");
-        BikeUser LoginUser = AccessBike.loginUser(userName, passW);
-      } catch (SQLException e) {
-        DBUtil.processException(e);
-      }
-      return null;
+    public BikeUser logIn(String userName, String passW) throws SQLException  {
+      BikeUser LoginUser = null;
+        System.out.println("in the 'try' bikeuser login");
+        LoginUser = AccessUser.loginUser(userName, passW);
+      return LoginUser;
     }
 
     @Override
@@ -82,4 +79,9 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess{
     public boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw, Date membersince) {
         return false;
     }
+
+  @Override
+  public boolean isUserAvalible(String userName) throws SQLException{
+    return AccessUser.isUserAvalible(userName);
+  }
 }

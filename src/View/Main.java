@@ -20,9 +20,13 @@ public class Main extends Application {
     }
 
     public  FXMLLoader getNewUserLoader(){
-        FXMLLoader newUserLoader = new FXMLLoader(getClass().getResource("../View/mainView.fxml"));
+        FXMLLoader newUserLoader = new FXMLLoader(getClass().getResource("../View/newUserView.fxml"));
         return newUserLoader;
     }
+  public  FXMLLoader getMainViewLoader(){
+    FXMLLoader newUserLoader = new FXMLLoader(getClass().getResource("../View/mainView.fxml"));
+    return newUserLoader;
+  }
 
     public static Stage getPrimaryStage(){
         return primaryStage_;

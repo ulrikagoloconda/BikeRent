@@ -7,6 +7,7 @@ import Model.Mounth;
 
 import java.io.ByteArrayInputStream;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Map;
@@ -27,6 +28,8 @@ public interface DBAccess {
     int averageLoanPerUser();
     Map<Mounth,Integer> numerOfLoanPerMounnth();
     BikeUser logIn(String userName, String passW) throws SQLException;
+    boolean isUserAvalible(String userName) throws SQLException;
+    boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw, LocalDate membersince);
 
 
 

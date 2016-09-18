@@ -23,6 +23,11 @@ public class DBUtil {
 
   public static Connection getConnection(DBType dbType) throws SQLException {
     System.out.println("in model/dbutil");
+    if(helpers.PCRelated.isThisNiklasPC()){
+      dbType = DBType.Niklas;
+    }else{
+      dbType = DBType.Ulrika;
+    }
     switch (dbType) {
       case Ulrika:
         System.out.println("Ulrikas inloggning");
