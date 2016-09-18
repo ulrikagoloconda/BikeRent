@@ -2,6 +2,7 @@ package View;
 
 import Model.Bike;
 import Model.BikeUser;
+import Model.AccessBike;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -62,28 +63,36 @@ public class AdminViewController implements Initializable {
 
     public void addBike(ActionEvent actionEvent) {
         //TextField brandText, modelYearText, colorText, typeText;
-        if(newBike.equals(null)){
-            newBike = new Bike();
-        }
-       if(newBike.getColor().equals(currentUser)) {
-           if(brandText.getText().length()>0){
-               newBike.setBrandName(brandText.getText());
-           }
-           if(modelYearText.getText().length()==4){
-               String s = modelYearText.getText();
-               for(int i = 0; i < 4; i++ ) {
-                 if(!Character.isDigit(s.charAt(i))){
-                       modelYearText.setText("");
-                       break;
-                   }else {
-                     int yearInt = Integer.valueOf(s);
-                     Year y = Year.of(yearInt);
-                     newBike.setModelYear(y);
-                   }
-               }
+        if (newBike.getCreatedBy().equals(loginView.getCurrentUser())) {
+            if (newBike.equals(null)) {
+                newBike = new Bike();
+            }
+            if (newBike.getColor().equals(currentUser)) {
+                if (brandText.getText().length() > 0) {
+                    newBike.setBrandName(brandText.getText());
+                }
+                if (modelYearText.getText().length() == 4) {
+                    String s = modelYearText.getText();
+                    for (int i = 0; i < 4; i++) {
+                        if (!Character.isDigit(s.charAt(i))) {
+                            modelYearText.setText("");
+                            break;
+                        } else {
+                            int yearInt = Integer.valueOf(s);
+                            Year y = Year.of(yearInt);
+                            newBike.setModelYear(y);
+                        }
+                    }
+                }
+                if (colorText.getText().length() > 0) {
+                    newBike.setColor(colorText.getText());
+                }
+                if (typeText.getText().length() > 0) {
+                    newBike.setType(typeText.getText());
+                }
+            }
 
-           }
         }
-
+        AccessBike.insertNewBike(newBike);
     }
 }
