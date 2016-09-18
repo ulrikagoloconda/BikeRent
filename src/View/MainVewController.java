@@ -11,7 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * @author MGoloconda Fahlén
+ * @author Goloconda Fahlén
  * @version 1.0
  * @since 2016-09-15
  */
@@ -31,23 +32,20 @@ public class MainVewController implements Initializable {
     @FXML
     private TableColumn<Bike, String> year, status, color, type, model, available;
    @FXML
-    private TableColumn<Bike, ImageView> image;
+   private GridPane gridPane;
+
     private DBAccess dbaccess;
 
 
-    public void populateColumns(){
-//        columCykel.getColumns().add(new Label("Test"));
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        populateColumns();
         dbaccess = new DBAccessImpl();
+
     }
 
     public void searchAvailableBikes(ActionEvent actionEvent) {
       ArrayList<Bike> availableBikes = dbaccess.selectAvailableBikes();
-
+        populateGridPane(availableBikes);
     }
 
     public void showAdminView(ActionEvent actionEvent)  {
@@ -62,6 +60,14 @@ public class MainVewController implements Initializable {
             e.printStackTrace();
         }
 
+
+    }
+
+    public void populateGridPane(ArrayList<Bike> bikeArray){
+        String [] topList = {"Bild", "Årsmodell", "Färg", "Cykeltyp", "Modell", "Ledig?"};
+        for(int i = 1; i <=6; i++) {
+            gridPane.add(new Label(topList[i-1]), i, 0);
+        }
 
     }
 

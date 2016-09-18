@@ -3,11 +3,7 @@ package Model;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Blob;
-import java.sql.PreparedStatement;
-import java.sql.*
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
@@ -19,43 +15,30 @@ import java.util.ArrayList;
  */
 public class AccessBike {
     public static int insertNewBike(Bike newBike) {
-        /*
-        IN typeIn VARCHAR(30),
-    IN modelYearIn YEAR,
-    IN colorIn VARCHAR(50),
-    IN sizeIn SMALLINT(6),
-  IN imageIn BLOB,
-  OUT bikeIDOut INT(11)
-         */
-        Year
-        int bikeID = 0;
         DBUtil.tempConnect();
         try {
-            String sql = "? = CALL insert_bike(?,?,?,?,?)";
-
+            String sql = "CALL insert_bike(?,?,?,?,?,?,?)";
             CallableStatement cs = DBUtil.getConnection().prepareCall(sql);
-            cs.setInt(1,bikeID);
-            cs.setString(2,newBike.getType());
+            cs.setString(1,newBike.getBrandName());
+            cs.setString(2, newBike.getType());
             int year = newBike.getModelYear().getValue();
-            String date = "" + year + "-01-01";
-            cs.setDate(3,Date.valueOf(date));
+            cs.setInt(3, year);
             cs.setString(4, newBike.getColor());
-            cs.setInt(5,newBike.getSize());
+            cs.setInt(5, newBike.getSize());
+            byte[] array = new byte[newBike.getImageStream().available()];
+            Blob blob = new javax.sql.rowset.serial.SerialBlob(array);
+            cs.setBlob(6, blob);
+            cs.registerOutParameter(7, Types.INTEGER);
 
-            /*
-               Blob blob = rs.getBlob("file");
-            InputStream in = blob.getBinaryStream();
-            String paths = "C:\\Users\\Rickard\\IdeaProjects\\DressLibraryFX\\src\\image\\image"+i+".jpg";
-            OutputStream out = new FileOutputStream(paths);
-             */
-            Blob blob = newBike.getImageStream();
-            cs.setBlob(newBike.getImageStream());
+          cs.executeQuery();
+            newBike.setBikeID(cs.getInt(7));
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-return 0;
+
+        return newBike.getBikeID();
     }
 
     public static ArrayList<Bike> selectAvailableBikes() {

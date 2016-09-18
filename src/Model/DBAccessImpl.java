@@ -4,8 +4,6 @@ import Interfaces.DBAccess;
 import Interfaces.DeleteUser;
 import Interfaces.InsertNewUser;
 
-import java.io.ByteArrayInputStream;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -17,8 +15,8 @@ import java.util.Map;
  */
 public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess{
     @Override
-    public int insertNewBike(ByteArrayInputStream imageStream, int brandID, Year modelYear, String color, int size, BikeType type) {
-        return AccessBike.insertNewBike(imageStream, brandID, modelYear, color, size,  type);
+    public int insertNewBike(Bike newBike) {
+        return AccessBike.insertNewBike(newBike);
     }
 
     @Override

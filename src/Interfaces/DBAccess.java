@@ -5,8 +5,6 @@ import Model.BikeType;
 import Model.BikeUser;
 import Model.Mounth;
 
-import java.io.ByteArrayInputStream;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -16,7 +14,7 @@ import java.util.Map;
  * @since 2016-09-16
  */
 public interface DBAccess {
-    int insertNewBike(ByteArrayInputStream imageStream, int brandID, Year modelYear, String color, int size, BikeType type);
+    int insertNewBike(Bike newBike);
     ArrayList<Bike> selectAvailableBikes();
     ArrayList<BikeUser> searchUserByWildcard(String search);
     ArrayList<Bike> selectBikeByTypeBrandColor(String brand, String color, BikeType type);

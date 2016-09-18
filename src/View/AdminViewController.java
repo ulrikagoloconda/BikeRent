@@ -1,12 +1,13 @@
 package View;
 
+import Model.AccessBike;
 import Model.Bike;
 import Model.BikeUser;
-import Model.AccessBike;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 
 import java.io.ByteArrayInputStream;
@@ -25,9 +26,11 @@ public class AdminViewController implements Initializable {
    private  Bike newBike;
     private BikeUser currentUser;
     private loginVewController loginView;
+    @FXML
+    private Label urlLabel;
 
     @FXML
-    private TextField brandText,modelYearText,colorText,typeText;
+    private TextField brandText,modelYearText,colorText,typeText, sizeText;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,6 +50,7 @@ public class AdminViewController implements Initializable {
             byte[] bFile = new byte[(int) selected.length()];
             try {
                 fileInputStream = new FileInputStream(selected);
+               urlLabel.setText(selected.getName());
                 fileInputStream.read(bFile);
                 fileInputStream.close();
                  inputStream = new ByteArrayInputStream(bFile);
@@ -62,12 +66,11 @@ public class AdminViewController implements Initializable {
 
 
     public void addBike(ActionEvent actionEvent) {
-        //TextField brandText, modelYearText, colorText, typeText;
-        if (newBike.getCreatedBy().equals(loginView.getCurrentUser())) {
-            if (newBike.equals(null)) {
-                newBike = new Bike();
-            }
-            if (newBike.getColor().equals(currentUser)) {
+
+        if (newBike.equals(null)) {
+            // } else if (newBike.getCreatedBy().equals(loginView.getCurrentUser())) {
+            //TODO fixa detta när koden satts ihop
+        }else if(true){
                 if (brandText.getText().length() > 0) {
                     newBike.setBrandName(brandText.getText());
                 }
@@ -90,9 +93,22 @@ public class AdminViewController implements Initializable {
                 if (typeText.getText().length() > 0) {
                     newBike.setType(typeText.getText());
                 }
+
+            if(sizeText.getText().length()<=2){
+                String s = sizeText.getText();
+                if(Character.isDigit(s.charAt(0)) && Character.isDigit(s.charAt(1))) {
+                    int i = Integer.valueOf(s);
+                    newBike.setSize(i);
+                }
+            }
             }
 
-        }
+
         AccessBike.insertNewBike(newBike);
+        brandText.setText("");
+        modelYearText.setText("");
+        colorText.setText("");
+        typeText.setText("");
+        sizeText.setText("");
     }
 }

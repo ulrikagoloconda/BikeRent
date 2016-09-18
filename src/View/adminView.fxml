@@ -20,19 +20,20 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Button layoutX="24.0" layoutY="216.0" mnemonicParsing="false" onAction="#addPicture" text="Lägg till bild" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="225.0" />
+            <Button layoutX="24.0" layoutY="216.0" mnemonicParsing="false" onAction="#addPicture" text="Lägg till bild" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="265.0" />
             <Label layoutX="31.0" layoutY="68.0" text="Cykelmärke: " AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="65.0" />
             <Label layoutX="31.0" layoutY="102.0" text="Årsmodell: " AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="105.0" />
             <Label layoutX="31.0" layoutY="136.0" text="Färg " AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="145.0" />
             <Label layoutX="31.0" layoutY="171.0" text="Cykeltyp: " AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="185.0" />
             <Button layoutX="246.0" layoutY="291.0" mnemonicParsing="false" onAction="#addBike" text="Lägg till" />
-            <Label layoutX="170.0" layoutY="220.0" text="url..." AnchorPane.leftAnchor="143.0" AnchorPane.topAnchor="225.0" />
+            <Label fx:id="urlLabel" layoutX="170.0" layoutY="220.0" text="url..." AnchorPane.leftAnchor="143.0" AnchorPane.topAnchor="265.0" />
             <TextField fx:id="typeText" layoutX="143.0" layoutY="167.0" AnchorPane.leftAnchor="143.0" AnchorPane.topAnchor="185.0" />
             <TextField fx:id="colorText" layoutX="143.0" layoutY="132.0" AnchorPane.topAnchor="145.0" />
             <TextField fx:id="modelYearText" layoutX="143.0" layoutY="98.0" AnchorPane.topAnchor="105.0" />
             <TextField fx:id="brandText" layoutX="143.0" layoutY="64.0" AnchorPane.topAnchor="65.0" />
+            <Label layoutX="20.0" layoutY="227.0" text="Storlek" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="225.0" />
+            <TextField fx:id="sizeText" layoutX="143.0" layoutY="221.0" AnchorPane.leftAnchor="143.0" AnchorPane.topAnchor="225.0" />
          </children>
       </AnchorPane>
-      <TextArea layoutX="377.0" layoutY="407.0" prefHeight="200.0" prefWidth="200.0" promptText=" private String brandName;    private Year modelYear;    private String color;    private String imagePath;    private int size;    private String type;" />
    </children>
 </AnchorPane>
