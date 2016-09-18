@@ -73,8 +73,8 @@ public interface SentMail extends OnlyOne {
 				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </big></big></big></big></th>" 
 				+ " <th>&nbsp; "
 				+ "</th> 		</tr> 			<tr> 			</tr>		</tbody>	</table>"
-				+"<p><strong>Hej&nbsp;Adminm, uppdrag åt anv:  "
-				+  userNamn 
+				+"<p><strong>Hej&nbsp;Admin, uppdrag åt anv:  "
+				+  userNamn
 				+ "</strong><br />	H&auml;r kommer uppdraget: "
 				+
 				"<br />	denna användare vill radera sitt konto:&nbsp; "

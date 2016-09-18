@@ -1,6 +1,9 @@
 package Model;
 
+import sample.DBType;
+
 import java.io.ByteArrayInputStream;
+import java.sql.*;
 import java.time.Year;
 
 /**
@@ -18,4 +21,8 @@ public class AccessBike {
         }
 return 0;
     }
+
+
+
+
 }

@@ -1,13 +1,11 @@
 package Interfaces;
 
-import java.util.Date;
-
 /**
  * Created by NIK1114 on 2016-09-15.
  */
 public interface DeleteUser {
 
-  boolean DeleteUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw, Date membersince);
+  boolean DeleteUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw);
   /**
    * TO use the: boolean DeleteUser(String fname, String lname, int memberlevel, String email, int phone , String username , String passw , Date membersince  )
    *
