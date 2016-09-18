@@ -1,7 +1,6 @@
 package Model;
 
 import java.io.ByteArrayInputStream;
-import java.time.Year;
 
 /**
  * @author Ulrika Goloconda Fahlén
@@ -11,7 +10,7 @@ import java.time.Year;
 public class Bike {
     private int bikeID;
     private String brandName;
-    private Year modelYear;
+    private int modelYear;
     private String color;
     private String imagePath;
     private int size;
@@ -22,7 +21,7 @@ public class Bike {
 
     public Bike(){}
 
-    public Bike( String brandName, Year modelYear, String color, int size, String type){
+    public Bike( String brandName, int modelYear, String color, int size, String type){
         this.brandName = brandName;
         this.modelYear = modelYear;
         this.color=color;
@@ -30,7 +29,7 @@ public class Bike {
         this.type = type;
     }
 
-    public Bike( String brandName, Year modelYear, String color, int size, String type, int bikeID, String imagePath){
+    public Bike( String brandName, int modelYear, String color, int size, String type, int bikeID, String imagePath){
 
         this.brandName = brandName;
         this.modelYear = modelYear;
@@ -57,11 +56,11 @@ public class Bike {
         this.brandName = brandName;
     }
 
-    public Year getModelYear() {
+    public int getModelYear() {
         return modelYear;
     }
 
-    public void setModelYear(Year modelYear) {
+    public void setModelYear(int modelYear) {
         this.modelYear = modelYear;
     }
 

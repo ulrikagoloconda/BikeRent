@@ -6,15 +6,14 @@ import Model.BikeUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
-import java.time.Year;
 import java.util.ResourceBundle;
 
 /**
@@ -82,8 +81,8 @@ public class AdminViewController implements Initializable {
                             break;
                         } else {
                             int yearInt = Integer.valueOf(s);
-                            Year y = Year.of(yearInt);
-                            newBike.setModelYear(y);
+
+                            newBike.setModelYear(yearInt);
                         }
                     }
                 }

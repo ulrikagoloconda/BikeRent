@@ -98,7 +98,6 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
@@ -106,14 +105,19 @@
                   <RowConstraints maxHeight="103.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="103.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
               </rowConstraints>
+               <children>
+                  <ImageView fx:id="imageVew1" fitHeight="62.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                  <ImageView fx:id="imabeVew2" fitHeight="62.0" fitWidth="89.0" layoutX="10.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                  <ImageView fx:id="imageView2" fitHeight="62.0" fitWidth="89.0" layoutX="10.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
+               </children>
             </GridPane>
             <Label layoutX="40.0" layoutY="294.0" text="Cyklar: ">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="forwardBtn" layoutX="492.0" layoutY="298.0" mnemonicParsing="false" text="Nästa -&gt;" />
-            <Button fx:id="backBtn" layoutX="413.0" layoutY="298.0" mnemonicParsing="false" text="&lt;- Bakåt " />
+            <Button layoutX="492.0" layoutY="298.0" mnemonicParsing="false" text="Nästa -&gt;" />
+            <Button layoutX="413.0" layoutY="298.0" mnemonicParsing="false" text="&lt;- Bakåt " />
    
            </children>
        </AnchorPane>

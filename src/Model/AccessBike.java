@@ -4,8 +4,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.Year;
 import java.util.ArrayList;
 
 /**
@@ -21,8 +19,7 @@ public class AccessBike {
             CallableStatement cs = DBUtil.getConnection().prepareCall(sql);
             cs.setString(1,newBike.getBrandName());
             cs.setString(2, newBike.getType());
-            int year = newBike.getModelYear().getValue();
-            cs.setInt(3, year);
+            cs.setInt(3, newBike.getModelYear());
             cs.setString(4, newBike.getColor());
             cs.setInt(5, newBike.getSize());
             byte[] array = new byte[newBike.getImageStream().available()];
@@ -57,13 +54,14 @@ public class AccessBike {
                 b.setBikeID(rs.getInt("bikeID"));
                 b.setColor(rs.getString("color"));
                 b.setSize(rs.getInt("size"));
-                LocalDate tempDate = rs.getDate("modelyear").toLocalDate();
-                b.setModelYear(Year.of(tempDate.getYear()));
-                Blob blob = rs.getBlob("file");
+                b.setModelYear(rs.getInt("modelyear"));
+                Blob blob = rs.getBlob("image");
                 InputStream in = blob.getBinaryStream();
-                String paths = "BikeRent\\src\\Image\\tempImageDir"+i+".jpg";
+                String paths = "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\image"+i+".png";
                 OutputStream out = new FileOutputStream(paths);
                 b.setImagePath(paths);
+                byte[] buff = blob.getBytes(1,(int)blob.length());
+                out.write(buff);
                 b.setType(rs.getString("typeName"));
                 b.setBrandName(rs.getString("brandname"));
                 availableBikes.add(b);
