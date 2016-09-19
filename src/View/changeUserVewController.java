@@ -264,6 +264,7 @@ public class changeUserVewController implements Initializable {
   }
 
   public void abortClick(ActionEvent actionEvent) {
+    System.out.println("abort click");
     try {
       Main m = new Main();
       FXMLLoader loginLoader = m.getLoginViewLoader();
@@ -280,7 +281,7 @@ public class changeUserVewController implements Initializable {
 
 
   public void dissableClick(ActionEvent actionEvent) {
-
+System.out.println("dessable click");
     userNameText.setText(currentUser.getUserName());
     int in_memberlevel = 0;
     boolean isUpdateUserOK = false;
@@ -295,6 +296,7 @@ public class changeUserVewController implements Initializable {
     }
     if (isUpdateUserOK) {
       boolean d = DialogView.showSimpleInfo("kontot har blivid av-aktiverat", "Lyckades", "Nu ärkonott avaktiverat med lösenord: 1234");
+      System.out.println("Mail ok = NOT NOW");// +  SentMail.sendDelRQ(currentUser.getUserName(), currentUser.getEmail()));
       try {
         Main m = new Main();
         FXMLLoader loginLoader = m.getLoginViewLoader();
