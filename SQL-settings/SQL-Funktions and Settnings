@@ -1,5 +1,6 @@
 //  userID fname lname memberlevel email phone username passw memberSince
    /*
+     ____________________ FEL START...
 DROP FUNCTION IF EXISTS check_password;
 DELIMITER //
 CREATE FUNCTION check_password(tryusername varchar(50), trypassword varchar(50)) RETURNS smallint(6)
@@ -16,6 +17,7 @@ CREATE FUNCTION check_password(tryusername varchar(50), trypassword varchar(50))
 DELIMITER ;
     */
 //'Niklas', 'Karlsson', 0, 'cykeltur@gmail.com', 0703032191 , 'cykeltur' , AES_ENCRYPT('1234','tackforkaffet') , CURDATE());
+  ____________________ FEL END..
 
 _______________
  drop FUNCTION insert_new_user;
@@ -59,3 +61,5 @@ drop FUNCTION update_user;
 
    SELECT update_user(
       'NiklasU', 'Karlsson', 0, 'cykeltur@gmail.com', 0703032191 , 'cykeltur1' , 1234);
+
+  ____________________
