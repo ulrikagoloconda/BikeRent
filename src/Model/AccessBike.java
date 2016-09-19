@@ -57,13 +57,14 @@ public class AccessBike {
                 b.setModelYear(rs.getInt("modelyear"));
                 Blob blob = rs.getBlob("image");
                 InputStream in = blob.getBinaryStream();
-                String paths = "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\image"+i+".png";
+                String paths = "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\tempImageDir\\image"+i+".png";
                 OutputStream out = new FileOutputStream(paths);
                 b.setImagePath(paths);
                 byte[] buff = blob.getBytes(1,(int)blob.length());
                 out.write(buff);
                 b.setType(rs.getString("typeName"));
                 b.setBrandName(rs.getString("brandname"));
+                b.setImageFileName(rs.getString("imageFileName"));
                 availableBikes.add(b);
             }
             DBUtil.getConnection().commit();

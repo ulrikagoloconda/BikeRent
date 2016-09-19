@@ -18,6 +18,7 @@ public class Bike {
     private boolean available;
     private ByteArrayInputStream imageStream;
     private BikeUser createdBy;
+    private String imageFileName;
 
     public Bike(){}
 
@@ -46,10 +47,6 @@ public class Bike {
 
     public void setBikeID(int bikeID) {
         this.bikeID = bikeID;
-    }
-
-    public String getBrandID() {
-        return brandName;
     }
 
     public void setBrandName(String brandName) {
@@ -122,5 +119,13 @@ public class Bike {
 
     public void setCreatedBy(BikeUser createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }

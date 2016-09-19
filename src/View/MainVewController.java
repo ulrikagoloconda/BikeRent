@@ -96,10 +96,9 @@ public class MainVewController implements Initializable {
             for (int i = 0; i < 6; i++) {
                 if (i == 0) {
 
-                  //  Image im = new Image("file:///"+b.getImagePath());
-                    Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image");
+                   Image im = new Image("file:///"+b.getImagePath());
+                  //  Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\rosaCykel.jpg");
                     System.out.println(b.getImagePath());
-
                     imageView1.setImage(im);
                     gridPane.add(imageView1, i, j);
                 }else {
