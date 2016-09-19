@@ -55,7 +55,7 @@ public interface SentMail extends OnlyOne {
 
 	
 //stanley.jpg
-	static String makeNiceEMailtextDel(String mailTo, String userNamn, String mailinfo ){
+	static String makeNiceEMailtextDel(String mailTo, String userNamn, String mailinfo){
 		System.out.println( mailTo);
 		System.out.println( userNamn);
 		System.out.println( mailinfo);

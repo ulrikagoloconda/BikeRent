@@ -60,7 +60,7 @@ public class changeUserVewController implements Initializable{
             Parent loginViewRoot = (Parent) loginViewLoader.load();
             Scene loginViewScean = new Scene(loginViewRoot);
             Main.getPrimaryStage().setScene(loginViewScean);
-          populateText();
+         // populateText();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,7 +69,7 @@ public class changeUserVewController implements Initializable{
 
     }
 
-
+/*
   private void populateText() {
     userNameText;
     fNameText;
@@ -80,7 +80,7 @@ public class changeUserVewController implements Initializable{
     passwordCheckerText;
 
   }
-
+*/
 
   @Override
     public void initialize(URL location, ResourceBundle resources) {
