@@ -33,6 +33,11 @@ private  static Connection tempCon;
     switch (dbType) {
       case Ulrika:
         System.out.println("Ulrikas inloggning");
+       /* try {
+        //  Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+          e.printStackTrace();
+        }*/
         return DriverManager.getConnection(CONN_STRING_Ulrika, USERNAME_Ulrika, PASSWORD_Ulrika);
 			/* return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD); */
 
