@@ -85,7 +85,6 @@ DELIMITER ;
 
   private static BikeUser getUserinfo(String userName, DBType dataBase) throws SQLException {
     BikeUser logedInBikeUser = new BikeUser();
-    System.out.println("Körs koden ända hit, getUserInfo");
  /* CREATE OR REPLACE PROCEDURE .....
 
 DROP PROCEDURE getUserFromUserName();
@@ -120,7 +119,7 @@ CALL getUserFromUserName('1');
       logedInBikeUser.setPhone(rs.getInt("phone"));
       logedInBikeUser.setMemberLevel(rs.getInt("memberlevel"));
       logedInBikeUser.setMemberSince(rs.getDate("membersince").toLocalDate());
-      //logedInBikeUser.setUserName(rs.getString("username"));
+      logedInBikeUser.setUserName(rs.getString("username"));
       System.out.print("what do we get from getUserFromUserName: ");
       System.out.println(logedInBikeUser.getEmail());
    // } catch (SQLException e) {
