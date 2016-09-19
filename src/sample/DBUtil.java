@@ -10,10 +10,10 @@ import java.sql.SQLException;
 
 public class DBUtil {
 
-	private static final String USERNAME_Ulrika = "dbuser";
-	private static final String PASSWORD_Ulrika = "1234";
+	private static final String USERNAME_Ulrika = "root";
+	private static final String PASSWORD_Ulrika = "Forfattare1";
 	private static final String CONN_STRING_Ulrika =
-			"jdbc:mysql://localhost/bikerentDB";
+			"jdbc:mysql://localhost:3306/bikerentDB";
 
   private static final String USERNAME_Niklas = "dbuser";
   private static final String PASSWORD_Niklas = "1234";
@@ -21,11 +21,12 @@ public class DBUtil {
 			"jdbc:mysql://localhost/bikerentDB";
 	
 	public static Connection getConnection(DBType dbType) throws SQLException {
-    System.out.println("in sample/dbutil");
+    System.out.println("in sample/dbutil" + dbType);
 		switch (dbType) {
 		case Ulrika:
       return DriverManager.getConnection(CONN_STRING_Ulrika, USERNAME_Ulrika, PASSWORD_Ulrika);
-			/* return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD); */
+		//	return DriverManager.getConnection(CONN_STRING_Ulrika, USERNAME_Ulrika, PASSWORD_Ulrika);
+
 
       case Niklas:
         return DriverManager.getConnection(CONN_STRING_Niklas, USERNAME_Niklas, PASSWORD_Niklas);

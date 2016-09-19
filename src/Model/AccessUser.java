@@ -37,6 +37,7 @@ DELIMITER ;
         dataBase = DBType.Niklas;
       }else{
         dataBase = DBType.Ulrika;
+
       }
       // boolean isLoginOK = isLoginInfoOK(userName, passW, dataBase);
 
@@ -84,6 +85,7 @@ DELIMITER ;
 
   private static BikeUser getUserinfo(String userName, DBType dataBase) throws SQLException {
     BikeUser logedInBikeUser = new BikeUser();
+    System.out.println("Körs koden ända hit, getUserInfo");
  /* CREATE OR REPLACE PROCEDURE .....
 
 DROP PROCEDURE getUserFromUserName();
