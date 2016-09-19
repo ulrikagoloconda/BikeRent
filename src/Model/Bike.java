@@ -1,7 +1,6 @@
 package Model;
 
 import java.io.ByteArrayInputStream;
-import java.time.Year;
 
 /**
  * @author Ulrika Goloconda Fahlén
@@ -10,32 +9,36 @@ import java.time.Year;
  */
 public class Bike {
     private int bikeID;
-    private int brandID;
-    private Year modelYear;
+    private String brandName;
+    private int modelYear;
     private String color;
-    private ByteArrayInputStream image;
+    private String imagePath;
     private int size;
-    private BikeType type;
+    private String type;
+    private boolean available;
+    private ByteArrayInputStream imageStream;
+    private BikeUser createdBy;
+    private String imageFileName;
 
     public Bike(){}
 
-    public Bike( int brandID, Year modelYear, String color, int size, BikeType type){
-        this.brandID = brandID;
+    public Bike( String brandName, int modelYear, String color, int size, String type){
+        this.brandName = brandName;
         this.modelYear = modelYear;
         this.color=color;
         this.size = size;
         this.type = type;
     }
 
-    public Bike( int brandID, Year modelYear, String color, int size, BikeType type, int bikeID, ByteArrayInputStream image){
+    public Bike( String brandName, int modelYear, String color, int size, String type, int bikeID, String imagePath){
 
-        this.brandID = brandID;
+        this.brandName = brandName;
         this.modelYear = modelYear;
         this.color=color;
         this.size = size;
         this.type = type;
         this.bikeID=bikeID;
-        this.image=image;
+        this.imagePath=imagePath;
 
     }
     public int getBikeID() {
@@ -46,19 +49,15 @@ public class Bike {
         this.bikeID = bikeID;
     }
 
-    public int getBrandID() {
-        return brandID;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
-    public void setBrandID(int brandID) {
-        this.brandID = brandID;
-    }
-
-    public Year getModelYear() {
+    public int getModelYear() {
         return modelYear;
     }
 
-    public void setModelYear(Year modelYear) {
+    public void setModelYear(int modelYear) {
         this.modelYear = modelYear;
     }
 
@@ -70,12 +69,12 @@ public class Bike {
         this.color = color;
     }
 
-    public ByteArrayInputStream getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImage(ByteArrayInputStream image) {
-        this.image = image;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public int getSize() {
@@ -86,11 +85,47 @@ public class Bike {
         this.size = size;
     }
 
-    public BikeType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(BikeType type) {
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public ByteArrayInputStream getImageStream() {
+        return imageStream;
+    }
+
+    public void setImageStream(ByteArrayInputStream imageStream) {
+        this.imageStream = imageStream;
+    }
+
+    public BikeUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(BikeUser createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }

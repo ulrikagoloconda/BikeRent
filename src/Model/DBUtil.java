@@ -11,15 +11,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtil {
+
   private static final String USERNAME_Ulrika = "root";
   private static final String PASSWORD_Ulrika = "Forfattare1";
   private static final String CONN_STRING_Ulrika =
       "jdbc:mysql://localhost:3306/bikerentDB";
 
+
   private static final String USERNAME_Niklas = "dbuser";
   private static final String PASSWORD_Niklas = "1234";
   private static final String CONN_STRING_Niklas =
       "jdbc:mysql://localhost/bikerent";
+
 
   public static Connection getConnection(DBType dbType) throws SQLException {
     System.out.println("in model/dbutil");
@@ -31,6 +34,11 @@ public class DBUtil {
     switch (dbType) {
       case Ulrika:
         System.out.println("Ulrikas inloggning");
+       /* try {
+        //  Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+          e.printStackTrace();
+        }*/
         return DriverManager.getConnection(CONN_STRING_Ulrika, USERNAME_Ulrika, PASSWORD_Ulrika);
 			//return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
 
