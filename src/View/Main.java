@@ -50,8 +50,6 @@ public class Main extends Application {
 
       //System.out.println("Mail ok = " +  SentMail.sendDelRQ("användare1", "anv1mail@gmail.com"));
 
-
-
       launch(args);
     }
 

@@ -97,7 +97,6 @@ public class MainVewController implements Initializable {
             values.add(""+b.isAvailable());
             for (int i = 0; i < 6; i++) {
                 if (i == 0) {
-
                    Image im = new Image("file:///"+b.getImagePath());
                   //  Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\rosaCykel.jpg");
                     System.out.println(b.getImagePath());
@@ -115,7 +114,6 @@ public class MainVewController implements Initializable {
             }
             System.out.println(j + " hur många gåner körs detta ");
         }
-
         return true;
     }
 
@@ -127,7 +125,6 @@ public class MainVewController implements Initializable {
       Parent ChangeUserViewRoot = (Parent) ChangeUserViewLoader.load();
       Scene ChangeUserViewScean = new Scene(ChangeUserViewRoot);
       Main.getPrimaryStage().setScene(ChangeUserViewScean);
-
     } catch (IOException e) {
       e.printStackTrace();
       ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
