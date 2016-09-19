@@ -67,7 +67,7 @@
                   <Label layoutY="41.0" prefHeight="17.0" text="level: 10" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0" />
                   <Label layoutX="-3.0" layoutY="60.0" prefHeight="17.0" text="Totalt antal lånade cyklar: 2" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="65.0" />
                   <Label layoutY="87.0" prefHeight="17.0" text="Aktuella lån: ingen" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="85.0" />
-                  <Button layoutX="195.0" layoutY="81.0" mnemonicParsing="false" text="Ändra" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0" />
+                  <Button layoutX="195.0" layoutY="81.0" mnemonicParsing="false" onAction="#showChangeUserView" text="Ändra" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0" />
                   <Label layoutX="171.0" layoutY="34.0" text="Ändra uppgifter?" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="25.0" />
                </children>
             </AnchorPane>

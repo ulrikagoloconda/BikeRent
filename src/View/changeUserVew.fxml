@@ -11,7 +11,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.newUserVewController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.changeUserVewController">
     <children>
        <AnchorPane fx:id="loginPane" layoutY="-4.0" prefHeight="390.0" prefWidth="374.0">
            <children>
@@ -79,8 +79,14 @@
                </cursor>
             </TextField>
             <Label layoutX="29.0" layoutY="178.0" text="E-Mail" />
-            <Label id="uniqeTextIdLabel" fx:id="passwordErrorMatchLabel" layoutX="179.0" layoutY="276.0" text="Lösenorden matchar inte" textFill="#f00c0c" visible="false" />
-            <Button layoutX="279.0" layoutY="337.0" mnemonicParsing="false" onAction="#abortClick" text="Återgå" />
+            <Label id="uniqeTextIdLabel" fx:id="passwordErrorMatchLabel" layoutX="179.0" layoutY="276.0" text="Lösenorden matchar inte" textFill="#f0e9eb"
+                   visible="false" />
+            <Button layoutX="297.0" layoutY="337.0" mnemonicParsing="false" onAction="#abortClick" text="Återgå" />
+            <Button layoutX="177.0" layoutY="337.0" mnemonicParsing="false" onAction="#dissableClick" text="Avaktivera konto" textFill="#f8fdff">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
    
            </children>
          <cursor>

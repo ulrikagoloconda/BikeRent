@@ -41,6 +41,8 @@ public class MainVewController implements Initializable {
 
     private DBAccess dbaccess;
 
+  private String errorTitle = "Fel i huvidfönster";
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,8 +74,8 @@ public class MainVewController implements Initializable {
             Main.getPrimaryStage().setScene(adminScene);
         } catch (IOException e) {
             e.printStackTrace();
+          ErrorView.showError(errorTitle, "fel vid Öppnining av admindata..", "starta om denna session..", e);
         }
-
 
     }
 
@@ -116,4 +118,19 @@ public class MainVewController implements Initializable {
 
         return true;
     }
+
+  public void showChangeUserView(ActionEvent actionEvent) {
+    try {
+      System.out.println("change user click");
+      Main m = new Main();
+      FXMLLoader ChangeUserViewLoader =m.getChangeUserViewLoader();
+      Parent ChangeUserViewRoot = (Parent) ChangeUserViewLoader.load();
+      Scene ChangeUserViewScean = new Scene(ChangeUserViewRoot);
+      Main.getPrimaryStage().setScene(ChangeUserViewScean);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+      ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
+    }
+  }
 }
