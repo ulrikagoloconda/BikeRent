@@ -42,7 +42,7 @@ public class AccessBike {
         ArrayList<Bike> availableBikes = new ArrayList<>();
         try {
             DBUtil.tempConnect();
-            DBUtil.getConnection().setAutoCommit(false);
+           DBUtil.getConnection().setAutoCommit(false);
             String sql = "CALL search_available_bikes()";
             PreparedStatement ps = DBUtil.getConnection().prepareStatement(sql);
            ResultSet rs =  ps.executeQuery();
@@ -79,4 +79,8 @@ public class AccessBike {
         }
         return availableBikes;
     }
+
+
+
+
 }

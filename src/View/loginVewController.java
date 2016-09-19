@@ -17,7 +17,10 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static Model.DBUtil.processException;
 
 public class loginVewController implements Initializable{
     @FXML
@@ -28,7 +31,7 @@ public class loginVewController implements Initializable{
     private Button adminBtn;
     private JDBCConnection jdbcConnection;
     private DBAccess dbAccess = new DBAccessImpl();
-    public BikeUser currentUser;
+    public BikeUser currentUser ;
 
     public loginVewController(){
         ;
@@ -37,24 +40,37 @@ public class loginVewController implements Initializable{
     public void logInClick(Event event) {
         String userName = userNameText.getText();
         String password = passwordText.getText();
+        System.out.println("logInClick");
+
+      try {
         currentUser = dbAccess.logIn(userName,password);
-        if(!currentUser.getUserName().equals("Admin")){
+        if(!currentUser.getUserName().equals("Admin")) {
             adminBtn.setVisible(false);
         }
+        System.out.println("after dbAccess.logIn(userName,password)");
+        System.out.println(currentUser.getEmail());
+        if (currentUser !=null){
+        showMainGui();
+        }
+      } catch (SQLException e) {
+        processException(e);
+        ErrorView.showError("Inloggningsfel", "fel vid inloggning","Kontrollera era uppgifter" ,  e);
+      }
     }
 
 
 
-    public void showMainGui(ActionEvent actionEvent) {
+  public void showMainGui() {
         try {
             Main m = new Main();
-            FXMLLoader newUserLoader =m.getNewUserLoader();
-            Parent newUserRoot = (Parent) newUserLoader.load();
-            Scene newUserScean = new Scene(newUserRoot);
-            Main.getPrimaryStage().setScene(newUserScean);
+            FXMLLoader MainViewLoader =m.getMainViewLoader();
+            Parent MainViewRoot = (Parent) MainViewLoader.load();
+            Scene MainViewScean = new Scene(MainViewRoot);
+            Main.getPrimaryStage().setScene(MainViewScean);
 
         } catch (IOException e) {
             e.printStackTrace();
+            ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
         }
 
     }
@@ -65,7 +81,25 @@ public class loginVewController implements Initializable{
 
     }
 
+
     public BikeUser getCurrentUser(){
         return currentUser;
     }
+
+  public void newUserClick(ActionEvent actionEvent) {
+    System.out.println("clicked on newUserClick");
+    try {
+      Main m = new Main();
+      FXMLLoader newUserLoader =m.getNewUserLoader();
+      Parent newUserRoot = (Parent) newUserLoader.load();
+      Scene newUserScean = new Scene(newUserRoot);
+      Main.getPrimaryStage().setScene(newUserScean);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+      ErrorView.showError("Lägg till användare-fönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
+    }
+
+
+  }
 }
