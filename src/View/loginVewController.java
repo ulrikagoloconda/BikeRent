@@ -41,6 +41,7 @@ public class loginVewController implements Initializable{
 
       try {
         currentUser = dbAccess.logIn(userName,password);
+          System.out.println(currentUser.getUserName());
         System.out.println("after dbAccess.logIn(userName,password)");
         System.out.println(currentUser.getEmail());
         if (currentUser !=null){
@@ -75,6 +76,11 @@ public class loginVewController implements Initializable{
 
     }
 
+
+    public BikeUser getCurrentUser(){
+        return currentUser;
+    }
+
   public void newUserClick(ActionEvent actionEvent) {
     System.out.println("clicked on newUserClick");
     try {
@@ -88,7 +94,5 @@ public class loginVewController implements Initializable{
       e.printStackTrace();
       ErrorView.showError("Lägg till användare-fönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
     }
-
-
   }
 }

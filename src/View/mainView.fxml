@@ -11,9 +11,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.loginVewController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainVewController">
    <children>
-       <AnchorPane layoutY="2.0" prefHeight="621.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+       <AnchorPane layoutY="2.0" prefHeight="621.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
            <children>
                <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="132.0">
                    <menus>
@@ -39,7 +39,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TableView layoutX="40.0" layoutY="278.0" prefHeight="298.0" prefWidth="525.0">
+            <TableView layoutX="40.0" layoutY="644.0" prefHeight="67.0" prefWidth="525.0">
               <columns>
                 <TableColumn fx:id="columCykel" prefWidth="75.0" text="Bild" />
                 <TableColumn prefWidth="75.0" text="Årsmodell" />
@@ -50,7 +50,7 @@
                   <TableColumn prefWidth="75.0" text="Ledig?" />
               </columns>
             </TableView>
-            <Button layoutX="38.0" layoutY="223.0" mnemonicParsing="false" text="Sök ledig cykel" />
+            <Button layoutX="38.0" layoutY="223.0" mnemonicParsing="false" onAction="#searchAvailableBikes" text="Sök ledig cykel" />
             <Label layoutX="40.0" layoutY="182.0" text="Vilka cyklar är lediga?">
                <font>
                   <Font size="16.0" />
@@ -77,7 +77,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ImageView fitHeight="109.0" fitWidth="199.0" layoutX="292.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="120.0">
+            <ImageView fitHeight="92.0" fitWidth="146.0" layoutX="358.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="118.82008361816406">
                <image>
                   <Image url="@../Image/bike.png" />
                </image>
@@ -88,6 +88,36 @@
                </font>
             </Label>
             <Button layoutX="404.0" layoutY="223.0" mnemonicParsing="false" text="Visa statistik" />
+            <Button fx:id="adminBtn" layoutX="434.0" layoutY="15.0" mnemonicParsing="false" onAction="#showAdminView" text="Administrera Bike Rent" />
+            <Button fx:id="executeLoanBtn" layoutX="466.0" layoutY="582.0" mnemonicParsing="false" text="Låna cykeln" AnchorPane.bottomAnchor="10.0" />
+            <GridPane fx:id="gridPane" layoutX="27.0" layoutY="350.0" prefHeight="226.0" prefWidth="541.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="111.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fx:id="imageView1" fitHeight="62.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                  <ImageView fx:id="imabeVew2" fitHeight="62.0" fitWidth="89.0" layoutX="10.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                  <ImageView fx:id="imageView2" fitHeight="62.0" fitWidth="89.0" layoutX="10.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <Label layoutX="40.0" layoutY="294.0" text="Cyklar: ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button layoutX="492.0" layoutY="298.0" mnemonicParsing="false" text="Nästa -&gt;" />
+            <Button layoutX="413.0" layoutY="298.0" mnemonicParsing="false" text="&lt;- Bakåt " />
    
            </children>
        </AnchorPane>

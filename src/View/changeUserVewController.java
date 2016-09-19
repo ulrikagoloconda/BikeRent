@@ -21,7 +21,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class changeUserVewController implements Initializable{
+public class changeUserVewController implements Initializable {
 
   @FXML
   private TextField userNameText;
@@ -40,53 +40,50 @@ public class changeUserVewController implements Initializable{
 
   @FXML
   private Label uniqeTextIdLabel;
-    @FXML
-    private JDBCConnection jdbcConnection;
-    private DBAccess dbAccess = new DBAccessImpl();
-    public BikeUser currentUser ;
+  @FXML
+  private JDBCConnection jdbcConnection;
+  private DBAccess dbAccess = new DBAccessImpl();
+  public BikeUser currentUser;
+  private String errorTitle = "fel i uppdatera användare";
 
-    public changeUserVewController(){
-        ;
-    }
-
-
+  public changeUserVewController() {
+    ;
+  }
 
 
   public void showLoginGui() {
-        try {
-            Main m = new Main();
-            FXMLLoader loginViewLoader =m.getNewUserLoader();
-          System.out.println("fel fönster laddas i denna version..");
-            Parent loginViewRoot = (Parent) loginViewLoader.load();
-            Scene loginViewScean = new Scene(loginViewRoot);
-            Main.getPrimaryStage().setScene(loginViewScean);
-         // populateText();
+    try {
+      Main m = new Main();
+      FXMLLoader loginViewLoader = m.getNewUserLoader();
+      System.out.println("fel fönster laddas i denna version..");
+      Parent loginViewRoot = (Parent) loginViewLoader.load();
+      Scene loginViewScean = new Scene(loginViewRoot);
+      Main.getPrimaryStage().setScene(loginViewScean);
+      // populateText();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
-        }
-
+    } catch (IOException e) {
+      e.printStackTrace();
+      ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..", "Kontrollera er data..", e);
     }
-
-
-  private void populateText() {
-
-    userNameText.setText("uNamn");
-    fNameText.setText("f-Name");
-    lNameText.setText("l-Name");
-    mailText.setText("e-mail");
-    phoneText.setText("123456789");
-    passwordText.setText("12");
-    passwordCheckerText.setText("12");
 
   }
 
 
-  @Override
-    public void initialize(URL location, ResourceBundle resources) {
+  private void populateText() {
+    userNameText.setText(currentUser.getUserName());
+    fNameText.setText(currentUser.getfName());
+    lNameText.setText(currentUser.getlName());
+    mailText.setText(currentUser.getEmail());
+    phoneText.setText(Integer.toString(currentUser.getPhone()));
+    passwordText.setText("");
+    passwordCheckerText.setText("");
+  }
 
-    }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+  }
+
 
   public void newUserClick(ActionEvent actionEvent) {
     System.out.println("clicked on newUserClick");
@@ -97,71 +94,79 @@ public class changeUserVewController implements Initializable{
     String phoneString = phoneText.getText();
     String password = passwordText.getText();
     String passwordChecker = passwordCheckerText.getText();
-    phoneString.replace("-","");
-    phoneString.replace("+","");
+    phoneString.replace("-", "");
+    phoneString.replace("+", "");
 
 
     try {
-      if (userName.length()<5) {
+      if (userName.length() < 5) {
         System.out.println("username to short");
-      }else if (!dbAccess.isUserAvalible(userName)) {
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("username is to short!"));
+      } else if (!dbAccess.isUserAvalible(userName)) {
         System.out.println("username not free");
-      } else if(password.length()<1){
-        System.out.println("phone is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("username is allready taken!"));
+      } else if (password.length() < 1) {
+        System.out.println("password is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("password is to short!"));
       } else if (!password.equals(passwordChecker)) {
         System.out.println("passw not same");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("password is to not the same!"));
       } else if (!EmailValidator.validate(email)) {
         System.out.println("email not ok format!");
-      } else if(phoneString.length()<2){
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("email not ok format!"));
+      } else if (phoneString.length() < 2) {
         System.out.println("phone is to short!");
-      }else if(fName.length()<1){
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("phone is to short!"));
+      } else if (fName.length() < 1) {
+        System.out.println("fName is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("First Name is to short!"));
+      } else if (lName.length() < 1) {
         System.out.println("phone is to short!");
-      }else if(lName.length()<1){
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("Last Name is to short!"));
+      } else if (phoneString.length() < 2) {
         System.out.println("phone is to short!");
-      }else if(phoneString.length()<2){
-        System.out.println("phone is to short!");
-      }else {
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("phone is to short!"));
+      } else {
         int phone = Integer.parseInt(phoneString);
         System.out.println("we can now add some info");
         //insert_new_user(in_fname varchar(50),in_lname varchar(50),in_memberlevel varchar(50),in_email varchar(50),in_phone varchar(50),in_username varchar(50), in_passw varchar(50)) RETURNS smallint(6)
         int in_memberlevel = 1;
         boolean isAddUserOK = dbAccess.InsertNewUser(fName, lName, in_memberlevel, email, phone, userName, password);
         if (!isAddUserOK) {
-          ErrorView.showError("Inloggningsfel", "fel vid inloggning", "Kontrollera era uppgifter", new IOException(" :-( kunde inte lägga till användare"));
+          ErrorView.showError(errorTitle, "fel vid inläsning", "Kontrollera era uppgifter", new IOException(" :-( kunde inte lägga till användare"));
         }
         if (isAddUserOK) {
           boolean d = DialogView.showSimpleInfo("Ny användare upplaggd", "Lyckades", "Ny användare är nu upplagd");
           try {
             Main m = new Main();
-            FXMLLoader loginLoader =m.getLoginViewLoader();
+            FXMLLoader loginLoader = m.getLoginViewLoader();
             Parent loginRoot = (Parent) loginLoader.load();
             Scene loginScean = new Scene(loginRoot);
             Main.getPrimaryStage().setScene(loginScean);
 
           } catch (IOException e) {
             e.printStackTrace();
-            ErrorView.showError("Lägg till användare-fönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
+            ErrorView.showError(errorTitle, "fel vid inläsning av data..", "Kontrollera er data..", e);
           }
 
         }
       }
     } catch (SQLException e) {
       e.printStackTrace();
-      ErrorView.showError("fel vid add", "fel vid lägg till användare","Kontrollera era uppgifter" ,  e);
+      ErrorView.showError(errorTitle, "fel vid lägg till användare", "Kontrollera era uppgifter", e);
     }
 
 //      ErrorView.showError("Inloggningsfel", "fel vid inloggning","Kontrollera era uppgifter" ,  e);
   }
 
 
-
   public void checkUserName(KeyEvent keyEvent) {
     System.out.println("entering get username");
     String userName = userNameText.getText();
-    if (userName.length()<=5){
+    if (userName.length() <= 5) {
       uniqeTextIdLabel.setText("Måste vara längre än 5 tecken");
       uniqeTextIdLabel.setTextFill(Color.RED);
-    }else {
+    } else {
       //userName
  /*     try {
         if (!dbAccess.isUserAvalible(userName)){
@@ -182,5 +187,125 @@ public class changeUserVewController implements Initializable{
 */
     }
 
+  }
+
+  public void updateUserClick(ActionEvent actionEvent) {
+    System.out.println("clicked on updateUserClick");
+    String userName = userNameText.getText();
+    String fName = fNameText.getText();
+    String lName = lNameText.getText();
+    String email = mailText.getText();
+    String phoneString = phoneText.getText();
+    String password = passwordText.getText();
+    String passwordChecker = passwordCheckerText.getText();
+    phoneString.replace("-", "");
+    phoneString.replace("+", "");
+
+
+    try {
+      if (userName.length() < 1) {
+        System.out.println("username to short");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("username is to short!"));
+        //}else if (!dbAccess.isUserAvalible(userName)) {
+        // System.out.println("username not free");
+        // ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("username is allready taken!") );
+      } else if (password.length() < 1) {
+        System.out.println("password is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("password is to short!"));
+      } else if (!password.equals(passwordChecker)) {
+        System.out.println("passw not same");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("password is to not the same!"));
+      } else if (!EmailValidator.validate(email)) {
+        System.out.println("email not ok format!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("email not ok format!"));
+      } else if (phoneString.length() < 2) {
+        System.out.println("phone is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("phone is to short!"));
+      } else if (fName.length() < 1) {
+        System.out.println("fName is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("First Name is to short!"));
+      } else if (lName.length() < 1) {
+        System.out.println("phone is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("Last Name is to short!"));
+      } else if (phoneString.length() < 2) {
+        System.out.println("phone is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("phone is to short!"));
+      } else {
+        int phone = Integer.parseInt(phoneString);
+        System.out.println("we can now add some info");
+        //insert_new_user(in_fname varchar(50),in_lname varchar(50),in_memberlevel varchar(50),in_email varchar(50),in_phone varchar(50),in_username varchar(50), in_passw varchar(50)) RETURNS smallint(6)
+        int in_memberlevel = currentUser.getMemberLevel();
+        boolean isUpdateUserOK = dbAccess.UpdateUser(fName, lName, in_memberlevel, email, phone, userName, password);
+        if (!isUpdateUserOK) {
+          ErrorView.showError(errorTitle, "fel vid inläsning", "Kontrollera era uppgifter", new IOException(" :-( kunde inte uppdatera uppgifter"));
+        }
+        if (isUpdateUserOK) {
+          boolean d = DialogView.showSimpleInfo("Uppdaterat", "Lyckades", "Ny är detta uppdaterat");
+          try {
+            Main m = new Main();
+            FXMLLoader loginLoader = m.getLoginViewLoader();
+            Parent loginRoot = (Parent) loginLoader.load();
+            Scene loginScean = new Scene(loginRoot);
+            Main.getPrimaryStage().setScene(loginScean);
+
+          } catch (IOException e) {
+            e.printStackTrace();
+            ErrorView.showError(errorTitle, "fel vid inläsning av data..", "Kontrollera er data..", e);
+          }
+
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      ErrorView.showError(errorTitle, "fel vid lägg till användare", "Kontrollera era uppgifter", e);
+    }
+
+//      ErrorView.showError("Inloggningsfel", "fel vid inloggning","Kontrollera era uppgifter" ,  e);
+  }
+
+  public void abortClick(ActionEvent actionEvent) {
+    try {
+      Main m = new Main();
+      FXMLLoader loginLoader = m.getLoginViewLoader();
+      Parent loginRoot = (Parent) loginLoader.load();
+      Scene loginScean = new Scene(loginRoot);
+      Main.getPrimaryStage().setScene(loginScean);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+      ErrorView.showError(errorTitle, "fel vid Öppnining av data..", "starta om denna session..", e);
+    }
+
+  }
+
+
+  public void dissableClick(ActionEvent actionEvent) {
+
+    userNameText.setText(currentUser.getUserName());
+    int in_memberlevel = 0;
+    boolean isUpdateUserOK = false;
+    try {
+      isUpdateUserOK = dbAccess.UpdateUser(currentUser.getfName(), currentUser.getlName(), in_memberlevel, currentUser.getEmail(), currentUser.getPhone(), currentUser.getUserName(), "1234");
+    } catch (SQLException e) {
+      e.printStackTrace();
+      ErrorView.showError(errorTitle, "fel vid dissable account..", "starta om denna session.. pw 1234", e);
+    }
+    if (!isUpdateUserOK) {
+      ErrorView.showError(errorTitle, "fel vid inläsning", "Kontrollera era uppgifter", new IOException(" :-( kunde inte uppdatera uppgifter"));
+    }
+    if (isUpdateUserOK) {
+      boolean d = DialogView.showSimpleInfo("kontot har blivid av-aktiverat", "Lyckades", "Nu ärkonott avaktiverat med lösenord: 1234");
+      try {
+        Main m = new Main();
+        FXMLLoader loginLoader = m.getLoginViewLoader();
+        Parent loginRoot = (Parent) loginLoader.load();
+        Scene loginScean = new Scene(loginRoot);
+        Main.getPrimaryStage().setScene(loginScean);
+
+      } catch (IOException e) {
+        e.printStackTrace();
+        ErrorView.showError(errorTitle, "fel vid inläsning av data..", "Kontrollera er data..", e);
+      }
+    }
   }
 }

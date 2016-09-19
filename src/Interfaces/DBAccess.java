@@ -5,10 +5,7 @@ import Model.BikeType;
 import Model.BikeUser;
 import Model.Mounth;
 
-import java.io.ByteArrayInputStream;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -18,7 +15,7 @@ import java.util.Map;
  * @since 2016-09-16
  */
 public interface DBAccess {
-    int insertNewBike(ByteArrayInputStream imageStream, int brandID, Year modelYear, String color, int size, BikeType type);
+    int insertNewBike(Bike newBike);
     ArrayList<Bike> selectAvailableBikes();
     ArrayList<BikeUser> searchUserByWildcard(String search);
     ArrayList<Bike> selectBikeByTypeBrandColor(String brand, String color, BikeType type);
@@ -30,8 +27,5 @@ public interface DBAccess {
     BikeUser logIn(String userName, String passW) throws SQLException;
     boolean isUserAvalible(String userName) throws SQLException;
     boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw) throws SQLException;
-
-
-
-
+    boolean UpdateUser(String fName, String lName, int in_memberlevel, String email, int phone, String userName, String password)throws SQLException;
 }

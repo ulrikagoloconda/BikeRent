@@ -37,6 +37,7 @@ DELIMITER ;
         dataBase = DBType.Niklas;
       }else{
         dataBase = DBType.Ulrika;
+
       }
       // boolean isLoginOK = isLoginInfoOK(userName, passW, dataBase);
 
@@ -118,7 +119,7 @@ CALL getUserFromUserName('1');
       logedInBikeUser.setPhone(rs.getInt("phone"));
       logedInBikeUser.setMemberLevel(rs.getInt("memberlevel"));
       logedInBikeUser.setMemberSince(rs.getDate("membersince").toLocalDate());
-      //logedInBikeUser.setUserName(rs.getString("username"));
+      logedInBikeUser.setUserName(rs.getString("username"));
       System.out.print("what do we get from getUserFromUserName: ");
       System.out.println(logedInBikeUser.getEmail());
    // } catch (SQLException e) {
@@ -201,5 +202,74 @@ CALL getUserFromUserName('1');
 
     return false;
   }
+
+
+  public static boolean UpdateUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw)   {
+    // insert_new_user(in_fname varchar(50),in_lname varchar(50),in_memberlevel varchar(50),in_email varchar(50),in_phone varchar(50),in_username varchar(50), in_passw varchar(50)) RETURNS smallint(6)
+    String SQLInsertUser = "SELECT update_user(?, ?, ?, ?, ?, ?, ?)";
+    ResultSet rs = null;
+    DBType dataBase = null;
+    if(helpers.PCRelated.isThisNiklasPC()){
+      dataBase = DBType.Niklas;
+    }else{
+      dataBase = DBType.Ulrika;
+    }
+    try ( //only in java 7 and later!!
+          Connection conn = DBUtil.getConnection(dataBase); //database_user type like ENUM and get PW :-);
+          PreparedStatement stmt = conn.prepareStatement(SQLInsertUser, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+    ){
+        /*
+        SELECT update_user(fname, lname, 666, email@c.se, username, passw, ?)
+        in_fname varchar(50),in_lname varchar(11),in_memberlevel varchar(11),in_email varchar(50),in_phone varchar(11),in_username varchar(11), in_passw varchar(50))
+        ---
+    drop FUNCTION update_user;
+   DELIMITER //
+   CREATE FUNCTION update_user(in_fname varchar(50),in_lname varchar(11),in_memberlevel varchar(11),in_email varchar(50),in_phone varchar(11),in_username varchar(11), in_passw varchar(50)) RETURNS smallint(6)
+   BEGIN
+   DECLARE pw VARBINARY(56);
+   DECLARE userNameAvalible VARCHAR(11);
+   if exists(SELECT username FROM bikeuser WHERE userName=in_username)
+   THEN
+   UPDATE bikeuser SET fname = in_fname, lname = in_lname, email = in_email, phone = in_phone, passw = AES_ENCRYPT(in_passw,'tackforkaffet')
+   WHERE username = in_username;
+   RETURN 1;
+   ELSE
+   RETURN 0;
+   END IF;
+   END//
+   DELIMITER ;
+
+         */
+      //in_fname varchar(50),in_lname varchar(50),in_memberlevel varchar(50),in_email varchar(50),in_phone varchar(50),in_username varchar(50), in_passw varchar(50))
+      stmt.setString(1,fname);
+      stmt.setString(2,lname);
+      stmt.setInt(3,memberlevel);
+      stmt.setString(4,email);
+      stmt.setInt(5,phone);
+      stmt.setString(6,username);
+      stmt.setString(7,passw);
+      rs = stmt.executeQuery();
+      int nrFound = 0;
+      while (rs.next()) {
+        boolean isAddOK =   rs.getBoolean(1);
+        System.out.println("isAddOK : " + isAddOK);
+        return isAddOK;
+      }
+
+    } catch (SQLException e) {
+      DBUtil.processException(e);
+      return false;
+    }finally {
+      if(rs != null ) try {
+        rs.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+
+    return false;
+  }
+
+
 }
 
