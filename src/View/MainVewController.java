@@ -118,7 +118,16 @@ public class MainVewController implements Initializable {
     }
 
   public void showChangeUserView(ActionEvent actionEvent) {
-    try {
+      try {
+          Main m = new Main();
+          FXMLLoader changeTryLoader = m.getChangeUserTry();
+          Parent changeTryRoot = changeTryLoader.load();
+          Scene changeTryScean = new Scene(changeTryRoot);
+          Main.getPrimaryStage().setScene(changeTryScean);
+      }catch (Exception e){
+          e.printStackTrace();
+      }
+  /**  try {
       System.out.println("change user click");
       Main m = new Main();
       FXMLLoader ChangeUserViewLoader =m.getChangeUserViewLoader();
@@ -128,6 +137,6 @@ public class MainVewController implements Initializable {
     } catch (IOException e) {
       e.printStackTrace();
       ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
-    }
+    }*/
   }
 }
