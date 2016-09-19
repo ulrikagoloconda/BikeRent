@@ -3,9 +3,8 @@ package Model;
 import Interfaces.DBAccess;
 import Interfaces.DeleteUser;
 import Interfaces.InsertNewUser;
-import java.io.ByteArrayInputStream;
+
 import java.sql.SQLException;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -83,4 +82,9 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess {
         System.out.println("in the add user");
         return AccessUser.InsertNewUser(fname, lname, memberlevel, email, phone, username, passw);
       }
+
+  @Override
+  public boolean UpdateUser(String fName, String lName, int in_memberlevel, String email, int phone, String userName, String password) throws SQLException {
+    return AccessUser.UpdateUser(fName, lName, in_memberlevel, email, phone, userName, password);
+  }
 }
