@@ -1,5 +1,7 @@
 package Model;
 
+import sample.DBType;
+
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,10 +15,17 @@ import java.util.ArrayList;
  */
 public class AccessBike {
     public static int insertNewBike(Bike newBike) {
-        DBUtil.tempConnect();
+        DBType dataBase = null;
+        if(helpers.PCRelated.isThisNiklasPC()){
+            dataBase = DBType.Niklas;
+        }else{
+            dataBase = DBType.Ulrika;
+        }
+
         try {
+            Connection conn = DBUtil.getConnection(dataBase);
             String sql = "CALL insert_bike(?,?,?,?,?,?,?)";
-            CallableStatement cs = DBUtil.getConnection().prepareCall(sql);
+            CallableStatement cs = conn.prepareCall(sql);
             cs.setString(1,newBike.getBrandName());
             cs.setString(2, newBike.getType());
             cs.setInt(3, newBike.getModelYear());
@@ -40,11 +49,19 @@ public class AccessBike {
 
     public static ArrayList<Bike> selectAvailableBikes() {
         ArrayList<Bike> availableBikes = new ArrayList<>();
+        DBType dataBase = null;
+        Connection conn = null;
+        if(helpers.PCRelated.isThisNiklasPC()){
+            dataBase = DBType.Niklas;
+        }else{
+            dataBase = DBType.Ulrika;
+        }
+
         try {
-            DBUtil.tempConnect();
-           DBUtil.getConnection().setAutoCommit(false);
+            conn = DBUtil.getConnection(dataBase);
+           conn.setAutoCommit(false);
             String sql = "CALL search_available_bikes()";
-            PreparedStatement ps = DBUtil.getConnection().prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
            ResultSet rs =  ps.executeQuery();
             int i = 0;
             while (rs.next()){
@@ -67,11 +84,11 @@ public class AccessBike {
                 b.setImageFileName(rs.getString("imageFileName"));
                 availableBikes.add(b);
             }
-            DBUtil.getConnection().commit();
+            conn.commit();
 
         }catch (Exception e){
             try {
-                DBUtil.getConnection().rollback();
+                conn.rollback();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }

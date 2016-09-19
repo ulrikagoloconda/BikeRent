@@ -12,10 +12,10 @@ import java.sql.SQLException;
 
 public class DBUtil {
 private  static Connection tempCon;
-  private static final String USERNAME_Ulrika = "dbuser";
-  private static final String PASSWORD_Ulrika = "1234";
+  private static final String USERNAME_Ulrika = "root";
+  private static final String PASSWORD_Ulrika = "Forfattare1";
   private static final String CONN_STRING_Ulrika =
-      "jdbc:mysql://localhost/bikerent";
+      "\"jdbc:mysql://localhost:3306/bikerentDB\"";
 
   private static final String USERNAME_Niklas = "dbuser";
   private static final String PASSWORD_Niklas = "1234";
