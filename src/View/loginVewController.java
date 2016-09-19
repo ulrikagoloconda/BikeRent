@@ -11,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -27,8 +26,6 @@ public class loginVewController implements Initializable{
     private TextField userNameText;
     @FXML
     private PasswordField passwordText;
-    @FXML
-    private Button adminBtn;
     private JDBCConnection jdbcConnection;
     private DBAccess dbAccess = new DBAccessImpl();
     public BikeUser currentUser ;
@@ -44,9 +41,7 @@ public class loginVewController implements Initializable{
 
       try {
         currentUser = dbAccess.logIn(userName,password);
-        if(!currentUser.getUserName().equals("Admin")) {
-            adminBtn.setVisible(false);
-        }
+          System.out.println(currentUser.getUserName());
         System.out.println("after dbAccess.logIn(userName,password)");
         System.out.println(currentUser.getEmail());
         if (currentUser !=null){
@@ -99,7 +94,5 @@ public class loginVewController implements Initializable{
       e.printStackTrace();
       ErrorView.showError("Lägg till användare-fönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
     }
-
-
   }
 }
