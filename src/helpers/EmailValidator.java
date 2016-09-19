@@ -1,4 +1,4 @@
-package Model;
+package helpers;
 /**
  * @author Niklas Karlsson
  * @version 1.0

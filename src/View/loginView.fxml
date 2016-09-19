@@ -36,12 +36,13 @@
                <TextField fx:id="userNameText" layoutX="28.0" layoutY="153.0" />
                <Label layoutX="29.0" layoutY="124.0" text="Användarnamn" />
                <Label layoutX="260.0" layoutY="124.0" text="Lösenord" />
-               <Button layoutX="28.0" layoutY="200.0" mnemonicParsing="false" onAction="#showMainGui" onMouseClicked="#logInClick" text="Logga in" />
-               <Button layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onAction="#showMainGui" text="Skapa konto" />
+               <Button layoutX="28.0" layoutY="200.0" mnemonicParsing="false" onMouseReleased="#logInClick" text="Logga in" />
+               <Button layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onAction="#newUserClick" text="Skapa konto" />
                <Label layoutX="123.0" layoutY="52.0" text="Yes, hyr en cykel nu!">
                <font>
                   <Font size="20.0" />
                </font></Label>
+            <Button layoutX="115.0" layoutY="200.0" mnemonicParsing="false" onAction="#showMainGui" onMouseClicked="#logInClick" text="Override" />
    
            </children>
        </AnchorPane>
