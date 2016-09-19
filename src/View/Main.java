@@ -67,4 +67,9 @@ public class Main extends Application {
     System.out.println("in getChangeUserViewLoader: changeUserView.fxml ");
     return changeUserViewLoader;
   }
+
+  public FXMLLoader getChangeUserTry(){
+    FXMLLoader changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserTry.fxml"));
+    return changeTryLoader;
+  }
 }
