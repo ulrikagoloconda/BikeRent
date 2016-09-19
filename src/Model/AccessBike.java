@@ -98,6 +98,33 @@ public class AccessBike {
     }
 
 
-
-
+    public static ArrayList<Bike> getAllBikes() {
+        ArrayList<Bike> allBikes =  new ArrayList<>();
+        DBType dataBase = null;
+        Connection conn = null;
+        if(helpers.PCRelated.isThisNiklasPC()){
+            dataBase = DBType.Niklas;
+        }else{
+            dataBase = DBType.Ulrika;
+        }
+        try{
+            conn = DBUtil.getConnection(dataBase);
+            String sql = "CALL get_all_bikes()";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Bike b = new Bike();
+                b.setBikeID(rs.getInt("bikeID"));
+                b.setColor(rs.getString("color"));
+                b.setSize(rs.getInt("size"));
+                b.setModelYear(rs.getInt("modelyear"));
+                b.setType(rs.getString("typeName"));
+                b.setBrandName(rs.getString("brandname"));
+                allBikes.add(b);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return allBikes;
+    }
 }

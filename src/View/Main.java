@@ -35,6 +35,11 @@ public class Main extends Application {
     return loginLoader;
   }
 
+    public FXMLLoader getDeleteBikeLoader(){
+        FXMLLoader deleteBikeLoader = new FXMLLoader(getClass().getResource("../View/deleteBikeView.fxml"));
+        return deleteBikeLoader;
+    }
+
     public static Stage getPrimaryStage(){
         return primaryStage_;
     }
