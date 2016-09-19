@@ -69,18 +69,19 @@ public class changeUserVewController implements Initializable{
 
     }
 
-/*
+
   private void populateText() {
-    userNameText;
-    fNameText;
-    lNameText;
-    mailText;
-    phoneText;
-    passwordText;
-    passwordCheckerText;
+
+    userNameText.setText("uNamn");
+    fNameText.setText("f-Name");
+    lNameText.setText("l-Name");
+    mailText.setText("e-mail");
+    phoneText.setText("123456789");
+    passwordText.setText("12");
+    passwordCheckerText.setText("12");
 
   }
-*/
+
 
   @Override
     public void initialize(URL location, ResourceBundle resources) {
