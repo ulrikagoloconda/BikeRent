@@ -130,8 +130,5 @@ public class AdminViewController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        DeleteBikeViewController db = new DeleteBikeViewController();
-        db.initDeleteView();
     }
 }

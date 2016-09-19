@@ -127,4 +127,32 @@ public class AccessBike {
         }
         return allBikes;
     }
+
+    public static boolean deleteBike(int bikeID) {
+        DBType dataBase = null;
+        Connection conn = null;
+        if(helpers.PCRelated.isThisNiklasPC()){
+            dataBase = DBType.Niklas;
+        }else{
+            dataBase = DBType.Ulrika;
+        }
+        try {
+            conn = DBUtil.getConnection(dataBase);
+            conn.setAutoCommit(false);
+            String sql = "CALL delete_bike(?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,bikeID);
+            ps.executeQuery();
+            conn.commit();
+            return true;
+        }catch (Exception e){
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

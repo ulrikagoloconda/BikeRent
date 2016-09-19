@@ -46,7 +46,7 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess {
 
     @Override
     public boolean deleteBike(int bikeID) {
-        return false;
+        return AccessBike.deleteBike(bikeID);
     }
 
     @Override
