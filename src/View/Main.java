@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     private static Stage primaryStage_;
-    private static FXMLLoader newUserLoader;
+    //private static FXMLLoader newUserLoader;
   private static FXMLLoader loginLoader;
   private static FXMLLoader root;
   private static Scene loginScene;
@@ -55,8 +55,6 @@ public class Main extends Application {
 
       //System.out.println("Mail ok = " +  SentMail.sendDelRQ("användare1", "anv1mail@gmail.com"));
 
-
-
       launch(args);
     }
 
@@ -65,4 +63,16 @@ public class Main extends Application {
         FXMLLoader adminLoader = new FXMLLoader(getClass().getResource("../View/adminView.fxml"));
         return adminLoader;
     }
+
+  public FXMLLoader getChangeUserViewLoader() {
+    System.out.println("in getChangeUserViewLoader");
+    FXMLLoader changeUserViewLoader = new FXMLLoader(getClass().getResource("../View/changeUserView.fxml"));
+    System.out.println("in getChangeUserViewLoader: changeUserView.fxml ");
+    return changeUserViewLoader;
+  }
+
+  public FXMLLoader getChangeUserTry(){
+    FXMLLoader changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserTry.fxml"));
+    return changeTryLoader;
+  }
 }

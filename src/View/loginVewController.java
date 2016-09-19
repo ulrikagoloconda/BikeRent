@@ -53,8 +53,6 @@ public class loginVewController implements Initializable{
       }
     }
 
-
-
   public void showMainGui() {
         try {
             Main m = new Main();
@@ -67,15 +65,12 @@ public class loginVewController implements Initializable{
             e.printStackTrace();
             ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
         }
-
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-
 
     public BikeUser getCurrentUser(){
         return currentUser;

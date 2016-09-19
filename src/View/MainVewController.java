@@ -41,6 +41,8 @@ public class MainVewController implements Initializable {
 
     private DBAccess dbaccess;
 
+  private String errorTitle = "Fel i huvidfönster";
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,8 +74,8 @@ public class MainVewController implements Initializable {
             Main.getPrimaryStage().setScene(adminScene);
         } catch (IOException e) {
             e.printStackTrace();
+          ErrorView.showError(errorTitle, "fel vid Öppnining av admindata..", "starta om denna session..", e);
         }
-
 
     }
 
@@ -95,7 +97,6 @@ public class MainVewController implements Initializable {
             values.add(""+b.isAvailable());
             for (int i = 0; i < 6; i++) {
                 if (i == 0) {
-
                    Image im = new Image("file:///"+b.getImagePath());
                   //  Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\rosaCykel.jpg");
                     System.out.println(b.getImagePath());
@@ -113,7 +114,29 @@ public class MainVewController implements Initializable {
             }
             System.out.println(j + " hur många gåner körs detta ");
         }
-
         return true;
     }
+
+  public void showChangeUserView(ActionEvent actionEvent) {
+      try {
+          Main m = new Main();
+          FXMLLoader changeTryLoader = m.getChangeUserTry();
+          Parent changeTryRoot = changeTryLoader.load();
+          Scene changeTryScean = new Scene(changeTryRoot);
+          Main.getPrimaryStage().setScene(changeTryScean);
+      }catch (Exception e){
+          e.printStackTrace();
+      }
+  /**  try {
+      System.out.println("change user click");
+      Main m = new Main();
+      FXMLLoader ChangeUserViewLoader =m.getChangeUserViewLoader();
+      Parent ChangeUserViewRoot = (Parent) ChangeUserViewLoader.load();
+      Scene ChangeUserViewScean = new Scene(ChangeUserViewRoot);
+      Main.getPrimaryStage().setScene(ChangeUserViewScean);
+    } catch (IOException e) {
+      e.printStackTrace();
+      ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
+    }*/
+  }
 }

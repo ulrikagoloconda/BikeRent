@@ -45,8 +45,9 @@ public class newUserVewController implements Initializable{
     private JDBCConnection jdbcConnection;
     private DBAccess dbAccess = new DBAccessImpl();
     public BikeUser currentUser ;
+  private String errorTitle = "fel i lägg till användare";
 
-    public newUserVewController(){
+  public newUserVewController(){
         ;
     }
 
@@ -70,7 +71,7 @@ public class newUserVewController implements Initializable{
 
         } catch (IOException e) {
             e.printStackTrace();
-            ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
+            ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
         }
 
     }
@@ -97,22 +98,31 @@ public class newUserVewController implements Initializable{
     try {
       if (userName.length()<5) {
         System.out.println("username to short");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("username is to short!") );
       }else if (!dbAccess.isUserAvalible(userName)) {
         System.out.println("username not free");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("username is allready taken!") );
       } else if(password.length()<1){
-        System.out.println("phone is to short!");
+        System.out.println("password is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("password is to short!") );
       } else if (!password.equals(passwordChecker)) {
         System.out.println("passw not same");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("password is to not the same!") );
       } else if (!EmailValidator.validate(email)) {
         System.out.println("email not ok format!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("email not ok format!") );
       } else if(phoneString.length()<2){
         System.out.println("phone is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("phone is to short!") );
       }else if(fName.length()<1){
-        System.out.println("phone is to short!");
+        System.out.println("fName is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("First Name is to short!") );
       }else if(lName.length()<1){
         System.out.println("phone is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("Last Name is to short!") );
       }else if(phoneString.length()<2){
         System.out.println("phone is to short!");
+        ErrorView.showError(errorTitle, "fel vid uppdatering", "Kontrollera era uppgifter", new IOException("phone is to short!") );
       }else {
         int phone = Integer.parseInt(phoneString);
         System.out.println("we can now add some info");
@@ -120,7 +130,7 @@ public class newUserVewController implements Initializable{
         int in_memberlevel = 1;
         boolean isAddUserOK = dbAccess.InsertNewUser(fName, lName, in_memberlevel, email, phone, userName, password);
         if (!isAddUserOK) {
-          ErrorView.showError("Inloggningsfel", "fel vid inloggning", "Kontrollera era uppgifter", new IOException(" :-( kunde inte lägga till användare"));
+          ErrorView.showError(errorTitle, "fel vid inläsning", "Kontrollera era uppgifter", new IOException(" :-( kunde inte lägga till användare"));
         }
         if (isAddUserOK) {
           boolean d = DialogView.showSimpleInfo("Ny användare upplaggd", "Lyckades", "Ny användare är nu upplagd");
@@ -133,14 +143,14 @@ public class newUserVewController implements Initializable{
 
           } catch (IOException e) {
             e.printStackTrace();
-            ErrorView.showError("Lägg till användare-fönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
+            ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
           }
 
         }
       }
     } catch (SQLException e) {
       e.printStackTrace();
-      ErrorView.showError("fel vid add", "fel vid lägg till användare","Kontrollera era uppgifter" ,  e);
+      ErrorView.showError(errorTitle, "fel vid lägg till användare","Kontrollera era uppgifter" ,  e);
     }
 
 //      ErrorView.showError("Inloggningsfel", "fel vid inloggning","Kontrollera era uppgifter" ,  e);
@@ -176,4 +186,6 @@ public class newUserVewController implements Initializable{
     }
 
   }
+
+
 }

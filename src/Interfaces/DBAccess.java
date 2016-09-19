@@ -27,5 +27,9 @@ public interface DBAccess {
     BikeUser logIn(String userName, String passW) throws SQLException;
     boolean isUserAvalible(String userName) throws SQLException;
     boolean InsertNewUser(String fname, String lname, int memberlevel, String email, int phone, String username, String passw) throws SQLException;
+<<<<<<< HEAD
     ArrayList<Bike> getAllBikes();
+=======
+    boolean UpdateUser(String fName, String lName, int in_memberlevel, String email, int phone, String userName, String password)throws SQLException;
+>>>>>>> ca61b0fbd15a00e6e2f32861181cce6ab279418b
 }
