@@ -1,7 +1,6 @@
 package View;
 
 import Interfaces.DBAccess;
-import Model.AccessBike;
 import Model.Bike;
 import Model.BikeUser;
 import Model.DBAccessImpl;
@@ -76,49 +75,7 @@ public class AdminViewController implements Initializable {
     }
 
 
-    public void addBike(ActionEvent actionEvent) {
-        if (newBike.equals(null)) {
-            // } else if (newBike.getCreatedBy().equals(loginView.getCurrentUser())) {
-            //TODO fixa detta när koden satts ihop
-        } else if (true) {
-            if (brandText.getText().length() > 0) {
-                newBike.setBrandName(brandText.getText());
-            }
-            if (modelYearText.getText().length() == 4) {
-                String s = modelYearText.getText();
-                for (int i = 0; i < 4; i++) {
-                    if (!Character.isDigit(s.charAt(i))) {
-                        modelYearText.setText("");
-                        break;
-                    } else {
-                        int yearInt = Integer.valueOf(s);
 
-                        newBike.setModelYear(yearInt);
-                    }
-                }
-            }
-            if (colorText.getText().length() > 0) {
-                newBike.setColor(colorText.getText());
-            }
-            if (typeText.getText().length() > 0) {
-                newBike.setType(typeText.getText());
-            }
-
-            if (sizeText.getText().length() <= 2) {
-                String s = sizeText.getText();
-                if (Character.isDigit(s.charAt(0)) && Character.isDigit(s.charAt(1))) {
-                    int i = Integer.valueOf(s);
-                    newBike.setSize(i);
-                }
-            }
-        }
-        AccessBike.insertNewBike(newBike);
-        brandText.setText("");
-        modelYearText.setText("");
-        colorText.setText("");
-        typeText.setText("");
-        sizeText.setText("");
-    }
 
 
     public void showDeleteView(ActionEvent actionEvent) {
@@ -128,6 +85,17 @@ public class AdminViewController implements Initializable {
             Scene deleteScene = new Scene(deleteRoot);
             Main.getPrimaryStage().setScene(deleteScene);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showAddView(ActionEvent actionEvent) {
+        Main m = new Main();
+        try{
+            Parent addRoot = (Parent)m.getAddLoader().load();
+            Scene addScean = new Scene(addRoot);
+            Main.getPrimaryStage().setScene(addScean);
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
