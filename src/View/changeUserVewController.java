@@ -6,7 +6,6 @@ import Model.DBAccessImpl;
 import Model.JDBCConnection;
 import helpers.EmailValidator;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,12 +49,6 @@ public class changeUserVewController implements Initializable{
         ;
     }
 
-    public void logInClick(Event event) {
-
-
-      System.out.println("logInClick");
-
-    }
 
 
 
@@ -67,6 +60,7 @@ public class changeUserVewController implements Initializable{
             Parent loginViewRoot = (Parent) loginViewLoader.load();
             Scene loginViewScean = new Scene(loginViewRoot);
             Main.getPrimaryStage().setScene(loginViewScean);
+          populateText();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,7 +70,19 @@ public class changeUserVewController implements Initializable{
     }
 
 
-    @Override
+  private void populateText() {
+    userNameText;
+    fNameText;
+    lNameText;
+    mailText;
+    phoneText;
+    passwordText;
+    passwordCheckerText;
+
+  }
+
+
+  @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }

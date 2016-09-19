@@ -176,4 +176,13 @@ public class newUserVewController implements Initializable{
     }
 
   }
+
+  public void updateUserClick(ActionEvent actionEvent) {
+  }
+
+  public void abortClick(ActionEvent actionEvent) {
+  }
+
+  public void dissableClick(ActionEvent actionEvent) {
+  }
 }
