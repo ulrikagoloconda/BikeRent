@@ -98,6 +98,65 @@ public class AccessBike {
     }
 
 
+    public static ArrayList<Bike> getAllBikes() {
+        ArrayList<Bike> allBikes =  new ArrayList<>();
+        DBType dataBase = null;
+        Connection conn = null;
+        if(helpers.PCRelated.isThisNiklasPC()){
+            dataBase = DBType.Niklas;
+        }else{
+            dataBase = DBType.Ulrika;
+        }
+        try{
+            conn = DBUtil.getConnection(dataBase);
+            String sql = "CALL get_all_bikes()";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Bike b = new Bike();
+                b.setBikeID(rs.getInt("bikeID"));
+                b.setColor(rs.getString("color"));
+                b.setSize(rs.getInt("size"));
+                b.setModelYear(rs.getInt("modelyear"));
+                b.setType(rs.getString("typeName"));
+                b.setBrandName(rs.getString("brandname"));
+                allBikes.add(b);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return allBikes;
+    }
 
+    public static boolean deleteBike(int bikeID) {
+        DBType dataBase = null;
+        Connection conn = null;
+        if(helpers.PCRelated.isThisNiklasPC()){
+            dataBase = DBType.Niklas;
+        }else{
+            dataBase = DBType.Ulrika;
+        }
+        try {
+            conn = DBUtil.getConnection(dataBase);
+            conn.setAutoCommit(false);
+            String sql = "CALL delete_bike(?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,bikeID);
+            ps.executeQuery();
+            conn.commit();
+            return true;
+        }catch (Exception e){
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+    public static String executeBikeLoan(int bikeID, int userID) {
+        return null;
+    }
 }

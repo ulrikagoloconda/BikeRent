@@ -1,5 +1,5 @@
 package View;
-
+//troligen nej..
 import Interfaces.DBAccess;
 import Model.BikeUser;
 import Model.DBAccessImpl;
@@ -47,6 +47,12 @@ public class newUserVewController implements Initializable{
     public BikeUser currentUser ;
   private String errorTitle = "fel i lägg till användare";
 
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    Main.getSpider().setNewUserView(this);
+
+  }
+
   public newUserVewController(){
         ;
     }
@@ -62,12 +68,11 @@ public class newUserVewController implements Initializable{
 
   public void showLoginGui() {
         try {
-            Main m = new Main();
-            FXMLLoader loginViewLoader =m.getNewUserLoader();
+            FXMLLoader loginViewLoader =Main.getSpider().getMain().getNewUserLoader();
           System.out.println("fel fönster laddas i denna version..");
             Parent loginViewRoot = (Parent) loginViewLoader.load();
             Scene loginViewScean = new Scene(loginViewRoot);
-            Main.getPrimaryStage().setScene(loginViewScean);
+            Main.getSpider().getMain().getPrimaryStage().setScene(loginViewScean);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,11 +81,6 @@ public class newUserVewController implements Initializable{
 
     }
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
 
   public void newUserClick(ActionEvent actionEvent) {
     System.out.println("clicked on newUserClick");
@@ -133,19 +133,8 @@ public class newUserVewController implements Initializable{
           ErrorView.showError(errorTitle, "fel vid inläsning", "Kontrollera era uppgifter", new IOException(" :-( kunde inte lägga till användare"));
         }
         if (isAddUserOK) {
-          boolean d = DialogView.showSimpleInfo("Ny användare upplaggd", "Lyckades", "Ny användare är nu upplagd");
-          try {
-            Main m = new Main();
-            FXMLLoader loginLoader =m.getLoginViewLoader();
-            Parent loginRoot = (Parent) loginLoader.load();
-            Scene loginScean = new Scene(loginRoot);
-            Main.getPrimaryStage().setScene(loginScean);
-
-          } catch (IOException e) {
-            e.printStackTrace();
-            ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
-          }
-
+          boolean d = DialogView.showSimpleInfo("Ny användare upplaggd", "Lyckades", "Ny användare är nu upplagd, öppnar nu inloggningsrutan");
+          Main.getSpider().getMain().showLoginView();
         }
       }
     } catch (SQLException e) {
@@ -184,6 +173,22 @@ public class newUserVewController implements Initializable{
       }
 */
     }
+
+  }
+  public void abortClick(ActionEvent actionEvent) {
+    System.out.println("abort click");
+    Main.getSpider().getMain().showLoginView();
+   /* try {
+      FXMLLoader loginLoader = Main.getSpider().getMain().getLoginViewLoader();
+      Parent loginRoot = (Parent) loginLoader.load();
+      Scene loginScean = new Scene(loginRoot);
+      Main.getSpider().getMain().getPrimaryStage().setScene(loginScean);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+      ErrorView.showError(errorTitle, "fel vid Öppnining av data..", "starta om denna session..", e);
+    }
+    */
 
   }
 

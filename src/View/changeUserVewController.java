@@ -1,5 +1,5 @@
 package View;
-
+// ja denna..
 import Interfaces.DBAccess;
 import Model.BikeUser;
 import Model.DBAccessImpl;
@@ -46,26 +46,17 @@ public class changeUserVewController implements Initializable {
   public BikeUser currentUser;
   private String errorTitle = "fel i uppdatera användare";
 
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    Main.getSpider().setChangeUserVewController(this);
+
+    currentUser = (Main.getSpider().getLoginView().getCurrentUser());
+    System.out.println("test i change user: " + currentUser.getEmail());
+    populateText();
+
+  }
   public changeUserVewController() {
     ;
-  }
-
-
-  public void showLoginGui() {
-    try {
-      Main m = new Main();
-      FXMLLoader loginViewLoader = m.getNewUserLoader();
-      System.out.println("fel fönster laddas i denna version..");
-      Parent loginViewRoot = (Parent) loginViewLoader.load();
-      Scene loginViewScean = new Scene(loginViewRoot);
-      Main.getPrimaryStage().setScene(loginViewScean);
-      // populateText();
-
-    } catch (IOException e) {
-      e.printStackTrace();
-      ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..", "Kontrollera er data..", e);
-    }
-
   }
 
 
@@ -77,11 +68,8 @@ public class changeUserVewController implements Initializable {
     phoneText.setText(Integer.toString(currentUser.getPhone()));
     passwordText.setText("");
     passwordCheckerText.setText("");
-  }
 
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+    System.out.println("test i populate user" + currentUser.getEmail());
   }
 
 
@@ -138,11 +126,11 @@ public class changeUserVewController implements Initializable {
         if (isAddUserOK) {
           boolean d = DialogView.showSimpleInfo("Ny användare upplaggd", "Lyckades", "Ny användare är nu upplagd");
           try {
-            Main m = new Main();
-            FXMLLoader loginLoader = m.getLoginViewLoader();
+            FXMLLoader loginLoader = Main.getSpider().getMain().getLoginViewLoader();
             Parent loginRoot = (Parent) loginLoader.load();
             Scene loginScean = new Scene(loginRoot);
-            Main.getPrimaryStage().setScene(loginScean);
+
+            Main.getSpider().getMain().getPrimaryStage().setScene(loginScean);
 
           } catch (IOException e) {
             e.printStackTrace();
@@ -241,18 +229,19 @@ public class changeUserVewController implements Initializable {
         }
         if (isUpdateUserOK) {
           boolean d = DialogView.showSimpleInfo("Uppdaterat", "Lyckades", "Ny är detta uppdaterat");
-          try {
-            Main m = new Main();
-            FXMLLoader loginLoader = m.getLoginViewLoader();
-            Parent loginRoot = (Parent) loginLoader.load();
-            Scene loginScean = new Scene(loginRoot);
-            Main.getPrimaryStage().setScene(loginScean);
+          System.out.println("innan : " + currentUser.getfName());
+          currentUser.setfName(fName);
+          currentUser.setlName(lName);
+          currentUser.setMemberLevel(in_memberlevel);
+          currentUser.setEmail(email);
+          currentUser.setPhone(phone);
+          Main.getSpider().getMainView().setCurrentUser(currentUser);
+          currentUser = Main.getSpider().getMainView().getMasterViewUser();
+          System.out.println("efter : " + currentUser.getfName());
+          populateText();
 
-          } catch (IOException e) {
-            e.printStackTrace();
-            ErrorView.showError(errorTitle, "fel vid inläsning av data..", "Kontrollera er data..", e);
-          }
-
+          //Main.getSpider().getMain()
+          //goback();
         }
       }
     } catch (SQLException e) {
@@ -265,18 +254,24 @@ public class changeUserVewController implements Initializable {
 
   public void abortClick(ActionEvent actionEvent) {
     System.out.println("abort click");
+    goback();
+
+
+  }
+
+  private void goback() {
     try {
-      Main m = new Main();
-      FXMLLoader loginLoader = m.getLoginViewLoader();
-      Parent loginRoot = (Parent) loginLoader.load();
-      Scene loginScean = new Scene(loginRoot);
-      Main.getPrimaryStage().setScene(loginScean);
+
+      FXMLLoader MainViewLoader = Main.getSpider().getMain().getMainViewLoader();
+      Parent MainViewRoot = (Parent) MainViewLoader.load();
+      Scene MainViewScean = new Scene(MainViewRoot);
+      Main.getSpider().getMain().getPrimaryStage().setScene(MainViewScean);
+
 
     } catch (IOException e) {
       e.printStackTrace();
-      ErrorView.showError(errorTitle, "fel vid Öppnining av data..", "starta om denna session..", e);
+      ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
     }
-
   }
 
 
@@ -296,18 +291,17 @@ System.out.println("dessable click");
     }
     if (isUpdateUserOK) {
       boolean d = DialogView.showSimpleInfo("kontot har blivid av-aktiverat", "Lyckades", "Nu ärkonott avaktiverat med lösenord: 1234");
-      System.out.println("Mail ok = NOT NOW");// +  SentMail.sendDelRQ(currentUser.getUserName(), currentUser.getEmail()));
-      try {
-        Main m = new Main();
-        FXMLLoader loginLoader = m.getLoginViewLoader();
-        Parent loginRoot = (Parent) loginLoader.load();
-        Scene loginScean = new Scene(loginRoot);
-        Main.getPrimaryStage().setScene(loginScean);
+      System.out.println("Mail ok = NOT NOW");
+      // +  SentMail.sendDelRQ(currentUser.getUserName(), currentUser.getEmail()));
+      currentUser.setMemberLevel(0);
 
-      } catch (IOException e) {
-        e.printStackTrace();
-        ErrorView.showError(errorTitle, "fel vid inläsning av data..", "Kontrollera er data..", e);
-      }
+      Main.getSpider().getMainView().setCurrentUser(currentUser);
+      //populateText();
+      //Main.getSpider().getMain()
+      Main.getSpider().getMain().showLoginView();
+
     }
+
+
   }
 }
