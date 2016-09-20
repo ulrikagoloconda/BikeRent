@@ -2,6 +2,7 @@ package View;
 
 import Interfaces.DBAccess;
 import Model.Bike;
+import Model.BikeUser;
 import Model.DBAccessImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,12 +10,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -39,6 +39,9 @@ public class MainVewController implements Initializable {
     @FXML
     private ImageView imageView1,imageView2,imageView3;
 
+  @FXML
+  private Label userNameLabel, memberLevelLabel, activeLoanLabel, numberOfLoanedBikesLabel;
+
     private DBAccess dbaccess;
 
   private String errorTitle = "Fel i huvidfönster";
@@ -47,10 +50,22 @@ public class MainVewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dbaccess = new DBAccessImpl();
+      BikeUser bikeUser = null;
+      populateUserTextInGUI(Main.getSpider().getLoginView().getCurrentUser());
+
 
     }
 
-    public void searchAvailableBikes(ActionEvent actionEvent) {
+  private void populateUserTextInGUI(BikeUser bikeUser) {
+    userNameLabel.setText(bikeUser.getUserName());
+    memberLevelLabel.setText(""+bikeUser.getMemberLevel());
+    activeLoanLabel.setText("000");
+    numberOfLoanedBikesLabel.setText("111");
+  }
+
+
+
+  public void searchAvailableBikes(ActionEvent actionEvent) {
         ArrayList<Bike> availableBikes = dbaccess.selectAvailableBikes();
         System.out.println(availableBikes.size());
         if (availableBikes.size() > 3) {
@@ -120,7 +135,7 @@ public class MainVewController implements Initializable {
   public void showChangeUserView(ActionEvent actionEvent) {
       try {
           Main m = new Main();
-          FXMLLoader changeTryLoader = m.getChangeUserTry();
+          FXMLLoader changeTryLoader = m.getChangeUserView1();
           Parent changeTryRoot = changeTryLoader.load();
           Scene changeTryScean = new Scene(changeTryRoot);
           Main.getPrimaryStage().setScene(changeTryScean);
@@ -139,4 +154,5 @@ public class MainVewController implements Initializable {
       ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
     }*/
   }
+
 }

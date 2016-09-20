@@ -45,7 +45,7 @@ public class loginVewController implements Initializable{
         System.out.println("after dbAccess.logIn(userName,password)");
         System.out.println(currentUser.getEmail());
         if (currentUser !=null){
-        showMainGui();
+                  showMainGui();
         }
       } catch (SQLException e) {
         processException(e);
@@ -60,6 +60,7 @@ public class loginVewController implements Initializable{
             Parent MainViewRoot = (Parent) MainViewLoader.load();
             Scene MainViewScean = new Scene(MainViewRoot);
             Main.getPrimaryStage().setScene(MainViewScean);
+
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,4 +1,5 @@
 package View;
+import Model.BikeUser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ public class Main extends Application {
   private static FXMLLoader loginLoader;
   private static FXMLLoader root;
   private static Scene loginScene;
+  private BikeUser currentUser;
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage_ = primaryStage;
@@ -59,6 +61,7 @@ public class Main extends Application {
         return adminLoader;
     }
 
+
   public FXMLLoader getChangeUserViewLoader() {
     System.out.println("in getChangeUserViewLoader");
     FXMLLoader changeUserViewLoader = new FXMLLoader(getClass().getResource("../View/changeUserView.fxml"));
@@ -66,8 +69,8 @@ public class Main extends Application {
     return changeUserViewLoader;
   }
 
-  public FXMLLoader getChangeUserTry(){
-    FXMLLoader changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserTry.fxml"));
+  public FXMLLoader getChangeUserView1(){
+    FXMLLoader changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserView1.fxml"));
     return changeTryLoader;
   }
 }
