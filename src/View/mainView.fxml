@@ -61,7 +61,6 @@
                   <Label layoutX="171.0" layoutY="34.0" text="Ändra uppgifter?" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="25.0" />
                </children>
             </AnchorPane>
-            <TextField layoutX="209.0" layoutY="223.0" promptText="Ex. Monark, röd" />
             <Label layoutX="209.0" layoutY="182.0" text="Vilken cykel söker du?">
                <font>
                   <Font size="16.0" />
@@ -109,6 +108,7 @@
             <Button fx:id="netBtn" layoutX="492.0" layoutY="298.0" mnemonicParsing="false" onAction="#nextBikesOnList" text="Nästa -&gt;" />
             <Button layoutX="413.0" layoutY="298.0" mnemonicParsing="false" text="&lt;- Bakåt " />
             <Label fx:id="messageLabel" layoutX="151.0" layoutY="296.0" AnchorPane.leftAnchor="130.0" />
+            <ComboBox fx:id="combobox" layoutX="209.0" layoutY="223.0" onAction="#setSearchResult" onInputMethodTextChanged="#popuateComboBox" onKeyPressed="#popuateComboBox" onKeyReleased="#popuateComboBox" onKeyTyped="#popuateComboBox" prefWidth="150.0" />
    
            </children>
        </AnchorPane>

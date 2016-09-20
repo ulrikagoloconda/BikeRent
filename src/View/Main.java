@@ -6,11 +6,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private Stage primaryStage_;
+    private Stage primaryStage;
     private  FXMLLoader loginLoader;
     private  FXMLLoader mainViewLoader;
     private FXMLLoader newUserLoader;
     private FXMLLoader deleteBikeLoader;
+    private FXMLLoader  adminLoader;
+    private FXMLLoader changeUserViewLoader;
+    private FXMLLoader changeTryLoader;
+    private  FXMLLoader addBikeLoader;
     private  Scene loginScene;
 
     private static SpiderView spider;
@@ -19,19 +23,19 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         spider = new SpiderView();
         spider.setMain(this);
-        primaryStage_ = primaryStage;
+        this.primaryStage = primaryStage;
         loginLoader = spider.getMain().getLoginViewLoader();
         Parent root = loginLoader.load();
-        primaryStage_.setTitle("Bike Rent");
+        this.primaryStage.setTitle("Bike Rent");
         loginScene = new Scene(root, 600, 600);
-        primaryStage_.setScene(loginScene);
+        this.primaryStage.setScene(loginScene);
 
-        primaryStage_.show();
+        this.primaryStage.show();
     }
 
     public void showLoginView(){
         try {
-            primaryStage_.setScene(loginScene);
+            primaryStage.setScene(loginScene);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -72,9 +76,36 @@ public class Main extends Application {
             return deleteBikeLoader;
         }
     }
+    public FXMLLoader getAdminLoader() {
+        if(adminLoader == null) {
+            adminLoader = new FXMLLoader(getClass().getResource("../View/adminView.fxml"));
+        }
+        return adminLoader;
+    }
+
+    public FXMLLoader getChangeUserViewLoader() {
+    if(changeUserViewLoader==null) {
+        changeUserViewLoader = new FXMLLoader(getClass().getResource("../View/changeUserView.fxml"));
+    }
+        return changeUserViewLoader;
+    }
+
+    public FXMLLoader getChangeUserTry() {
+        if(changeTryLoader==null) {
+            changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserTry.fxml"));
+        }
+        return changeTryLoader;
+    }
+
+    public FXMLLoader getAddLoader() {
+        if(addBikeLoader == null) {
+            addBikeLoader = new FXMLLoader(getClass().getResource("../View/addBikeView.fxml"));
+        }
+        return addBikeLoader;
+    }
 
     public Stage getPrimaryStage() {
-        return primaryStage_;
+        return primaryStage;
     }
 
 
@@ -93,27 +124,7 @@ public class Main extends Application {
     }
 
 
-    public FXMLLoader getAdminLoader() {
-        FXMLLoader adminLoader = new FXMLLoader(getClass().getResource("../View/adminView.fxml"));
-        return adminLoader;
-    }
 
-    public FXMLLoader getChangeUserViewLoader() {
-        System.out.println("in getChangeUserViewLoader");
-        FXMLLoader changeUserViewLoader = new FXMLLoader(getClass().getResource("../View/changeUserView.fxml"));
-        System.out.println("in getChangeUserViewLoader: changeUserView.fxml ");
-        return changeUserViewLoader;
-    }
-
-    public FXMLLoader getChangeUserTry() {
-        FXMLLoader changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserTry.fxml"));
-        return changeTryLoader;
-    }
-
-    public FXMLLoader getAddLoader() {
-        FXMLLoader addBikeLoader = new FXMLLoader(getClass().getResource("../View/addBikeView.fxml"));
-        return addBikeLoader;
-    }
 
     public static SpiderView getSpider(){
         return spider;
