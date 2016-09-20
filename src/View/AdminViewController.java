@@ -49,30 +49,7 @@ public class AdminViewController implements Initializable {
         loginView = new loginVewController();
     }
 
-    public void addPicture(ActionEvent actionEvent) {
-        if (newBike == null) {
-            newBike = new Bike();
-        }
-        ByteArrayInputStream inputStream;
-        FileChooser fc = new FileChooser();
-        File selected = fc.showOpenDialog(null);
-        if (selected != null) {
 
-            FileInputStream fileInputStream = null;
-            byte[] bFile = new byte[(int) selected.length()];
-            try {
-                fileInputStream = new FileInputStream(selected);
-                urlLabel.setText(selected.getName());
-                fileInputStream.read(bFile);
-                fileInputStream.close();
-                inputStream = new ByteArrayInputStream(bFile);
-                newBike.setImageStream(inputStream);
-                newBike.setCreatedBy(loginView.getCurrentUser());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
 
 

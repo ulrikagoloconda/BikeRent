@@ -13,7 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,7 +32,7 @@ public class AddBikeController implements Initializable {
     private loginVewController loginView;
     private DBAccess dbAccess = new DBAccessImpl();
     @FXML
-    private Label urlLabel;
+    private Label urlLabel,messageLabel;
     @FXML
     private TextField brandText, modelYearText, colorText, typeText, sizeText;
     @FXML
@@ -39,7 +43,7 @@ public class AddBikeController implements Initializable {
     private Pane editPane;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+loginView = new loginVewController();
     }
 
     public void showDeleteView(ActionEvent actionEvent) {
@@ -47,9 +51,6 @@ public class AddBikeController implements Initializable {
         lv.showMainGui();
     }
 
-
-    public void addPicture(ActionEvent actionEvent) {
-    }
 
     public void addBike(ActionEvent actionEvent) {
         if (newBike.equals(null)) {
@@ -93,6 +94,33 @@ public class AddBikeController implements Initializable {
         colorText.setText("");
         typeText.setText("");
         sizeText.setText("");
+        messageLabel.setText("Cykeln har lagts till");
+        urlLabel.setText("");
+    }
+
+    public void addPicture(ActionEvent actionEvent) {
+        if (newBike == null) {
+            newBike = new Bike();
+        }
+        ByteArrayInputStream inputStream;
+        FileChooser fc = new FileChooser();
+        File selected = fc.showOpenDialog(null);
+        if (selected != null) {
+
+            FileInputStream fileInputStream = null;
+            byte[] bFile = new byte[(int) selected.length()];
+            try {
+                fileInputStream = new FileInputStream(selected);
+                urlLabel.setText(selected.getName());
+                fileInputStream.read(bFile);
+                fileInputStream.close();
+                inputStream = new ByteArrayInputStream(bFile);
+                newBike.setImageStream(inputStream);
+                newBike.setCreatedBy(loginView.getCurrentUser());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void showMainGui(ActionEvent actionEvent) {
