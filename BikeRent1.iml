@@ -10,5 +10,6 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="mail" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.39-bin" level="project" />
+    <orderEntry type="library" name="mail" level="project" />
   </component>
 </module>

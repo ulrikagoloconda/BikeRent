@@ -53,9 +53,45 @@ public interface SentMail extends OnlyOne {
 		
 	}
 
-	
-//stanley.jpg
-	static String makeNiceEMailtextDel(String mailTo, String userNamn, String mailinfo ){
+
+  static boolean sendNewUser(String userNamn, String email){
+
+    //_____________________________________________________________________
+
+
+    String host = "smtp.gmail.com";
+    String port = "587";
+    String mailFrom = "bike4u2Rent@gmail.com" ;
+    String password = "Just4Fun#";
+
+    //String mailTo = "cykeltur@gmail.com";  //
+    String mailTo = email;
+    String mailinfo = email;
+    String subject = "Användare " + userNamn + " önskar del";
+
+    String message = makeNiceEMailtextNewUser(mailTo, userNamn, mailinfo);
+
+    String[] attachFiles = new String[1];
+    attachFiles[0]= "img/bikelogo.png";
+
+    try {
+      sendEmailWithAttachments(host, port, mailFrom, password, mailTo, subject, message, attachFiles);
+      System.out.println("mailTo " + mailTo);
+      System.out.println("subject " + subject);
+      System.out.println("message " + message);
+
+//
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      return false; //inte ett fullskaligt test..
+    }
+
+    return true;
+
+  }
+
+
+  static String makeNiceEMailtextDel(String mailTo, String userNamn, String mailinfo){
 		System.out.println( mailTo);
 		System.out.println( userNamn);
 		System.out.println( mailinfo);
@@ -85,8 +121,40 @@ public interface SentMail extends OnlyOne {
 				
 		return message;
 	}
-		
-	static String changeSpecialCharForHTML(String textString){
+
+  static String makeNiceEMailtextNewUser(String mailTo, String userNamn, String mailinfo){
+    System.out.println( mailTo);
+    System.out.println( userNamn);
+    System.out.println( mailinfo);
+    System.out.println( "----");
+    //String cid = generateCID();
+    String mailToNice = changeSpecialCharForHTML(mailTo);
+    String userNamnNice = changeSpecialCharForHTML(userNamn);
+    String siteNamnNice = changeSpecialCharForHTML(mailinfo);
+    String message =
+        "<table border=\"0\" cellpadding=\"0\" class=\"MsoNormalTable\" height=\"58\" style=\"background: none repeat scroll 0% 0% rgb(0, 219, 200);\" width=\"100%\">" +
+            "<tbody> <tr> " +
+            "<th><img src=\"cid:image\"></th>" +
+            "<th><big><big><big><big>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </big></big></big></big></th>"
+            + " <th>&nbsp; "
+            + "</th> 		</tr> 			<tr> 			</tr>		</tbody>	</table>"
+            +"<p><strong>Hej&nbsp;Admin, uppdrag åt anv:  "
+            +  userNamn
+            + "</strong><br />	V&auml;lkommen till BikeRent " + userNamn
+            +
+            "<br />	ni angav Email:&nbsp; "
+            + mailinfo
+            + "</p>	<p>&nbsp;</p>	<p>&nbsp;</p>"//;
+            + "<br /> <a href=\"http://www.bike4u2Rent.app4solutions.com\"> 	<img src=\"cid:imageFoot\"> </a>";
+
+
+    return message;
+  }
+
+
+  static String changeSpecialCharForHTML(String textString){
 		String old = textString;
 		try {
       textString = textString.replaceAll("&", "&amp;");
