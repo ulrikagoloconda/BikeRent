@@ -6,7 +6,10 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ulrika Goloconda Fahlén
@@ -157,6 +160,71 @@ public class AccessBike {
     }
 
     public static String executeBikeLoan(int bikeID, int userID) {
-        return null;
+        DBType dataBase = null;
+        Connection conn = null;
+        Date dayOfReturn = null;
+        String returnSring = "";
+        if(helpers.PCRelated.isThisNiklasPC()){
+            dataBase = DBType.Niklas;
+        }else{
+            dataBase = DBType.Ulrika;
+        }
+        try{
+            conn = DBUtil.getConnection(dataBase);
+            conn.setAutoCommit(false);
+            String sql = "CALL execute_bike_loan(?,?,?, ?)";
+            CallableStatement cs = conn.prepareCall(sql);
+            cs.setInt(1,userID);
+            cs.setInt(2,bikeID);
+            Date date = Date.valueOf(LocalDate.now());
+            cs.setDate(3,date);
+            cs.registerOutParameter(4,Types.DATE);
+            cs.executeQuery();
+            dayOfReturn = cs.getDate(4);
+            conn.commit();
+            returnSring = "Lånet har genomförts. Återlämningsdatum: " + dayOfReturn.toString();
+        }catch (Exception e){
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            e.printStackTrace();
+            returnSring = "Lånet kunde inte genomföras";
+        }
+        return returnSring;
+    }
+
+    public static Map<String, Integer> getSearchValue(String text) {
+        Map<String, Integer> mapToReturn = new HashMap<>();
+        DBType dataBase = null;
+        Connection conn = null;
+        Date dayOfReturn = null;
+        String returnSring = "";
+        if(helpers.PCRelated.isThisNiklasPC()){
+            dataBase = DBType.Niklas;
+        }else{
+            dataBase = DBType.Ulrika;
+        }
+        try {
+            conn = DBUtil.getConnection(dataBase);
+            String sql = "CALL search_by_string(?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,text);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                int i = rs.getInt("bikeID");
+
+                String s1 = rs.getString("color");
+                String s2 = rs.getString("brandname");
+                String s3 = rs.getString("typeName");
+                String s4 = s2 + " " + s1 + " " + s3;
+                mapToReturn.put(s4,i);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return mapToReturn;
+
     }
 }
