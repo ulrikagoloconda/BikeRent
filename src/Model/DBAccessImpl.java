@@ -46,7 +46,7 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess {
 
     @Override
     public boolean deleteBike(int bikeID) {
-        return false;
+        return AccessBike.deleteBike(bikeID);
     }
 
     @Override
@@ -82,6 +82,11 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess {
         System.out.println("in the add user");
         return AccessUser.InsertNewUser(fname, lname, memberlevel, email, phone, username, passw);
       }
+
+    @Override
+    public ArrayList<Bike> getAllBikes() {
+        return AccessBike.getAllBikes();
+    }
 
   @Override
   public boolean UpdateUser(String fName, String lName, int in_memberlevel, String email, int phone, String userName, String password) throws SQLException {

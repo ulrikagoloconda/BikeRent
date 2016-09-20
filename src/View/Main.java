@@ -32,8 +32,14 @@ public class Main extends Application {
     return newUserLoader;
   }
   public  FXMLLoader getLoginViewLoader(){
-    return loginLoader;
+     FXMLLoader loginLoader2 = new FXMLLoader(getClass().getResource("../View/loginView.fxml"));
+      return loginLoader2;
   }
+
+    public FXMLLoader getDeleteBikeLoader(){
+        FXMLLoader deleteBikeLoader = new FXMLLoader(getClass().getResource("../View/deleteBikeView.fxml"));
+        return deleteBikeLoader;
+    }
 
     public static Stage getPrimaryStage(){
         return primaryStage_;
@@ -70,4 +76,9 @@ public class Main extends Application {
     FXMLLoader changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserTry.fxml"));
     return changeTryLoader;
   }
+
+    public FXMLLoader getAddLoader() {
+        FXMLLoader addBikeLoader = new FXMLLoader(getClass().getResource("../View/addBikeView.fxml"));
+        return addBikeLoader;
+    }
 }
