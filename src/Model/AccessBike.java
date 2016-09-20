@@ -227,4 +227,29 @@ public class AccessBike {
         return mapToReturn;
 
     }
+
+    public static Bike getBikeByID(int bikeID) {
+        Bike b = new Bike();
+
+        DBType dataBase = null;
+        Connection conn = null;
+        Date dayOfReturn = null;
+        String returnSring = "";
+        if(helpers.PCRelated.isThisNiklasPC()){
+            dataBase = DBType.Niklas;
+        }else{
+            dataBase = DBType.Ulrika;
+        }
+        try {
+            conn = DBUtil.getConnection(dataBase);
+            String sql = "SELECT  FROM bike WHERE bikeID=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+
+            }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 }

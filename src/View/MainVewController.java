@@ -52,6 +52,7 @@ public class MainVewController implements Initializable {
     private ArrayList<Bike> availableBikesCopy;
     private ArrayList<Bike> availableBikes;
     private List<Bike> currentListInView;
+    Map<String,Integer> searchMap;
 
     private String errorTitle = "Fel i huvidfönster";
 
@@ -208,7 +209,7 @@ public class MainVewController implements Initializable {
 
 
     public void popuateComboBox(Event event) {
-    Map<String,Integer> searchMap = dbaccess.getSearchValue(combobox.getEditor().getText());
+    searchMap = dbaccess.getSearchValue(combobox.getEditor().getText());
         System.out.println(combobox.getEditor().getText());
         int count = 0;
         combobox.getItems().clear();
@@ -222,6 +223,11 @@ public class MainVewController implements Initializable {
     }
 
     public void setSearchResult(ActionEvent actionEvent) {
+
+       String selected = combobox.getSelectionModel().getSelectedItem().toString();
+        int bikeID = searchMap.get(selected);
+       Bike bike = dbaccess.getBikeByID(bikeID);
+        ArrayList<Bike>
     }
 }
 
