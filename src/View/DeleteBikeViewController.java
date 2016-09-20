@@ -38,8 +38,11 @@ public class DeleteBikeViewController implements Initializable{
     private Bike selected = null;
     private int bikeIdDel;
     private int lastIndex;
+    private loginVewController loginVew;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Main.getSpider().setDeleteView(this);
         idMap = new HashMap<>();
         dbAccess = new DBAccessImpl();
         System.out.println("Körs inte init ? " + dbAccess);
@@ -148,7 +151,11 @@ public class DeleteBikeViewController implements Initializable{
     }
 
     public void showMainView(ActionEvent actionEvent) {
-        loginVewController lv = new loginVewController();
-        lv.showMainGui();
+       Main.getSpider().getLoginView().showMainGui();
+    }
+
+    public void setLoginVew(loginVewController loginVew){
+        System.out.println("Här sätts loginVew objektet ");
+        this.loginVew = loginVew;
     }
 }

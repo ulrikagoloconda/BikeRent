@@ -50,6 +50,10 @@ public class ChangeUserTry implements Initializable {
     public BikeUser currentUser;
     private String errorTitle = "fel i uppdatera användare";
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Main.getSpider().setChangeUserTry(this);
+    }
     public ChangeUserTry() {
         ;
     }
@@ -57,12 +61,11 @@ public class ChangeUserTry implements Initializable {
 
     public void showLoginGui() {
         try {
-            Main m = new Main();
-            FXMLLoader loginViewLoader = m.getNewUserLoader();
+            FXMLLoader loginViewLoader = Main.getSpider().getMain().getNewUserLoader();
             System.out.println("fel fönster laddas i denna version..");
             Parent loginViewRoot = (Parent) loginViewLoader.load();
             Scene loginViewScean = new Scene(loginViewRoot);
-            Main.getPrimaryStage().setScene(loginViewScean);
+            Main.getSpider().getMain().getPrimaryStage().setScene(loginViewScean);
             // populateText();
 
         } catch (IOException e) {
@@ -84,9 +87,7 @@ public class ChangeUserTry implements Initializable {
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
+
 
 
     public void newUserClick(ActionEvent actionEvent) {
@@ -142,11 +143,10 @@ public class ChangeUserTry implements Initializable {
                 if (isAddUserOK) {
                     boolean d = DialogView.showSimpleInfo("Ny användare upplaggd", "Lyckades", "Ny användare är nu upplagd");
                     try {
-                        Main m = new Main();
-                        FXMLLoader loginLoader = m.getLoginViewLoader();
+                        FXMLLoader loginLoader = Main.getSpider().getMain().getLoginViewLoader();
                         Parent loginRoot = (Parent) loginLoader.load();
                         Scene loginScean = new Scene(loginRoot);
-                        Main.getPrimaryStage().setScene(loginScean);
+                        Main.getSpider().getMain().getPrimaryStage().setScene(loginScean);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -246,11 +246,10 @@ public class ChangeUserTry implements Initializable {
                 if (isUpdateUserOK) {
                     boolean d = DialogView.showSimpleInfo("Uppdaterat", "Lyckades", "Ny är detta uppdaterat");
                     try {
-                        Main m = new Main();
-                        FXMLLoader loginLoader = m.getLoginViewLoader();
+                        FXMLLoader loginLoader = Main.getSpider().getMain().getLoginViewLoader();
                         Parent loginRoot = (Parent) loginLoader.load();
                         Scene loginScean = new Scene(loginRoot);
-                        Main.getPrimaryStage().setScene(loginScean);
+                        Main.getSpider().getMain().getPrimaryStage().setScene(loginScean);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -269,11 +268,10 @@ public class ChangeUserTry implements Initializable {
 
     public void abortClick(ActionEvent actionEvent) {
         try {
-            Main m = new Main();
-            FXMLLoader loginLoader = m.getLoginViewLoader();
+            FXMLLoader loginLoader = Main.getSpider().getMain().getLoginViewLoader();
             Parent loginRoot = (Parent) loginLoader.load();
             Scene loginScean = new Scene(loginRoot);
-            Main.getPrimaryStage().setScene(loginScean);
+            Main.getSpider().getMain().getPrimaryStage().setScene(loginScean);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -300,11 +298,10 @@ public class ChangeUserTry implements Initializable {
         if (isUpdateUserOK) {
             boolean d = DialogView.showSimpleInfo("kontot har blivid av-aktiverat", "Lyckades", "Nu ärkonott avaktiverat med lösenord: 1234");
             try {
-                Main m = new Main();
-                FXMLLoader loginLoader = m.getLoginViewLoader();
+                FXMLLoader loginLoader = Main.getSpider().getMain().getLoginViewLoader();
                 Parent loginRoot = (Parent) loginLoader.load();
                 Scene loginScean = new Scene(loginRoot);
-                Main.getPrimaryStage().setScene(loginScean);
+                Main.getSpider().getMain().getPrimaryStage().setScene(loginScean);
 
             } catch (IOException e) {
                 e.printStackTrace();

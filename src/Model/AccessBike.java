@@ -155,4 +155,8 @@ public class AccessBike {
             return false;
         }
     }
+
+    public static String executeBikeLoan(int bikeID, int userID) {
+        return null;
+    }
 }
