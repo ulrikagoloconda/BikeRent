@@ -28,9 +28,10 @@ import java.util.ResourceBundle;
  */
 public class AddBikeController implements Initializable {
     private Bike newBike;
-    private BikeUser currentUser;
     private loginVewController loginView;
     private DBAccess dbAccess = new DBAccessImpl();
+    private BikeUser currentUser;
+    private loginVewController loginVew;
     @FXML
     private Label urlLabel,messageLabel;
     @FXML
@@ -43,12 +44,11 @@ public class AddBikeController implements Initializable {
     private Pane editPane;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-loginView = new loginVewController();
+        Main.getSpider().setAddBikeView(this);
     }
 
     public void showDeleteView(ActionEvent actionEvent) {
-        loginVewController lv = new loginVewController();
-        lv.showMainGui();
+        loginView.showMainGui();
     }
 
 
@@ -116,7 +116,7 @@ loginView = new loginVewController();
                 fileInputStream.close();
                 inputStream = new ByteArrayInputStream(bFile);
                 newBike.setImageStream(inputStream);
-                newBike.setCreatedBy(loginView.getCurrentUser());
+                newBike.setCreatedBy(currentUser);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -124,7 +124,15 @@ loginView = new loginVewController();
     }
 
     public void showMainGui(ActionEvent actionEvent) {
-        loginVewController lv = new loginVewController();
-        lv.showMainGui();
+        Main.getSpider().getLoginView().showMainGui();
+
+    }
+
+    public void setCurrentUser(BikeUser currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public void setLoginViewController(loginVewController loginView){
+        this.loginView = loginView;
     }
 }

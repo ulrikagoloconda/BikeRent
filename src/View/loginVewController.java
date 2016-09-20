@@ -28,10 +28,15 @@ public class loginVewController implements Initializable{
     private PasswordField passwordText;
     private JDBCConnection jdbcConnection;
     private DBAccess dbAccess = new DBAccessImpl();
-    public BikeUser currentUser ;
+    private BikeUser currentUser ;
+    private MainVewController mainVew;
+    private AddBikeController addView;
+    private DeleteBikeViewController deleteBikeView;
+    private loginVewController currentLoginViewContrlloer;
 
-    public loginVewController(){
-        ;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    Main.getSpider().setLoginView(this);
     }
 
     public void logInClick(Event event) {
@@ -41,7 +46,6 @@ public class loginVewController implements Initializable{
 
       try {
         currentUser = dbAccess.logIn(userName,password);
-          System.out.println(currentUser.getUserName());
         System.out.println("after dbAccess.logIn(userName,password)");
         System.out.println(currentUser.getEmail());
         if (currentUser !=null){
@@ -55,11 +59,11 @@ public class loginVewController implements Initializable{
 
   public void showMainGui() {
         try {
-            Main m = new Main();
-            FXMLLoader MainViewLoader =m.getMainViewLoader();
+
+            FXMLLoader MainViewLoader = Main.getSpider().getMain().getMainViewLoader();
             Parent MainViewRoot = (Parent) MainViewLoader.load();
             Scene MainViewScean = new Scene(MainViewRoot);
-            Main.getPrimaryStage().setScene(MainViewScean);
+            Main.getSpider().getMain().getPrimaryStage().setScene(MainViewScean);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,27 +71,22 @@ public class loginVewController implements Initializable{
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
-    public BikeUser getCurrentUser(){
-        return currentUser;
-    }
-
   public void newUserClick(ActionEvent actionEvent) {
     System.out.println("clicked on newUserClick");
     try {
-      Main m = new Main();
-      FXMLLoader newUserLoader =m.getNewUserLoader();
+
+      FXMLLoader newUserLoader =Main.getSpider().getMain().getNewUserLoader();
       Parent newUserRoot = (Parent) newUserLoader.load();
       Scene newUserScean = new Scene(newUserRoot);
-      Main.getPrimaryStage().setScene(newUserScean);
+      Main.getSpider().getMain().getPrimaryStage().setScene(newUserScean);
 
     } catch (IOException e) {
       e.printStackTrace();
       ErrorView.showError("Lägg till användare-fönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
     }
   }
+
+    public loginVewController getInstanceOfLoginVewController(){
+        return currentLoginViewContrlloer;
+    }
 }

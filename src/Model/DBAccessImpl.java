@@ -92,4 +92,9 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess {
   public boolean UpdateUser(String fName, String lName, int in_memberlevel, String email, int phone, String userName, String password) throws SQLException {
     return AccessUser.UpdateUser(fName, lName, in_memberlevel, email, phone, userName, password);
   }
+
+    @Override
+    public String executeBikeLoan(int bikeID, int userID) {
+       return AccessBike.executeBikeLoan(bikeID, userID);
+    }
 }

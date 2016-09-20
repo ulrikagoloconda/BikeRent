@@ -2,6 +2,7 @@ package View;
 
 import Interfaces.DBAccess;
 import Model.Bike;
+import Model.BikeUser;
 import Model.DBAccessImpl;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -52,12 +53,14 @@ public class MainVewController implements Initializable {
     private ArrayList<Bike> availableBikesCopy;
     private ArrayList<Bike> availableBikes;
     private List<Bike> currentListInView;
+    private BikeUser currentUser;
 
     private String errorTitle = "Fel i huvidfönster";
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Main.getSpider().setMainView(this);
         dbaccess = new DBAccessImpl();
         idMap = new HashMap<>();
         executeLoanBtn.setVisible(false);
@@ -80,11 +83,11 @@ public class MainVewController implements Initializable {
     public void showAdminView(ActionEvent actionEvent) {
 
         try {
-            Main m = new Main();
-            FXMLLoader newUserLoader = m.getAdminLoader();
+
+            FXMLLoader newUserLoader = Main.getSpider().getMain().getAdminLoader();
             Parent adminRoot = (Parent) newUserLoader.load();
             Scene adminScene = new Scene(adminRoot);
-            Main.getPrimaryStage().setScene(adminScene);
+            Main.getSpider().getMain().getPrimaryStage().setScene(adminScene);
         } catch (IOException e) {
             e.printStackTrace();
             ErrorView.showError(errorTitle, "fel vid Öppnining av admindata..", "starta om denna session..", e);
@@ -179,11 +182,11 @@ public class MainVewController implements Initializable {
 
     public void showChangeUserView(ActionEvent actionEvent) {
         try {
-            Main m = new Main();
-            FXMLLoader changeTryLoader = m.getChangeUserTry();
+
+            FXMLLoader changeTryLoader = Main.getSpider().getMain().getChangeUserTry();
             Parent changeTryRoot = changeTryLoader.load();
             Scene changeTryScean = new Scene(changeTryRoot);
-            Main.getPrimaryStage().setScene(changeTryScean);
+            Main.getSpider().getMain().getPrimaryStage().setScene(changeTryScean);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -201,6 +204,15 @@ public class MainVewController implements Initializable {
             currentListInView = availableBikes.subList(0, availableBikes.size() - 1);
         }
         populateGridPane(currentListInView);
+    }
+
+    public void executeBikeLoan(ActionEvent actionEvent) {
+
+        String message = dbaccess.executeBikeLoan(selectedFromGrid,currentUser.getUserID());
+    }
+
+    public void setCurrentUser(BikeUser currentUser) {
+        this.currentUser = currentUser;
     }
 }
 

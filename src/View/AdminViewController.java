@@ -14,11 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,7 +27,7 @@ import java.util.ResourceBundle;
 public class AdminViewController implements Initializable {
     private Bike newBike;
     private BikeUser currentUser;
-    private loginVewController loginView;
+    //private loginVewController loginView;
     private DBAccess dbAccess = new DBAccessImpl();
     @FXML
     private Label urlLabel;
@@ -46,32 +42,24 @@ public class AdminViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loginView = new loginVewController();
+        Main.getSpider().setAdminView(this);
     }
 
-
-
-
-
-
-
     public void showDeleteView(ActionEvent actionEvent) {
-        Main m = new Main();
         try {
-            Parent deleteRoot = (Parent)m.getDeleteBikeLoader().load();
+            Parent deleteRoot = (Parent)Main.getSpider().getMain().getDeleteBikeLoader().load();
             Scene deleteScene = new Scene(deleteRoot);
-            Main.getPrimaryStage().setScene(deleteScene);
+            Main.getSpider().getMain().getPrimaryStage().setScene(deleteScene);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void showAddView(ActionEvent actionEvent) {
-        Main m = new Main();
         try{
-            Parent addRoot = (Parent)m.getAddLoader().load();
+            Parent addRoot = (Parent)Main.getSpider().getMain().getAddLoader().load();
             Scene addScean = new Scene(addRoot);
-            Main.getPrimaryStage().setScene(addScean);
+            Main.getSpider().getMain().getPrimaryStage().setScene(addScean);
         }catch (Exception e){
             e.printStackTrace();
         }
