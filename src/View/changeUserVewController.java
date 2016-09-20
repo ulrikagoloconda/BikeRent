@@ -296,7 +296,8 @@ System.out.println("dessable click");
       currentUser.setMemberLevel(0);
 
       Main.getSpider().getMainView().setCurrentUser(currentUser);
-      //populateText();
+      populateText();
+      Main.getSpider().getMainView().populateUserTextInGUI(currentUser);
       //Main.getSpider().getMain()
       Main.getSpider().getMain().showLoginView();
 

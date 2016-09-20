@@ -74,9 +74,9 @@ public class MainVewController implements Initializable {
 
     }
 
-  private void populateUserTextInGUI(BikeUser bikeUser) {
+  public void populateUserTextInGUI(BikeUser bikeUser) {
     userNameLabel.setText(bikeUser.getUserName());
-    memberLevelLabel.setText(""+bikeUser.getMemberLevel());
+    memberLevelLabel.setText("*"+bikeUser.getMemberLevel()+ "*");
     activeLoanLabel.setText("000");
     numberOfLoanedBikesLabel.setText("111");
   }
