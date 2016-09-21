@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.io.IOException;
 import java.net.URL;
@@ -98,7 +99,6 @@ public class MainVewController implements Initializable {
 
     public boolean populateGridPane(List<Bike> bikeArray) {
         gridPane.getChildren().clear();
-        System.out.println(availableBikes.size() + " Storleken på långlistan i pop");
         if (availableBikes.size() <= 3) {
             netBtn.setVisible(false);
         } else {
@@ -107,9 +107,12 @@ public class MainVewController implements Initializable {
         String[] topList = {"Bild", "Årsmodell", "Färg", "Cykeltyp", "Modell", "Ledig?"};
         ArrayList<String> values = new ArrayList<>();
 
-        gridPane.gridLinesVisibleProperty().setValue(true);
+       // gridPane.gridLinesVisibleProperty().setValue(true);
         for (int i = 0; i < 6; i++) {
-            gridPane.add(new Label(topList[i]), i, 0);
+            Label l = new Label();
+            l.setText(topList[i]);
+            l.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
+            gridPane.add(l, i, 0);
         }
         int j = 1;
         for (Bike b : bikeArray) {
