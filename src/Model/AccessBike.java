@@ -252,6 +252,7 @@ public class AccessBike {
                 } else {
                     b.setAvailable(true);
                 }
+                b.setBrandName(rs.getString("brandName"));
 
             }
 
