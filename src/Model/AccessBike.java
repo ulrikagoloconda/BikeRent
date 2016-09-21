@@ -242,14 +242,23 @@ public class AccessBike {
         }
         try {
             conn = DBUtil.getConnection(dataBase);
-            String sql = "SELECT  FROM bike WHERE bikeID=?";
+            String sql = "Call get_bike_returnedDate_from_ID(?)";
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,bikeID);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            while (rs.next()){
+                if(rs.getDate("dayOfActualReturn")== null){
+                    b.setAvailable(false);
+                } else {
+                    b.setAvailable(true);
+                }
 
             }
-            }
-        }catch (Exception e){
+
+      }catch (Exception e){
             e.printStackTrace();
         }
+        return null;
+        }
+
 }

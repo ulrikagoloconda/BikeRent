@@ -227,7 +227,7 @@ public class MainVewController implements Initializable {
        String selected = combobox.getSelectionModel().getSelectedItem().toString();
         int bikeID = searchMap.get(selected);
        Bike bike = dbaccess.getBikeByID(bikeID);
-        ArrayList<Bike>
+       // ArrayList<Bike>
     }
 }
 
