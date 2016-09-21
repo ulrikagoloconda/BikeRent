@@ -17,10 +17,9 @@ public class DBUtil {
   private static final String CONN_STRING_Ulrika =
       "jdbc:mysql://localhost:3306/bikerentDB";
 
-  private static final String USERNAME_Niklas = "root";//"dbuser";
-  private static final String PASSWORD_Niklas = "Forfattare1";//"1234";
-  private static final String CONN_STRING_Niklas ="jdbc:mysql://83.250.52.184:3306/bikerentDB";
-      //"jdbc:mysql://localhost/bikerent";
+  private static final String USERNAME_Niklas = "dbuser";
+  private static final String PASSWORD_Niklas = "1234";
+  private static final String CONN_STRING_Niklas ="jdbc:mysql://localhost/bikerent";
 
 
   public static Connection getConnection(DBType dbType) throws SQLException {
