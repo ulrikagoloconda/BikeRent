@@ -13,13 +13,13 @@ import javafx.scene.layout.StackPane;
  */
 public class StatView {
 
-  public static void showStatView(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2, String labelID3, Integer stat0To100ID3) {
+  public static void showStatView(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
 
-    if ( (stat0To100ID1 + stat0To100ID2 + stat0To100ID3) != 100){
-      ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 +"+" + stat0To100ID3));
+    if ( (stat0To100ID1 + stat0To100ID2 ) != 100){
+      ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 ));
     }
     PieChart pieChart = new PieChart();
-    pieChart.setData(getChartData(labelID1, stat0To100ID1, labelID2, stat0To100ID2, labelID3, stat0To100ID3));
+    pieChart.setData(getChartData(labelID1, stat0To100ID1, labelID2, stat0To100ID2));
     pieChart.setTitle("Title");
     pieChart.setLegendSide(Side.LEFT);
     pieChart.setClockwise(false);
@@ -33,12 +33,11 @@ public class StatView {
     
   }
 
-  private static ObservableList<PieChart.Data> getChartData(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2, String labelID3, Integer stat0To100ID3) {
+  private static ObservableList<PieChart.Data> getChartData(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
 
     ObservableList<PieChart.Data> answer = FXCollections.observableArrayList();
     answer.addAll(new PieChart.Data(labelID1, stat0To100ID1),
-        new PieChart.Data(labelID2, stat0To100ID2),
-        new PieChart.Data(labelID3, stat0To100ID3)
+        new PieChart.Data(labelID2, stat0To100ID2)
     );
     return answer;
   }
