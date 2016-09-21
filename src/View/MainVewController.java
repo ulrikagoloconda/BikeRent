@@ -75,6 +75,7 @@ public class MainVewController implements Initializable {
     }
 
   public void populateUserTextInGUI(BikeUser bikeUser) {
+    System.out.println("uppdaterar mainGUI!!");
     userNameLabel.setText(bikeUser.getUserName());
     memberLevelLabel.setText("*"+bikeUser.getMemberLevel()+ "*");
     activeLoanLabel.setText("000");
