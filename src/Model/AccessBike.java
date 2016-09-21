@@ -27,15 +27,6 @@ public class AccessBike {
 
         try {
             Connection conn = DBUtil.getConnection(dataBase);
-            /*
-                                                            IN brandNameIn VARCHAR(50),
-                                                          IN typeIn VARCHAR(30),
-                                                          IN modelYearIn SMALLINT(6),
-                                                          IN colorIn VARCHAR(50),
-                                                          IN sizeIn SMALLINT(6),
-                                                          IN imageIn LONGBLOB,
-                                                          OUT bikeIDOut INT(11))
-             */
             String sql = "CALL insert_bike(?,?,?,?,?,?,?)";
             CallableStatement cs = conn.prepareCall(sql);
             cs.setString(1,newBike.getBrandName());
@@ -45,9 +36,6 @@ public class AccessBike {
             cs.setInt(5, newBike.getSize());
             ByteArrayInputStream bais = newBike.getImageStream();
             cs.setBinaryStream(6, bais);
-           /* byte[] array = new byte[newBike.getImageStream().available()];
-            Blob blob = new javax.sql.rowset.serial.SerialBlob(array);
-            cs.setBlob(6, blob);*/
             cs.registerOutParameter(7, Types.INTEGER);
 
           cs.executeQuery();
@@ -85,7 +73,6 @@ public class AccessBike {
                 b.setColor(rs.getString("color"));
                 b.setSize(rs.getInt("size"));
                 b.setModelYear(rs.getInt("modelyear"));
-                System.out.println("Körs inte detta precis innan?");
                 Blob blob = rs.getBlob("image");
                 byte [] bytes = blob.getBytes(1, (int) blob.length());
                 BufferedImage theImage= ImageIO.read(new ByteArrayInputStream(bytes));

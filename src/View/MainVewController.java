@@ -121,10 +121,6 @@ public class MainVewController implements Initializable {
             values.add("" + b.isAvailable());
             for (int i = 0; i < 6; i++) {
                 if (i == 0) {
-                    //Image im = new Image("file:///" + b.getImagePath());
-                    //Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\rosaCykel.jpg");
-
-                    System.out.println(b.getBufferedImage());
                     Image image = SwingFXUtils.toFXImage(b.getBufferedImage(), null);
                     ImageView iv = new ImageView();
                   iv.setFitHeight(65);
@@ -182,10 +178,10 @@ public class MainVewController implements Initializable {
             values.add("" + bike.isAvailable());
             for (int i = 0; i < 6; i++) {
                 if (i == 0) {
-                    Image im = new Image("file:///" + bike.getImagePath());
-                    //Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\rosaCykel.jpg");
-
+                    Image image = SwingFXUtils.toFXImage(bike.getBufferedImage(), null);
                     ImageView iv = new ImageView();
+                    iv.setFitHeight(65);
+                    iv.setFitWidth(95);
                     iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                         @Override
@@ -195,7 +191,7 @@ public class MainVewController implements Initializable {
                         }
                     });
                     idMap.put(iv, bike.getBikeID());
-                    iv.setImage(im);
+                    iv.setImage(image);
                     gridPane.add(iv, i, 1);
                 } else {
                     Label k = new Label();
@@ -291,8 +287,6 @@ public class MainVewController implements Initializable {
        String selected = combobox.getSelectionModel().getSelectedItem().toString();
         int bikeID = searchMap.get(selected);
         selectedBikeSearch = dbaccess.getBikeByID(bikeID);
-     /*  List<Bike> bikes = new ArrayList<>();
-        bikes.add(bike);*/
         System.out.println(selectedBikeSearch.getBrandName());
         System.out.println(selectedBikeSearch.getBikeID());
         populateGridPane(selectedBikeSearch);

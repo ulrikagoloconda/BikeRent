@@ -53,23 +53,23 @@ public class DeleteBikeViewController implements Initializable{
 
 
     public void initDeleteView() {
-        System.out.println(dbAccess);
+
         allBikes = dbAccess.getAllBikes();
+        System.out.println("i init Del, storleken " + allBikes.size());
         if (allBikes.size() > 10){
             List<Bike> shortList = allBikes.subList(0, 9);
             populateDeleteGrid(shortList);
+            forwardBtn.setDisable(false);
         } else {
             populateDeleteGrid(allBikes);
-            forwardBtn.setDisable(false);
+            forwardBtn.setDisable(true);
 
         }
-
-
     }
 
     public void populateDeleteGrid(List<Bike> bikeList) {
+        gridDelBike.getChildren().clear();
         ArrayList<String> columnNames = new ArrayList<>();
-
         columnNames.add("CykelID");
         columnNames.add("Modell");
         columnNames.add("Årsmodell");
@@ -130,32 +130,17 @@ public class DeleteBikeViewController implements Initializable{
     }
 
     public void nextView(ActionEvent actionEvent) {
-        int i = 0;
-        for(Bike b : allBikes){
-            if (b.getBikeID()==lastIndex){
-                 i = allBikes.indexOf(b);
-            }
-        }
-        if(i>allBikes.size()) {
-            System.out.println(i + 10 + " längden " + allBikes.size());
-            if (allBikes.size() > i + 10) {
-                List<Bike> smallList = allBikes.subList(i + 1, i + 10);
+            if (allBikes.size() > 10) {
+                List<Bike> smallList = allBikes.subList(0, 10);
                 populateDeleteGrid(smallList);
             } else {
-                List<Bike> smallList = allBikes.subList(i + 1, allBikes.size() - 1);
+                List<Bike> smallList = allBikes.subList(0, allBikes.size() - 1);
                 populateDeleteGrid(smallList);
+                forwardBtn.setDisable(true);
             }
-        }else {
-            forwardBtn.setDisable(false);
-        }
     }
 
     public void showMainView(ActionEvent actionEvent) {
        Main.getSpider().getLoginView().showMainGui();
-    }
-
-    public void setLoginVew(loginVewController loginVew){
-        System.out.println("Här sätts loginVew objektet ");
-        this.loginVew = loginVew;
     }
 }
