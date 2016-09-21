@@ -106,6 +106,7 @@ public class AddBikeController implements Initializable {
         }
         FileChooser fc = new FileChooser();
         File selected = fc.showOpenDialog(null);
+        urlLabel.setText(selected.getName());
         if (selected != null) {
             try {
                 ByteArrayInputStream in = new ByteArrayInputStream(FileUtils.readFileToByteArray(selected));

@@ -29,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.io.IOException;
 import java.net.URL;
@@ -95,26 +96,20 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
 
 
   public void searchAvailableBikes(ActionEvent actionEvent) {
-        ArrayList<Bike> availableBikes = dbaccess.selectAvailableBikes();
-
-        idMap = new HashMap<>();
-        executeLoanBtn.setVisible(false);
-        netBtn.setVisible(false);
-        combobox.setEditable(true);
-    }
-
-//    public void searchAvailableBikes(ActionEvent actionEvent) {
-//        availableBikes = dbaccess.selectAvailableBikes();
-//        availableBikesCopy = availableBikes;
-//>>>>>>> 31d002a7db8fd6050defcc3b2d8e9a041dfb8480
-//        System.out.println(availableBikes.size());
-//        if (availableBikes.size() > 3) {
-//            currentListInView = availableBikes.subList(0, 3);
-//            populateGridPane(currentListInView);
-//        } else {
-//           populateGridPane(availableBikes);
-//        }
-//    }
+      idMap = new HashMap<>();
+      executeLoanBtn.setVisible(false);
+      netBtn.setVisible(false);
+      combobox.setEditable(true);
+      availableBikes = dbaccess.selectAvailableBikes();
+      availableBikesCopy = availableBikes;
+      System.out.println(availableBikes.size());
+      if (availableBikes.size() > 3) {
+          currentListInView = availableBikes.subList(0, 3);
+          populateGridPane(currentListInView);
+      } else {
+          populateGridPane(availableBikes);
+      }
+  }
 
     public void showAdminView(ActionEvent actionEvent) {
 
@@ -133,7 +128,6 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
 
     public boolean populateGridPane(List<Bike> bikeArray) {
         gridPane.getChildren().clear();
-        System.out.println(availableBikes.size() + " Storleken på långlistan i pop");
         if (availableBikes.size() <= 3) {
             netBtn.setVisible(false);
         } else {
@@ -142,9 +136,12 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
         String[] topList = {"Bild", "Årsmodell", "Färg", "Cykeltyp", "Modell", "Ledig?"};
         ArrayList<String> values = new ArrayList<>();
 
-        gridPane.gridLinesVisibleProperty().setValue(true);
+       // gridPane.gridLinesVisibleProperty().setValue(true);
         for (int i = 0; i < 6; i++) {
-            gridPane.add(new Label(topList[i]), i, 0);
+            Label l = new Label();
+            l.setText(topList[i]);
+            l.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
+            gridPane.add(l, i, 0);
         }
         int j = 1;
         for (Bike b : bikeArray) {
@@ -156,15 +153,11 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
             values.add("" + b.isAvailable());
             for (int i = 0; i < 6; i++) {
                 if (i == 0) {
-                    //Image im = new Image("file:///" + b.getImagePath());
-                    //Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\rosaCykel.jpg");
-
-                    System.out.println(b.getBufferedImage());
                     Image image = SwingFXUtils.toFXImage(b.getBufferedImage(), null);
                     ImageView iv = new ImageView();
                   iv.setFitHeight(65);
                     iv.setFitWidth(95);
-
+                    System.out.println("Körs detta ");
                     iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                         @Override
@@ -217,10 +210,10 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
             values.add("" + bike.isAvailable());
             for (int i = 0; i < 6; i++) {
                 if (i == 0) {
-                    Image im = new Image("file:///" + bike.getImagePath());
-                    //Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\rosaCykel.jpg");
-
+                    Image image = SwingFXUtils.toFXImage(bike.getBufferedImage(), null);
                     ImageView iv = new ImageView();
+                    iv.setFitHeight(65);
+                    iv.setFitWidth(95);
                     iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                         @Override
@@ -230,7 +223,7 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
                         }
                     });
                     idMap.put(iv, bike.getBikeID());
-                    iv.setImage(im);
+                    iv.setImage(image);
                     gridPane.add(iv, i, 1);
                 } else {
                     Label k = new Label();
@@ -351,8 +344,6 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
        String selected = combobox.getSelectionModel().getSelectedItem().toString();
         int bikeID = searchMap.get(selected);
         selectedBikeSearch = dbaccess.getBikeByID(bikeID);
-     /*  List<Bike> bikes = new ArrayList<>();
-        bikes.add(bike);*/
         System.out.println(selectedBikeSearch.getBrandName());
         System.out.println(selectedBikeSearch.getBikeID());
         populateGridPane(selectedBikeSearch);
