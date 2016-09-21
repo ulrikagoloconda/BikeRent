@@ -1,6 +1,8 @@
 package Model;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 
 /**
  * @author Ulrika Goloconda Fahlén
@@ -19,6 +21,8 @@ public class Bike {
     private ByteArrayInputStream imageStream;
     private BikeUser createdBy;
     private String imageFileName;
+    private BufferedImage bufferedImage;
+   private FileInputStream fileInputImage;
 
     public Bike(){}
 
@@ -127,5 +131,21 @@ public class Bike {
 
     public void setImageFileName(String imageFileName) {
         this.imageFileName = imageFileName;
+    }
+
+    public BufferedImage getBufferedImage() {
+        return bufferedImage;
+    }
+
+    public void setBufferedImage(BufferedImage bufferedImage) {
+        this.bufferedImage = bufferedImage;
+    }
+
+    public FileInputStream getFileInputImage() {
+        return fileInputImage;
+    }
+
+    public void setFileInputImage(FileInputStream fileInputImage) {
+        this.fileInputImage = fileInputImage;
     }
 }
