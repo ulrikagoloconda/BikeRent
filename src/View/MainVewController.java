@@ -2,9 +2,9 @@ package View;
 
 import Interfaces.DBAccess;
 import Model.Bike;
-import Model.BikeUser;
 import Model.DBAccessImpl;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -46,6 +43,8 @@ public class MainVewController implements Initializable {
     private Label messageLabel;
     @FXML
     private Button executeLoanBtn, netBtn;
+    @FXML
+    private ComboBox<String> combobox;
 
     private DBAccess dbaccess;
     private Map<Node, Integer> idMap;
@@ -53,7 +52,6 @@ public class MainVewController implements Initializable {
     private ArrayList<Bike> availableBikesCopy;
     private ArrayList<Bike> availableBikes;
     private List<Bike> currentListInView;
-    private BikeUser currentUser;
 
     private String errorTitle = "Fel i huvidfönster";
 
@@ -65,7 +63,7 @@ public class MainVewController implements Initializable {
         idMap = new HashMap<>();
         executeLoanBtn.setVisible(false);
         netBtn.setVisible(false);
-
+        combobox.setEditable(true);
     }
 
     public void searchAvailableBikes(ActionEvent actionEvent) {
@@ -197,9 +195,6 @@ public class MainVewController implements Initializable {
         currentListInView.clear();
         if (availableBikes.size() >= 3) {
             currentListInView = availableBikes.subList(0, 3);
-            System.out.println(currentListInView.size() + " den korta listans längde");
-            System.out.println(availableBikes.size() + " tillgängliga cyklar ");
-
         } else {
             currentListInView = availableBikes.subList(0, availableBikes.size() - 1);
         }
@@ -207,12 +202,26 @@ public class MainVewController implements Initializable {
     }
 
     public void executeBikeLoan(ActionEvent actionEvent) {
-
-        String message = dbaccess.executeBikeLoan(selectedFromGrid,currentUser.getUserID());
+        String message = dbaccess.executeBikeLoan(selectedFromGrid,Main.getSpider().getLoginView().getCurrentUser().getUserID());
+        messageLabel.setText(message);
     }
 
-    public void setCurrentUser(BikeUser currentUser) {
-        this.currentUser = currentUser;
+
+    public void popuateComboBox(Event event) {
+    Map<String,Integer> searchMap = dbaccess.getSearchValue(combobox.getEditor().getText());
+        System.out.println(combobox.getEditor().getText());
+        int count = 0;
+        combobox.getItems().clear();
+        for (Map.Entry<String,Integer> entry : searchMap.entrySet()) {
+            if(count>10){
+                break;
+            }
+            combobox.getItems().add(entry.getKey());
+            count++;
+        }
+    }
+
+    public void setSearchResult(ActionEvent actionEvent) {
     }
 }
 

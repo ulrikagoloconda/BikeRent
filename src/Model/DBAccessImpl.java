@@ -97,4 +97,9 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess {
     public String executeBikeLoan(int bikeID, int userID) {
        return AccessBike.executeBikeLoan(bikeID, userID);
     }
+
+    @Override
+    public Map<String,Integer> getSearchValue(String text) {
+        return AccessBike.getSearchValue(text);
+    }
 }
