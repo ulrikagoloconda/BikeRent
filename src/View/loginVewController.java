@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,17 +27,17 @@ public class loginVewController implements Initializable{
     private TextField userNameText;
     @FXML
     private PasswordField passwordText;
+    @FXML
+    private AnchorPane loginPane;
     private JDBCConnection jdbcConnection;
     private DBAccess dbAccess = new DBAccessImpl();
     private BikeUser currentUser ;
-    private MainVewController mainVew;
-    private AddBikeController addView;
-    private DeleteBikeViewController deleteBikeView;
-    private loginVewController currentLoginViewContrlloer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     Main.getSpider().setLoginView(this);
+
+
     }
 
     public void logInClick(Event event) {
@@ -86,7 +87,8 @@ public class loginVewController implements Initializable{
     }
   }
 
-    public loginVewController getInstanceOfLoginVewController(){
-        return currentLoginViewContrlloer;
+
+    public BikeUser getCurrentUser() {
+        return currentUser;
     }
 }

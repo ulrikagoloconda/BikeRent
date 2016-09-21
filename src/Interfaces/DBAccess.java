@@ -30,4 +30,5 @@ public interface DBAccess {
     ArrayList<Bike> getAllBikes();
     boolean UpdateUser(String fName, String lName, int in_memberlevel, String email, int phone, String userName, String password)throws SQLException;
     String executeBikeLoan(int bikeID, int userID);
+    Map<String,Integer> getSearchValue(String text);
 }
