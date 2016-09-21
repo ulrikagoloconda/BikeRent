@@ -14,10 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import org.apache.commons.io.FileUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,7 +31,7 @@ public class AddBikeController implements Initializable {
     private Bike newBike;
     private loginVewController loginView;
     private DBAccess dbAccess = new DBAccessImpl();
-    private BikeUser currentUser;
+   private BikeUser currentUser;
     private loginVewController loginVew;
     @FXML
     private Label urlLabel,messageLabel;
@@ -45,6 +46,7 @@ public class AddBikeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Main.getSpider().setAddBikeView(this);
+        currentUser = Main.getSpider().getLoginView().getCurrentUser();
     }
 
     public void showDeleteView(ActionEvent actionEvent) {
@@ -102,22 +104,14 @@ public class AddBikeController implements Initializable {
         if (newBike == null) {
             newBike = new Bike();
         }
-        ByteArrayInputStream inputStream;
         FileChooser fc = new FileChooser();
         File selected = fc.showOpenDialog(null);
         if (selected != null) {
-
-            FileInputStream fileInputStream = null;
-            byte[] bFile = new byte[(int) selected.length()];
             try {
-                fileInputStream = new FileInputStream(selected);
-                urlLabel.setText(selected.getName());
-                fileInputStream.read(bFile);
-                fileInputStream.close();
-                inputStream = new ByteArrayInputStream(bFile);
-                newBike.setImageStream(inputStream);
+                ByteArrayInputStream in = new ByteArrayInputStream(FileUtils.readFileToByteArray(selected));
+                newBike.setImageStream(in);
                 newBike.setCreatedBy(currentUser);
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -126,13 +120,5 @@ public class AddBikeController implements Initializable {
     public void showMainGui(ActionEvent actionEvent) {
         Main.getSpider().getLoginView().showMainGui();
 
-    }
-
-    public void setCurrentUser(BikeUser currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    public void setLoginViewController(loginVewController loginView){
-        this.loginView = loginView;
     }
 }
