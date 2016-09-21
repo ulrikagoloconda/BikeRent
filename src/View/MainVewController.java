@@ -4,6 +4,7 @@ import Interfaces.DBAccess;
 import Model.Bike;
 import Model.BikeUser;
 import Model.DBAccessImpl;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -28,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.io.IOException;
 import java.net.URL;
@@ -66,6 +68,9 @@ public class MainVewController implements Initializable {
     private ArrayList<Bike> availableBikes;
     private List<Bike> currentListInView;
   private BikeUser currentUser;
+    Map<String,Integer> searchMap;
+    private  Bike selectedBikeSearch;
+
 
     private String errorTitle = "Fel i huvidfönster";
 
@@ -91,26 +96,20 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
 
 
   public void searchAvailableBikes(ActionEvent actionEvent) {
-        ArrayList<Bike> availableBikes = dbaccess.selectAvailableBikes();
-
-        idMap = new HashMap<>();
-        executeLoanBtn.setVisible(false);
-        netBtn.setVisible(false);
-        combobox.setEditable(true);
-    }
-
-//    public void searchAvailableBikes(ActionEvent actionEvent) {
-//        availableBikes = dbaccess.selectAvailableBikes();
-//        availableBikesCopy = availableBikes;
-//>>>>>>> 31d002a7db8fd6050defcc3b2d8e9a041dfb8480
-//        System.out.println(availableBikes.size());
-//        if (availableBikes.size() > 3) {
-//            currentListInView = availableBikes.subList(0, 3);
-//            populateGridPane(currentListInView);
-//        } else {
-//           populateGridPane(availableBikes);
-//        }
-//    }
+      idMap = new HashMap<>();
+      executeLoanBtn.setVisible(false);
+      netBtn.setVisible(false);
+      combobox.setEditable(true);
+      availableBikes = dbaccess.selectAvailableBikes();
+      availableBikesCopy = availableBikes;
+      System.out.println(availableBikes.size());
+      if (availableBikes.size() > 3) {
+          currentListInView = availableBikes.subList(0, 3);
+          populateGridPane(currentListInView);
+      } else {
+          populateGridPane(availableBikes);
+      }
+  }
 
     public void showAdminView(ActionEvent actionEvent) {
 
@@ -128,7 +127,7 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
     }
 
     public boolean populateGridPane(List<Bike> bikeArray) {
-        System.out.println(availableBikes.size() + " Storleken på långlistan i pop");
+        gridPane.getChildren().clear();
         if (availableBikes.size() <= 3) {
             netBtn.setVisible(false);
         } else {
@@ -137,9 +136,12 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
         String[] topList = {"Bild", "Årsmodell", "Färg", "Cykeltyp", "Modell", "Ledig?"};
         ArrayList<String> values = new ArrayList<>();
 
-        gridPane.gridLinesVisibleProperty().setValue(true);
+       // gridPane.gridLinesVisibleProperty().setValue(true);
         for (int i = 0; i < 6; i++) {
-            gridPane.add(new Label(topList[i]), i, 0);
+            Label l = new Label();
+            l.setText(topList[i]);
+            l.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
+            gridPane.add(l, i, 0);
         }
         int j = 1;
         for (Bike b : bikeArray) {
@@ -151,10 +153,11 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
             values.add("" + b.isAvailable());
             for (int i = 0; i < 6; i++) {
                 if (i == 0) {
-                    Image im = new Image("file:///" + b.getImagePath());
-                    //Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\rosaCykel.jpg");
-
+                    Image image = SwingFXUtils.toFXImage(b.getBufferedImage(), null);
                     ImageView iv = new ImageView();
+                  iv.setFitHeight(65);
+                    iv.setFitWidth(95);
+                    System.out.println("Körs detta ");
                     iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                         @Override
@@ -164,7 +167,7 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
                         }
                     });
                     idMap.put(iv, b.getBikeID());
-                    iv.setImage(im);
+                    iv.setImage(image);
                     gridPane.add(iv, i, j);
                 } else {
                     Label k = new Label();
@@ -188,6 +191,57 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
             if (j > 3) {
                 return false;
             }
+        }
+        return true;
+    }
+    public boolean populateGridPane(Bike bike) {
+        gridPane.getChildren().clear();
+        String[] topList = {"Bild", "Årsmodell", "Färg", "Cykeltyp", "Modell", "Ledig?"};
+        ArrayList<String> values = new ArrayList<>();
+       // gridPane.gridLinesVisibleProperty().setValue(true);
+        for (int i = 0; i < 6; i++) {
+            gridPane.add(new Label(topList[i]), i, 0);
+        }
+
+            values.add("" + bike.getModelYear());
+            values.add(bike.getColor());
+            values.add(bike.getType());
+            values.add(bike.getBrandName());
+            values.add("" + bike.isAvailable());
+            for (int i = 0; i < 6; i++) {
+                if (i == 0) {
+                    Image image = SwingFXUtils.toFXImage(bike.getBufferedImage(), null);
+                    ImageView iv = new ImageView();
+                    iv.setFitHeight(65);
+                    iv.setFitWidth(95);
+                    iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                        @Override
+                        public void handle(MouseEvent event) {
+                            Node n = (Node) event.getSource();
+                            onClickActions(n);
+                        }
+                    });
+                    idMap.put(iv, bike.getBikeID());
+                    iv.setImage(image);
+                    gridPane.add(iv, i, 1);
+                } else {
+                    Label k = new Label();
+                    k.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                        @Override
+                        public void handle(MouseEvent event) {
+                            Node n = (Node) event.getSource();
+                            onClickActions(n);
+                        }
+                    });
+                    k.setText(values.get(i - 1));
+                    Font f = new Font(16);
+                    k.setFont(f);
+                    idMap.put(k, bike.getBikeID());
+                    gridPane.add(k, i, 1);
+
+                }
         }
         return true;
     }
@@ -218,23 +272,28 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
 
 
     public void onClickActions(Node n) {
-        selectedFromGrid = idMap.get(n);
-        String available = "";
-        for (Bike b : availableBikes) {
-            if (b.isAvailable()) {
-                available = "Ja";
-            } else {
-                available = "Nej";
-            }
-            if (b.getBikeID() == selectedFromGrid) {
+        if (availableBikes == null) {
+            executeLoanBtn.setVisible(true);
+            selectedFromGrid = selectedBikeSearch.getBikeID();
+        } else {
+            selectedFromGrid = idMap.get(n);
+            String available = "";
+            for (Bike b : availableBikes) {
+                if (b.isAvailable()) {
+                    available = "Ja";
+                } else {
+                    available = "Nej";
+                }
+                if (b.getBikeID() == selectedFromGrid) {
 
-                String s = "Årsmodell: " + b.getModelYear() + " Färg: " + b.getColor() + " Cykeltyp: " +
-                        b.getType() + " Ledig? " + available;
-                messageLabel.setText(s);
-                executeLoanBtn.setVisible(true);
+                    String s = "Årsmodell: " + b.getModelYear() + " Färg: " + b.getColor() + " Cykeltyp: " +
+                            b.getType() + " Ledig? " + available;
+                    messageLabel.setText(s);
+                    executeLoanBtn.setVisible(true);
+                }
             }
+
         }
-
     }
 
     public void showChangeUserView(ActionEvent actionEvent) {
@@ -267,7 +326,7 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
 
 
     public void popuateComboBox(Event event) {
-    Map<String,Integer> searchMap = dbaccess.getSearchValue(combobox.getEditor().getText());
+    searchMap = dbaccess.getSearchValue(combobox.getEditor().getText());
         System.out.println(combobox.getEditor().getText());
         int count = 0;
         combobox.getItems().clear();
@@ -281,6 +340,14 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
     }
 
     public void setSearchResult(ActionEvent actionEvent) {
+
+       String selected = combobox.getSelectionModel().getSelectedItem().toString();
+        int bikeID = searchMap.get(selected);
+        selectedBikeSearch = dbaccess.getBikeByID(bikeID);
+        System.out.println(selectedBikeSearch.getBrandName());
+        System.out.println(selectedBikeSearch.getBikeID());
+        populateGridPane(selectedBikeSearch);
+
     }
 
 }
