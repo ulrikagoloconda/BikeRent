@@ -3,6 +3,7 @@ package View;
 import Interfaces.DBAccess;
 import Model.Bike;
 import Model.DBAccessImpl;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -53,6 +54,7 @@ public class MainVewController implements Initializable {
     private ArrayList<Bike> availableBikes;
     private List<Bike> currentListInView;
     Map<String,Integer> searchMap;
+    private  Bike selectedBikeSearch;
 
     private String errorTitle = "Fel i huvidfönster";
 
@@ -95,6 +97,7 @@ public class MainVewController implements Initializable {
     }
 
     public boolean populateGridPane(List<Bike> bikeArray) {
+        gridPane.getChildren().clear();
         System.out.println(availableBikes.size() + " Storleken på långlistan i pop");
         if (availableBikes.size() <= 3) {
             netBtn.setVisible(false);
@@ -118,9 +121,11 @@ public class MainVewController implements Initializable {
             values.add("" + b.isAvailable());
             for (int i = 0; i < 6; i++) {
                 if (i == 0) {
-                    Image im = new Image("file:///" + b.getImagePath());
+                    //Image im = new Image("file:///" + b.getImagePath());
                     //Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\rosaCykel.jpg");
 
+                    System.out.println(b.getBufferedImage());
+                    Image image = SwingFXUtils.toFXImage(b.getBufferedImage(), null);
                     ImageView iv = new ImageView();
                     iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -131,7 +136,7 @@ public class MainVewController implements Initializable {
                         }
                     });
                     idMap.put(iv, b.getBikeID());
-                    iv.setImage(im);
+                    iv.setImage(image);
                     gridPane.add(iv, i, j);
                 } else {
                     Label k = new Label();
@@ -158,25 +163,81 @@ public class MainVewController implements Initializable {
         }
         return true;
     }
-
-    public void onClickActions(Node n) {
-        selectedFromGrid = idMap.get(n);
-        String available = "";
-        for (Bike b : availableBikes) {
-            if (b.isAvailable()) {
-                available = "Ja";
-            } else {
-                available = "Nej";
-            }
-            if (b.getBikeID() == selectedFromGrid) {
-
-                String s = "Årsmodell: " + b.getModelYear() + " Färg: " + b.getColor() + " Cykeltyp: " +
-                        b.getType() + " Ledig? " + available;
-                messageLabel.setText(s);
-                executeLoanBtn.setVisible(true);
-            }
+    public boolean populateGridPane(Bike bike) {
+        gridPane.getChildren().clear();
+        String[] topList = {"Bild", "Årsmodell", "Färg", "Cykeltyp", "Modell", "Ledig?"};
+        ArrayList<String> values = new ArrayList<>();
+       // gridPane.gridLinesVisibleProperty().setValue(true);
+        for (int i = 0; i < 6; i++) {
+            gridPane.add(new Label(topList[i]), i, 0);
         }
 
+            values.add("" + bike.getModelYear());
+            values.add(bike.getColor());
+            values.add(bike.getType());
+            values.add(bike.getBrandName());
+            values.add("" + bike.isAvailable());
+            for (int i = 0; i < 6; i++) {
+                if (i == 0) {
+                    Image im = new Image("file:///" + bike.getImagePath());
+                    //Image im = new Image("file:///"+ "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\rosaCykel.jpg");
+
+                    ImageView iv = new ImageView();
+                    iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                        @Override
+                        public void handle(MouseEvent event) {
+                            Node n = (Node) event.getSource();
+                            onClickActions(n);
+                        }
+                    });
+                    idMap.put(iv, bike.getBikeID());
+                    iv.setImage(im);
+                    gridPane.add(iv, i, 1);
+                } else {
+                    Label k = new Label();
+                    k.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                        @Override
+                        public void handle(MouseEvent event) {
+                            Node n = (Node) event.getSource();
+                            onClickActions(n);
+                        }
+                    });
+                    k.setText(values.get(i - 1));
+                    Font f = new Font(16);
+                    k.setFont(f);
+                    idMap.put(k, bike.getBikeID());
+                    gridPane.add(k, i, 1);
+
+                }
+        }
+        return true;
+    }
+
+    public void onClickActions(Node n) {
+        if (availableBikes == null) {
+            executeLoanBtn.setVisible(true);
+            selectedFromGrid = selectedBikeSearch.getBikeID();
+        } else {
+            selectedFromGrid = idMap.get(n);
+            String available = "";
+            for (Bike b : availableBikes) {
+                if (b.isAvailable()) {
+                    available = "Ja";
+                } else {
+                    available = "Nej";
+                }
+                if (b.getBikeID() == selectedFromGrid) {
+
+                    String s = "Årsmodell: " + b.getModelYear() + " Färg: " + b.getColor() + " Cykeltyp: " +
+                            b.getType() + " Ledig? " + available;
+                    messageLabel.setText(s);
+                    executeLoanBtn.setVisible(true);
+                }
+            }
+
+        }
     }
 
     public void showChangeUserView(ActionEvent actionEvent) {
@@ -226,8 +287,13 @@ public class MainVewController implements Initializable {
 
        String selected = combobox.getSelectionModel().getSelectedItem().toString();
         int bikeID = searchMap.get(selected);
-       Bike bike = dbaccess.getBikeByID(bikeID);
-       // ArrayList<Bike>
+        selectedBikeSearch = dbaccess.getBikeByID(bikeID);
+     /*  List<Bike> bikes = new ArrayList<>();
+        bikes.add(bike);*/
+        System.out.println(selectedBikeSearch.getBrandName());
+        System.out.println(selectedBikeSearch.getBikeID());
+        populateGridPane(selectedBikeSearch);
+
     }
 }
 
