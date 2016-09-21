@@ -127,6 +127,9 @@ public class MainVewController implements Initializable {
                     System.out.println(b.getBufferedImage());
                     Image image = SwingFXUtils.toFXImage(b.getBufferedImage(), null);
                     ImageView iv = new ImageView();
+                  iv.setFitHeight(65);
+                    iv.setFitWidth(95);
+
                     iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                         @Override
