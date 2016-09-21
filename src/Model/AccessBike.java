@@ -2,9 +2,9 @@ package Model;
 
 import sample.DBType;
 
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,16 +27,27 @@ public class AccessBike {
 
         try {
             Connection conn = DBUtil.getConnection(dataBase);
+            /*
+                                                            IN brandNameIn VARCHAR(50),
+                                                          IN typeIn VARCHAR(30),
+                                                          IN modelYearIn SMALLINT(6),
+                                                          IN colorIn VARCHAR(50),
+                                                          IN sizeIn SMALLINT(6),
+                                                          IN imageIn LONGBLOB,
+                                                          OUT bikeIDOut INT(11))
+             */
             String sql = "CALL insert_bike(?,?,?,?,?,?,?)";
             CallableStatement cs = conn.prepareCall(sql);
             cs.setString(1,newBike.getBrandName());
-            cs.setString(2, newBike.getType());
+            cs.setString(2,newBike.getType());
             cs.setInt(3, newBike.getModelYear());
             cs.setString(4, newBike.getColor());
             cs.setInt(5, newBike.getSize());
-            byte[] array = new byte[newBike.getImageStream().available()];
+            ByteArrayInputStream bais = newBike.getImageStream();
+            cs.setBinaryStream(6, bais);
+           /* byte[] array = new byte[newBike.getImageStream().available()];
             Blob blob = new javax.sql.rowset.serial.SerialBlob(array);
-            cs.setBlob(6, blob);
+            cs.setBlob(6, blob);*/
             cs.registerOutParameter(7, Types.INTEGER);
 
           cs.executeQuery();
@@ -59,7 +70,6 @@ public class AccessBike {
         }else{
             dataBase = DBType.Ulrika;
         }
-
         try {
             conn = DBUtil.getConnection(dataBase);
            conn.setAutoCommit(false);
@@ -75,13 +85,11 @@ public class AccessBike {
                 b.setColor(rs.getString("color"));
                 b.setSize(rs.getInt("size"));
                 b.setModelYear(rs.getInt("modelyear"));
+                System.out.println("Körs inte detta precis innan?");
                 Blob blob = rs.getBlob("image");
-                InputStream in = blob.getBinaryStream();
-                String paths = "C:\\Users\\Rickard\\IdeaProjects\\github\\BikeRent\\src\\Image\\tempImageDir\\image"+i+".png";
-                OutputStream out = new FileOutputStream(paths);
-                b.setImagePath(paths);
-                byte[] buff = blob.getBytes(1,(int)blob.length());
-                out.write(buff);
+                byte [] bytes = blob.getBytes(1, (int) blob.length());
+                BufferedImage theImage= ImageIO.read(new ByteArrayInputStream(bytes));
+                b.setBufferedImage(theImage);
                 b.setType(rs.getString("typeName"));
                 b.setBrandName(rs.getString("brandname"));
                 b.setImageFileName(rs.getString("imageFileName"));
@@ -227,4 +235,48 @@ public class AccessBike {
         return mapToReturn;
 
     }
+
+    public static Bike getBikeByID(int bikeID) {
+        Bike b = new Bike();
+
+        DBType dataBase = null;
+        Connection conn = null;
+        Date dayOfReturn = null;
+        String returnSring = "";
+        if(helpers.PCRelated.isThisNiklasPC()){
+            dataBase = DBType.Niklas;
+        }else{
+            dataBase = DBType.Ulrika;
+        }
+        try {
+            conn = DBUtil.getConnection(dataBase);
+            String sql = "Call get_bike_returnedDate_from_ID(?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,bikeID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                if(rs.getDate("dayOfActualReturn")== null && rs.getDate("dayOfRent") != null){
+                    b.setAvailable(false);
+                } else {
+                    b.setAvailable(true);
+                }
+                b.setBrandName(rs.getString("brandname"));
+
+                Blob blob = rs.getBlob("image");
+                byte [] bytes = blob.getBytes(1, (int) blob.length());
+                BufferedImage theImage= ImageIO.read(new ByteArrayInputStream(bytes));
+                b.setBufferedImage(theImage);
+                b.setColor(rs.getString("color"));
+                b.setType(rs.getString("typeName"));
+                b.setModelYear(rs.getInt("modelyear"));
+                b.setBikeID(bikeID);
+                b.setSize(rs.getInt("size"));
+            }
+
+      }catch (Exception e){
+            e.printStackTrace();
+        }
+        return b;
+        }
+
 }
