@@ -2,6 +2,7 @@ package View;
 
 import Interfaces.DBAccess;
 import Model.Bike;
+import Model.BikeUser;
 import Model.DBAccessImpl;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -13,9 +14,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 import javafx.scene.control.*;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -47,14 +57,19 @@ public class MainVewController implements Initializable {
     @FXML
     private ComboBox<String> combobox;
 
+  @FXML
+  private Label userNameLabel, memberLevelLabel, activeLoanLabel, numberOfLoanedBikesLabel;
+
     private DBAccess dbaccess;
     private Map<Node, Integer> idMap;
     private int selectedFromGrid;
     private ArrayList<Bike> availableBikesCopy;
     private ArrayList<Bike> availableBikes;
     private List<Bike> currentListInView;
+  private BikeUser currentUser;
     Map<String,Integer> searchMap;
     private  Bike selectedBikeSearch;
+
 
     private String errorTitle = "Fel i huvidfönster";
 
@@ -63,23 +78,43 @@ public class MainVewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Main.getSpider().setMainView(this);
         dbaccess = new DBAccessImpl();
+currentUser = Main.getSpider().getLoginView().getCurrentUser();
+      populateUserTextInGUI(currentUser);
+
+
+    }
+
+  public void populateUserTextInGUI(BikeUser bikeUser) {
+    System.out.println("uppdaterar mainGUI!!");
+    userNameLabel.setText(bikeUser.getUserName());
+    memberLevelLabel.setText("* "+bikeUser.getMemberLevel()+ " *");
+    activeLoanLabel.setText("000");
+    numberOfLoanedBikesLabel.setText("111");
+  }
+
+
+
+  public void searchAvailableBikes(ActionEvent actionEvent) {
+        ArrayList<Bike> availableBikes = dbaccess.selectAvailableBikes();
+
         idMap = new HashMap<>();
         executeLoanBtn.setVisible(false);
         netBtn.setVisible(false);
         combobox.setEditable(true);
     }
 
-    public void searchAvailableBikes(ActionEvent actionEvent) {
-        availableBikes = dbaccess.selectAvailableBikes();
-        availableBikesCopy = availableBikes;
-        System.out.println(availableBikes.size());
-        if (availableBikes.size() > 3) {
-            currentListInView = availableBikes.subList(0, 3);
-            populateGridPane(currentListInView);
-        } else {
-            populateGridPane(availableBikes);
-        }
-    }
+//    public void searchAvailableBikes(ActionEvent actionEvent) {
+//        availableBikes = dbaccess.selectAvailableBikes();
+//        availableBikesCopy = availableBikes;
+//>>>>>>> 31d002a7db8fd6050defcc3b2d8e9a041dfb8480
+//        System.out.println(availableBikes.size());
+//        if (availableBikes.size() > 3) {
+//            currentListInView = availableBikes.subList(0, 3);
+//            populateGridPane(currentListInView);
+//        } else {
+//           populateGridPane(availableBikes);
+//        }
+//    }
 
     public void showAdminView(ActionEvent actionEvent) {
 
@@ -218,6 +253,31 @@ public class MainVewController implements Initializable {
         return true;
     }
 
+
+ // public void showChangeUserView(ActionEvent actionEvent) {
+ //     try {
+ //          Main m = new Main();
+ //       FXMLLoader changeTryLoader = m.getChangeUserView1();
+ //       Parent changeTryRoot = changeTryLoader.load();
+  //       Scene changeTryScean = new Scene(changeTryRoot);
+  //       Main.getPrimaryStage().setScene(changeTryScean);
+  //  }catch (Exception e){
+  //        e.printStackTrace();
+  //    }
+  /**  try {
+      System.out.println("change user click");
+      Main m = new Main();
+      FXMLLoader ChangeUserViewLoader =m.getChangeUserViewLoader();
+      Parent ChangeUserViewRoot = (Parent) ChangeUserViewLoader.load();
+      Scene ChangeUserViewScean = new Scene(ChangeUserViewRoot);
+      Main.getPrimaryStage().setScene(ChangeUserViewScean);
+    } catch (IOException e) {
+      e.printStackTrace();
+      ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
+    }*/
+  //}
+
+
     public void onClickActions(Node n) {
         if (availableBikes == null) {
             executeLoanBtn.setVisible(true);
@@ -246,10 +306,10 @@ public class MainVewController implements Initializable {
     public void showChangeUserView(ActionEvent actionEvent) {
         try {
 
-            FXMLLoader changeTryLoader = Main.getSpider().getMain().getChangeUserTry();
-            Parent changeTryRoot = changeTryLoader.load();
-            Scene changeTryScean = new Scene(changeTryRoot);
-            Main.getSpider().getMain().getPrimaryStage().setScene(changeTryScean);
+            FXMLLoader ChangeUserLoader = Main.getSpider().getMain().getChangeUserView();
+            Parent ChangeUserRoot = ChangeUserLoader.load();
+            Scene ChangeUserScean = new Scene(ChangeUserRoot);
+            Main.getSpider().getMain().getPrimaryStage().setScene(ChangeUserScean);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -298,5 +358,6 @@ public class MainVewController implements Initializable {
         populateGridPane(selectedBikeSearch);
 
     }
+
 }
 

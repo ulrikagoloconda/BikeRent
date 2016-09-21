@@ -1,5 +1,5 @@
 package View;
-
+//nej inte denna..
 import Interfaces.DBAccess;
 import Model.BikeUser;
 import Model.DBAccessImpl;
@@ -66,27 +66,29 @@ public class ChangeUserTry implements Initializable {
             Parent loginViewRoot = (Parent) loginViewLoader.load();
             Scene loginViewScean = new Scene(loginViewRoot);
             Main.getSpider().getMain().getPrimaryStage().setScene(loginViewScean);
-            // populateText();
+          currentUser = (Main.getSpider().getLoginView().getCurrentUser());
+          System.out.println("test i change user" + currentUser.getEmail());
+          populateText();
 
         } catch (IOException e) {
-            e.printStackTrace();
-            ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..", "Kontrollera er data..", e);
+          e.printStackTrace();
+          ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..", "Kontrollera er data..", e);
         }
 
     }
 
 
-    private void populateText() {
-        userNameText.setText(currentUser.getUserName());
-        fNameText.setText(currentUser.getfName());
-        lNameText.setText(currentUser.getlName());
-        mailText.setText(currentUser.getEmail());
-        phoneText.setText(Integer.toString(currentUser.getPhone()));
-        passwordText.setText("");
-        passwordCheckerText.setText("");
-    }
+  private void populateText() {
+    userNameText.setText(currentUser.getUserName());
+    fNameText.setText(currentUser.getfName());
+    lNameText.setText(currentUser.getlName());
+    mailText.setText(currentUser.getEmail());
+    phoneText.setText(Integer.toString(currentUser.getPhone()));
+    passwordText.setText("");
+    passwordCheckerText.setText("");
 
-
+    System.out.println("test i populate user" + currentUser.getEmail());
+  }
 
 
 
