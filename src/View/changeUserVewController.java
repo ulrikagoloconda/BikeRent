@@ -235,9 +235,7 @@ public class changeUserVewController implements Initializable {
           currentUser.setMemberLevel(in_memberlevel);
           currentUser.setEmail(email);
           currentUser.setPhone(phone);
-          Main.getSpider().getMainView().setCurrentUser(currentUser);
-          currentUser = Main.getSpider().getMainView().getMasterViewUser();
-          System.out.println("efter : " + currentUser.getfName());
+
           populateText();
 
           //Main.getSpider().getMain()
@@ -294,13 +292,9 @@ System.out.println("dessable click");
       System.out.println("Mail ok = NOT NOW");
       // +  SentMail.sendDelRQ(currentUser.getUserName(), currentUser.getEmail()));
       currentUser.setMemberLevel(0);
-
-      Main.getSpider().getMainView().setCurrentUser(currentUser);
       populateText();
       Main.getSpider().getMainView().populateUserTextInGUI(currentUser);
-      //Main.getSpider().getMain()
       Main.getSpider().getMain().showLoginView();
-
     }
 
 

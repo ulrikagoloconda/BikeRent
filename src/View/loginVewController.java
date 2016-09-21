@@ -4,6 +4,7 @@ import Interfaces.DBAccess;
 import Model.BikeUser;
 import Model.DBAccessImpl;
 import Model.JDBCConnection;
+import helpers.Sound;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,17 +28,17 @@ public class loginVewController implements Initializable{
     private TextField userNameText;
     @FXML
     private PasswordField passwordText;
+    @FXML
+    private AnchorPane loginPane;
     private JDBCConnection jdbcConnection;
     private DBAccess dbAccess = new DBAccessImpl();
     private BikeUser currentUser ;
-    private MainVewController mainVew;
-    private AddBikeController addView;
-    private DeleteBikeViewController deleteBikeView;
-    private loginVewController currentLoginViewContrlloer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     Main.getSpider().setLoginView(this);
+
+
     }
 
     public void logInClick(Event event) {
@@ -49,9 +51,13 @@ public class loginVewController implements Initializable{
         System.out.println("after dbAccess.logIn(userName,password)");
         System.out.println(currentUser.getEmail());
         if (currentUser !=null){
+          Sound pling = new Sound();
+          pling.playSoundInThread(Sound.LEAVE_DICE);
                   showMainGui();
         }
       } catch (SQLException e) {
+        Sound pling = new Sound();
+        pling.playMp3SoundInThread(Sound.NO);
         processException(e);
         ErrorView.showError("Inloggningsfel", "fel vid inloggning","Kontrollera era uppgifter" ,  e);
       }
@@ -92,9 +98,7 @@ public class loginVewController implements Initializable{
 
   }
 
-    public loginVewController getInstanceOfLoginVewController(){
-        return currentLoginViewContrlloer;
-    }
+
 
   public void setCurrentUser(BikeUser bikeUser) {
     System.out.println("in setcurentUser!!" + currentUser.getfName());

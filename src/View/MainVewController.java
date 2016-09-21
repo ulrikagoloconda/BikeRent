@@ -5,6 +5,7 @@ import Model.Bike;
 import Model.BikeUser;
 import Model.DBAccessImpl;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +14,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import javafx.scene.control.*;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -48,6 +53,8 @@ public class MainVewController implements Initializable {
     private Label messageLabel;
     @FXML
     private Button executeLoanBtn, netBtn;
+    @FXML
+    private ComboBox<String> combobox;
 
   @FXML
   private Label userNameLabel, memberLevelLabel, activeLoanLabel, numberOfLoanedBikesLabel;
@@ -58,7 +65,7 @@ public class MainVewController implements Initializable {
     private ArrayList<Bike> availableBikesCopy;
     private ArrayList<Bike> availableBikes;
     private List<Bike> currentListInView;
-    private BikeUser currentUser;
+  private BikeUser currentUser;
 
     private String errorTitle = "Fel i huvidfönster";
 
@@ -67,8 +74,7 @@ public class MainVewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Main.getSpider().setMainView(this);
         dbaccess = new DBAccessImpl();
-
-      currentUser = (Main.getSpider().getLoginView().getCurrentUser());
+currentUser = Main.getSpider().getLoginView().getCurrentUser();
       populateUserTextInGUI(currentUser);
 
 
@@ -77,7 +83,7 @@ public class MainVewController implements Initializable {
   public void populateUserTextInGUI(BikeUser bikeUser) {
     System.out.println("uppdaterar mainGUI!!");
     userNameLabel.setText(bikeUser.getUserName());
-    memberLevelLabel.setText("*"+bikeUser.getMemberLevel()+ "*");
+    memberLevelLabel.setText("* "+bikeUser.getMemberLevel()+ " *");
     activeLoanLabel.setText("000");
     numberOfLoanedBikesLabel.setText("111");
   }
@@ -90,7 +96,7 @@ public class MainVewController implements Initializable {
         idMap = new HashMap<>();
         executeLoanBtn.setVisible(false);
         netBtn.setVisible(false);
-
+        combobox.setEditable(true);
     }
 
 //    public void searchAvailableBikes(ActionEvent actionEvent) {
@@ -234,10 +240,10 @@ public class MainVewController implements Initializable {
     public void showChangeUserView(ActionEvent actionEvent) {
         try {
 
-            FXMLLoader changeTryLoader = Main.getSpider().getMain().getChangeUserTry();
-            Parent changeTryRoot = changeTryLoader.load();
-            Scene changeTryScean = new Scene(changeTryRoot);
-            Main.getSpider().getMain().getPrimaryStage().setScene(changeTryScean);
+            FXMLLoader ChangeUserLoader = Main.getSpider().getMain().getChangeUserView();
+            Parent ChangeUserRoot = ChangeUserLoader.load();
+            Scene ChangeUserScean = new Scene(ChangeUserRoot);
+            Main.getSpider().getMain().getPrimaryStage().setScene(ChangeUserScean);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -248,9 +254,6 @@ public class MainVewController implements Initializable {
         currentListInView.clear();
         if (availableBikes.size() >= 3) {
             currentListInView = availableBikes.subList(0, 3);
-            System.out.println(currentListInView.size() + " den korta listans längde");
-            System.out.println(availableBikes.size() + " tillgängliga cyklar ");
-
         } else {
             currentListInView = availableBikes.subList(0, availableBikes.size() - 1);
         }
@@ -258,16 +261,27 @@ public class MainVewController implements Initializable {
     }
 
     public void executeBikeLoan(ActionEvent actionEvent) {
-
-        String message = dbaccess.executeBikeLoan(selectedFromGrid,currentUser.getUserID());
+        String message = dbaccess.executeBikeLoan(selectedFromGrid,Main.getSpider().getLoginView().getCurrentUser().getUserID());
+        messageLabel.setText(message);
     }
 
-    public void setCurrentUser(BikeUser currentUser) {
-        this.currentUser = currentUser;
+
+    public void popuateComboBox(Event event) {
+    Map<String,Integer> searchMap = dbaccess.getSearchValue(combobox.getEditor().getText());
+        System.out.println(combobox.getEditor().getText());
+        int count = 0;
+        combobox.getItems().clear();
+        for (Map.Entry<String,Integer> entry : searchMap.entrySet()) {
+            if(count>10){
+                break;
+            }
+            combobox.getItems().add(entry.getKey());
+            count++;
+        }
     }
 
-  public BikeUser getMasterViewUser() {
-    return currentUser;
-  }
+    public void setSearchResult(ActionEvent actionEvent) {
+    }
+
 }
 
