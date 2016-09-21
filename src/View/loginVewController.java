@@ -36,6 +36,7 @@ public class loginVewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+      System.out.println("inne i init login");
     Main.getSpider().setLoginView(this);
 
 
@@ -89,6 +90,7 @@ public class loginVewController implements Initializable{
 
   public void newUserClick(ActionEvent actionEvent) {
     System.out.println("clicked on newUserClick");
+
     try {
 
       FXMLLoader newUserLoader =Main.getSpider().getMain().getNewUserLoader();
