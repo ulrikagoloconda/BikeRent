@@ -2,9 +2,7 @@ package View;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.JFXPanel;
 import javafx.geometry.Side;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.StackPane;
 
@@ -20,7 +18,7 @@ public class StatView {
     }
     PieChart pieChart = new PieChart();
     pieChart.setData(getChartData(labelID1, stat0To100ID1, labelID2, stat0To100ID2));
-    pieChart.setTitle("Title");
+    pieChart.setTitle("Statistik");
     pieChart.setLegendSide(Side.LEFT);
     pieChart.setClockwise(false);
     pieChart.setLabelsVisible(false);
@@ -28,8 +26,8 @@ public class StatView {
     StackPane root = new StackPane();
     root.getChildren().add(pieChart);
     //här kommer det kluriga..
-    primaryStage.setScene(new Scene(root, 300, 250));
-    primaryStage.show();
+//    primaryStage.setScene(new Scene(root, 300, 250));
+//    primaryStage.show();
     
   }
 
