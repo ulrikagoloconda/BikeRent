@@ -8,10 +8,7 @@ import helpers.EmailValidator;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -69,7 +66,8 @@ public class newUserVewController implements Initializable{
 
 
   public void showLoginGui() {
-        try {
+    Main.getSpider().getMain().showNewUserView();
+        /*try {
             FXMLLoader loginViewLoader =Main.getSpider().getMain().getNewUserLoader();
           System.out.println("fel fönster laddas i denna version..");
             Parent loginViewRoot = (Parent) loginViewLoader.load();
@@ -80,7 +78,7 @@ public class newUserVewController implements Initializable{
             e.printStackTrace();
             ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
         }
-
+*/
     }
 
 

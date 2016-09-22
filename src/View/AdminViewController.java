@@ -7,15 +7,12 @@ import Model.DBAccessImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -46,22 +43,10 @@ public class AdminViewController implements Initializable {
     }
 
     public void showDeleteView(ActionEvent actionEvent) {
-        try {
-            Parent deleteRoot = (Parent)Main.getSpider().getMain().getDeleteBikeLoader().load();
-            Scene deleteScene = new Scene(deleteRoot);
-            Main.getSpider().getMain().getPrimaryStage().setScene(deleteScene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       Main.getSpider().getMain().showDeleteView();
     }
 
     public void showAddView(ActionEvent actionEvent) {
-        try{
-            Parent addRoot = (Parent)Main.getSpider().getMain().getAddLoader().load();
-            Scene addScean = new Scene(addRoot);
-            Main.getSpider().getMain().getPrimaryStage().setScene(addScean);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        Main.getSpider().getMain().showAddBikeView();
     }
 }

@@ -1,5 +1,14 @@
 package View;
 
+<<<<<<< HEAD
+/**
+ * @author Ulrika Goloconda Fahlén
+ * @version 1.0
+ * @since 2016-09-22
+ */
+public class StatView {
+}
+=======
 import helpers.DoughnutChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,3 +76,4 @@ public class StatView {
 
     }
   }
+>>>>>>> master

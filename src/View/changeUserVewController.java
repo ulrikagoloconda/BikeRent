@@ -7,10 +7,7 @@ import Model.JDBCConnection;
 import helpers.EmailValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -126,7 +123,8 @@ public class changeUserVewController implements Initializable {
         }
         if (isAddUserOK) {
           boolean d = DialogView.showSimpleInfo("Ny användare upplaggd", "Lyckades", "Ny användare är nu upplagd");
-          try {
+      Main.getSpider().getMain().showLoginView();
+         /* try {
             FXMLLoader loginLoader = Main.getSpider().getMain().getLoginViewLoader();
             Parent loginRoot = (Parent) loginLoader.load();
             Scene loginScean = new Scene(loginRoot);
@@ -136,7 +134,7 @@ public class changeUserVewController implements Initializable {
           } catch (IOException e) {
             e.printStackTrace();
             ErrorView.showError(errorTitle, "fel vid inläsning av data..", "Kontrollera er data..", e);
-          }
+          }*/
 
         }
       }
@@ -259,7 +257,8 @@ public class changeUserVewController implements Initializable {
   }
 
   private void goback() {
-    try {
+    Main.getSpider().getMain().showMainView();
+   /* try {
 
       FXMLLoader MainViewLoader = Main.getSpider().getMain().getMainViewLoader();
       Parent MainViewRoot = (Parent) MainViewLoader.load();
@@ -270,7 +269,7 @@ public class changeUserVewController implements Initializable {
     } catch (IOException e) {
       e.printStackTrace();
       ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
-    }
+    }*/
   }
 
 
