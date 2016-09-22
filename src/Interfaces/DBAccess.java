@@ -32,4 +32,6 @@ public interface DBAccess {
     String executeBikeLoan(int bikeID, int userID);
     Map<String,Integer> getSearchValue(String text);
     Bike getBikeByID(int bikeID);
+    ArrayList<Integer> getUsersCurrentBikes(int userID);
+    ArrayList<Integer> getUsersTotalLoan(int userID);
 }

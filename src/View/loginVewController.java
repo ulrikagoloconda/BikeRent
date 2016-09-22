@@ -4,6 +4,7 @@ import Interfaces.DBAccess;
 import Model.BikeUser;
 import Model.DBAccessImpl;
 import Model.JDBCConnection;
+import helpers.Sound;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -50,21 +51,35 @@ public class loginVewController implements Initializable{
         System.out.println("after dbAccess.logIn(userName,password)");
         System.out.println(currentUser.getEmail());
         if (currentUser !=null){
-        showMainGui();
+          Sound pling = new Sound();
+          pling.playSoundInThread(Sound.LEAVE_DICE);
+                  showMainGui();
         }
       } catch (SQLException e) {
+        Sound pling = new Sound();
+        pling.playMp3SoundInThread(Sound.NO);
         processException(e);
         ErrorView.showError("Inloggningsfel", "fel vid inloggning","Kontrollera era uppgifter" ,  e);
       }
     }
 
   public void showMainGui() {
+    if (currentUser == null){
+      currentUser = new BikeUser();
+      currentUser.setlName("Override");
+      currentUser.setfName("Override");
+      currentUser.setUserName("Override");
+      currentUser.setMemberLevel(1010);
+      currentUser.setPhone(101010);
+      currentUser.setEmail("Override@Override.com");
+    }
         try {
 
             FXMLLoader MainViewLoader = Main.getSpider().getMain().getMainViewLoader();
             Parent MainViewRoot = (Parent) MainViewLoader.load();
             Scene MainViewScean = new Scene(MainViewRoot);
             Main.getSpider().getMain().getPrimaryStage().setScene(MainViewScean);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -87,8 +102,16 @@ public class loginVewController implements Initializable{
     }
   }
 
+  public BikeUser getCurrentUser() {
+    return currentUser;
 
-    public BikeUser getCurrentUser() {
-        return currentUser;
-    }
+  }
+
+
+
+  public void setCurrentUser(BikeUser bikeUser) {
+    System.out.println("in setcurentUser!!" + currentUser.getfName());
+   currentUser = bikeUser;
+    System.out.println("updated bikeuser!!" + currentUser.getfName());
+  }
 }

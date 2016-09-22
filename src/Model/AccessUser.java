@@ -221,16 +221,16 @@ CALL getUserFromUserName('1');
         /*
         SELECT update_user(fname, lname, 666, email@c.se, username, passw, ?)
         in_fname varchar(50),in_lname varchar(11),in_memberlevel varchar(11),in_email varchar(50),in_phone varchar(11),in_username varchar(11), in_passw varchar(50))
-        ---
-    drop FUNCTION update_user;
+  ---
+ drop FUNCTION update_user;
    DELIMITER //
-   CREATE FUNCTION update_user(in_fname varchar(50),in_lname varchar(11),in_memberlevel varchar(11),in_email varchar(50),in_phone varchar(11),in_username varchar(11), in_passw varchar(50)) RETURNS smallint(6)
+   CREATE FUNCTION update_user(in_fname varchar(50),in_lname varchar(50),in_memberlevel varchar(50),in_email varchar(50),in_phone varchar(50),in_username varchar(50), in_passw varchar(50)) RETURNS smallint(6)
    BEGIN
    DECLARE pw VARBINARY(56);
-   DECLARE userNameAvalible VARCHAR(11);
+   DECLARE userNameAvalible VARCHAR(50);
    if exists(SELECT username FROM bikeuser WHERE userName=in_username)
    THEN
-   UPDATE bikeuser SET fname = in_fname, lname = in_lname, email = in_email, phone = in_phone, passw = AES_ENCRYPT(in_passw,'tackforkaffet')
+   UPDATE bikeuser SET fname = in_fname, lname = in_lname, email = in_email, memberlevel = in_memberlevel, phone = in_phone, passw = AES_ENCRYPT(in_passw,'tackforkaffet')
    WHERE username = in_username;
    RETURN 1;
    ELSE
@@ -238,6 +238,7 @@ CALL getUserFromUserName('1');
    END IF;
    END//
    DELIMITER ;
+   ----
 
          */
       //in_fname varchar(50),in_lname varchar(50),in_memberlevel varchar(50),in_email varchar(50),in_phone varchar(50),in_username varchar(50), in_passw varchar(50))

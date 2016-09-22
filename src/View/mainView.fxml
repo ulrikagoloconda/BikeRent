@@ -53,12 +53,15 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutY="24.0" prefHeight="17.0" text="userName: Arne Arnesson" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
-                  <Label layoutY="41.0" prefHeight="17.0" text="level: 10" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0" />
-                  <Label layoutX="-3.0" layoutY="60.0" prefHeight="17.0" text="Totalt antal lånade cyklar: 2" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="65.0" />
-                  <Label layoutY="87.0" prefHeight="17.0" text="Aktuella lån: ingen" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="85.0" />
+                  <Label layoutY="24.0" prefHeight="17.0" text="userName: " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
+                  <Label id="memberLevelLabel" layoutY="41.0" prefHeight="17.0" text="level:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0" />
+                  <Label layoutX="-3.0" layoutY="60.0" prefHeight="17.0" text="Totalt antal lånade cyklar:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="65.0" />
+                  <Label layoutY="87.0" prefHeight="17.0" text="Aktuella lån: " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="85.0" />
                   <Button layoutX="195.0" layoutY="81.0" mnemonicParsing="false" onAction="#showChangeUserView" text="Ändra" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0" />
-                  <Label layoutX="171.0" layoutY="34.0" text="Ändra uppgifter?" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="25.0" />
+                  <Label id="numberOfLoanedBikesLabel" fx:id="numberOfLoanedBikesLabel" layoutX="146.0" layoutY="66.0" prefHeight="17.0" text="2" />
+                  <Label id="activeLoanLabel" fx:id="activeLoanLabel" layoutX="73.0" layoutY="85.0" prefHeight="17.0" text="0" />
+                  <Label id="memberLevelLabel" fx:id="memberLevelLabel" layoutX="31.0" layoutY="45.0" prefHeight="17.0" text="10" />
+                  <Label id="userNameLabel" fx:id="userNameLabel" layoutX="63.0" layoutY="25.0" prefHeight="17.0" text="kalle 123" />
                </children>
             </AnchorPane>
             <Label layoutX="209.0" layoutY="182.0" text="Vilken cykel söker du?">

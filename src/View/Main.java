@@ -6,7 +6,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+
+    private Stage primaryStage_;
+
     private Stage primaryStage;
+
     private  FXMLLoader loginLoader;
     private  FXMLLoader mainViewLoader;
     private FXMLLoader newUserLoader;
@@ -18,6 +22,7 @@ public class Main extends Application {
     private  Scene loginScene;
 
     private static SpiderView spider;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -41,6 +46,7 @@ public class Main extends Application {
         }
     }
 
+
     public FXMLLoader getNewUserLoader() {
         if(newUserLoader == null) {
             newUserLoader = new FXMLLoader(getClass().getResource("../View/newUserView.fxml"));
@@ -58,6 +64,10 @@ public class Main extends Application {
             return mainViewLoader;
         }
     }
+  public FXMLLoader getChangeUserView(){
+    FXMLLoader changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserView1.fxml"));
+    return changeTryLoader;
+  }
 
     public FXMLLoader getLoginViewLoader() {
         if(loginLoader==null) {
@@ -83,19 +93,7 @@ public class Main extends Application {
         return adminLoader;
     }
 
-    public FXMLLoader getChangeUserViewLoader() {
-    if(changeUserViewLoader==null) {
-        changeUserViewLoader = new FXMLLoader(getClass().getResource("../View/changeUserView.fxml"));
-    }
-        return changeUserViewLoader;
-    }
 
-    public FXMLLoader getChangeUserTry() {
-        if(changeTryLoader==null) {
-            changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserTry.fxml"));
-        }
-        return changeTryLoader;
-    }
 
     public FXMLLoader getAddLoader() {
         if(addBikeLoader == null) {
@@ -126,7 +124,19 @@ public class Main extends Application {
 
 
 
+
+  //public FXMLLoader getChangeUserViewLoader() {
+   // System.out.println("in getChangeUserViewLoader");
+   // FXMLLoader changeUserViewLoader = new FXMLLoader(getClass().getResource("../View/changeUserView.fxml"));
+   // System.out.println("in getChangeUserViewLoader: changeUserView.fxml ");
+   // return changeUserViewLoader;
+  //}
+
+
+
+
     public static SpiderView getSpider(){
         return spider;
     }
+
 }
