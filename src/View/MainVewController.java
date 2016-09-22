@@ -372,5 +372,8 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
 
     }
 
+  public void showStatClick(ActionEvent actionEvent) {
+    StatView.DoughnutChartView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()) );
+  }
 }
 
