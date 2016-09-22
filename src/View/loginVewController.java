@@ -74,6 +74,7 @@ public class loginVewController implements Initializable{
       currentUser.setPhone(101010);
       currentUser.setEmail("Override@Override.com");
     }
+
         try {
 
             FXMLLoader MainViewLoader = Main.getSpider().getMain().getMainViewLoader();
@@ -86,6 +87,7 @@ public class loginVewController implements Initializable{
             e.printStackTrace();
             ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
         }
+
     }
 
   public void newUserClick(ActionEvent actionEvent) {
