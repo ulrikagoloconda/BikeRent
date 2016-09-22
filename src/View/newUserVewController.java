@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import mailing.SentMail;
 
 import java.io.IOException;
 import java.net.URL;
@@ -134,7 +135,14 @@ public class newUserVewController implements Initializable{
           ErrorView.showError(errorTitle, "fel vid inläsning", "Kontrollera era uppgifter", new IOException(" :-( kunde inte lägga till användare"));
         }
         if (isAddUserOK) {
-          boolean d = DialogView.showSimpleInfo("Ny användare upplaggd", "Lyckades", "Ny användare är nu upplagd, öppnar nu inloggningsrutan");
+          //boolean d = DialogView.showSimpleInfo("Ny användare upplaggd", "Lyckades", "Ny användare är nu upplagd, öppnar nu inloggningsrutan");
+          boolean whantToSentMail = DialogView.showOK_CANCEL_Dialog("Ny användare upplaggd", "Lyckades, vill ni skicka iväg ett email", "Ny användare är nu upplagd");
+          if (whantToSentMail){
+            boolean isSentMailOK = SentMail.sendNewUser(fName,email);
+            if ( isSentMailOK ){
+              boolean d = DialogView.showSimpleInfo("Mailutskick", "mail till er är skickat, Lyckades", "Öppnar nu inloggningsrutan");
+            }
+          }
           Main.getSpider().getMain().showLoginView();
         }
       }
