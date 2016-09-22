@@ -46,7 +46,7 @@ public class MainVewController implements Initializable {
     private ComboBox<String> combobox;
 
   @FXML
-  private Label userNameLabel, memberLevelLabel, activeLoanLabel, numberOfLoanedBikesLabel;
+  private Label userNameLabel, memberLevelLabel, activeLoanLabel, numberOfLoanedBikesLabel,statLabel;
 
     private DBAccess dbaccess;
     private Map<Node, Integer> idMap;
@@ -78,9 +78,36 @@ ArrayList<Integer> bikesInUse = dbaccess.getUsersCurrentBikes(bikeUser.getUserID
     System.out.println("uppdaterar mainGUI!!");
     userNameLabel.setText(bikeUser.getUserName());
     memberLevelLabel.setText("* "+bikeUser.getMemberLevel()+ " *");
+<<<<<<< HEAD
     activeLoanLabel.setText(""+bikesInUse.size() );
     numberOfLoanedBikesLabel.setText(""+ totalBikes.size());
+=======
+    activeLoanLabel.setText("000");
+    numberOfLoanedBikesLabel.setText("111");
+    updateStatLabel();
+>>>>>>> master
   }
+
+  private void updateStatLabel() {
+    statLabel.setText(availableBikesStatistic() + "%");
+  }
+
+  public int availableBikesStatistic(){
+    int part = dbaccess.selectAvailableBikes().size();
+
+    int total = dbaccess.getAllBikes().size();
+    int stat;
+    try {
+      stat = ((part / total) * 100);
+    } catch (Exception e) {
+      e.printStackTrace();
+      ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
+      stat = 0;
+    }
+      return stat;
+
+  }
+
 
 
 

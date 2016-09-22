@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import mailing.SentMail;
 
 import java.io.IOException;
 import java.net.URL;
@@ -288,8 +289,15 @@ System.out.println("dessable click");
     }
     if (isUpdateUserOK) {
       boolean d = DialogView.showSimpleInfo("kontot har blivid av-aktiverat", "Lyckades", "Nu ärkonott avaktiverat med lösenord: 1234");
-      System.out.println("Mail ok = NOT NOW");
-      // +  SentMail.sendDelRQ(currentUser.getUserName(), currentUser.getEmail()));
+      //boolean d = DialogView.showSimpleInfo("Ny användare upplaggd", "Lyckades", "Ny användare är nu upplagd, öppnar nu inloggningsrutan");
+      boolean whantToSentMail = DialogView.showOK_CANCEL_Dialog("kontot har blivid av-aktiverat", "Lyckades, vill ni skicka iväg mail? ", "avaktiveringsmail admin");
+      if (whantToSentMail){
+        boolean isSentMailOK = SentMail.sendDelRQ(currentUser.getUserName(),currentUser.getEmail());
+        if ( isSentMailOK ){
+          System.out.println("Mail ok");
+        }
+      }
+
       currentUser.setMemberLevel(0);
       populateText();
       Main.getSpider().getMainView().populateUserTextInGUI(currentUser);
