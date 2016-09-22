@@ -14,8 +14,8 @@ import java.util.Properties;
 
 public interface SentMail extends OnlyOne {
 
- // String AdminEmail = "cykeltur@gmail.com";
-    String AdminEmail = "flagrans@hotmail.com";
+  String AdminEmail = "cykeltur@gmail.com";
+ //   String AdminEmail = "flagrans@hotmail.com";
 
   static boolean sendDelRQ(String userNamn, String email){
 
@@ -67,7 +67,7 @@ public interface SentMail extends OnlyOne {
     //String mailTo = "cykeltur@gmail.com";  //
     String mailTo = email;
     String mailinfo = email;
-    String subject = "Användare " + userNamn + " önskar del";
+    String subject = "Användare " + userNamn + ", konto är nu registrerat hos bike4u2rent";
 
     String message = makeNiceEMailtextNewUser(mailTo, userNamn, mailinfo);
 
@@ -92,6 +92,7 @@ public interface SentMail extends OnlyOne {
 
 
   static String makeNiceEMailtextDel(String mailTo, String userNamn, String mailinfo){
+    System.out.println("make a mail to anmin for DEL");
 		System.out.println( mailTo);
 		System.out.println( userNamn);
 		System.out.println( mailinfo);
@@ -123,6 +124,7 @@ public interface SentMail extends OnlyOne {
 	}
 
   static String makeNiceEMailtextNewUser(String mailTo, String userNamn, String mailinfo){
+    System.out.println("make a mail to new user");
     System.out.println( mailTo);
     System.out.println( userNamn);
     System.out.println( mailinfo);
@@ -140,9 +142,9 @@ public interface SentMail extends OnlyOne {
             + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </big></big></big></big></th>"
             + " <th>&nbsp; "
             + "</th> 		</tr> 			<tr> 			</tr>		</tbody>	</table>"
-            +"<p><strong>Hej&nbsp;Admin, uppdrag åt anv:  "
+            +"<p><strong>Hej&nbsp;:  "
             +  userNamn
-            + "</strong><br />	V&auml;lkommen till BikeRent " + userNamn
+            + "</strong><br />	V&auml;lkommen till bike4u2rent "
             +
             "<br />	ni angav Email:&nbsp; "
             + mailinfo
@@ -296,6 +298,7 @@ public interface SentMail extends OnlyOne {
  
         // sends the e-mail
         Transport.send(msg);
+    System.out.println("ot sent : " + message);
  
     }
 

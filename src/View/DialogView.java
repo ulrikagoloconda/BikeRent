@@ -21,9 +21,9 @@ public class DialogView {
   }
   public static boolean showOK_CANCEL_Dialog(String title, String header, String content) {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Confirmation Dialog");
-    alert.setHeaderText("Look, a Confirmation Dialog");
-    alert.setContentText("Are you ok with this?");
+    alert.setTitle(title);
+    alert.setHeaderText(header);
+    alert.setContentText(content);
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.OK) {
