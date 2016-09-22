@@ -8,15 +8,11 @@ import helpers.Sound;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -73,7 +69,8 @@ public class loginVewController implements Initializable{
       currentUser.setPhone(101010);
       currentUser.setEmail("Override@Override.com");
     }
-        try {
+      Main.getSpider().getMain().showMainView();
+       /* try {
 
             FXMLLoader MainViewLoader = Main.getSpider().getMain().getMainViewLoader();
             Parent MainViewRoot = (Parent) MainViewLoader.load();
@@ -84,12 +81,13 @@ public class loginVewController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
             ErrorView.showError("Huvudfönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
-        }
+        }*/
     }
 
   public void newUserClick(ActionEvent actionEvent) {
     System.out.println("clicked on newUserClick");
-    try {
+      Main.getSpider().getMain().showNewUserView();
+    /*try {
 
       FXMLLoader newUserLoader =Main.getSpider().getMain().getNewUserLoader();
       Parent newUserRoot = (Parent) newUserLoader.load();
@@ -100,6 +98,7 @@ public class loginVewController implements Initializable{
       e.printStackTrace();
       ErrorView.showError("Lägg till användare-fönster - fel", "fel vid inläsning av data..","Kontrollera er data.." ,  e);
     }
+    */
   }
 
   public BikeUser getCurrentUser() {

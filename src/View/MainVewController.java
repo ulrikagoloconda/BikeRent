@@ -9,29 +9,16 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-
-
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-
 import javafx.scene.control.*;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -91,7 +78,6 @@ ArrayList<Integer> bikesInUse = dbaccess.getUsersCurrentBikes(bikeUser.getUserID
     System.out.println("uppdaterar mainGUI!!");
     userNameLabel.setText(bikeUser.getUserName());
     memberLevelLabel.setText("* "+bikeUser.getMemberLevel()+ " *");
-
     activeLoanLabel.setText(""+bikesInUse.size() );
     numberOfLoanedBikesLabel.setText(""+ totalBikes.size());
   }
@@ -115,17 +101,18 @@ ArrayList<Integer> bikesInUse = dbaccess.getUsersCurrentBikes(bikeUser.getUserID
   }
 
     public void showAdminView(ActionEvent actionEvent) {
+        Main.getSpider().getMain().showAdeminView();
 
-        try {
-
-            FXMLLoader newUserLoader = Main.getSpider().getMain().getAdminLoader();
+      /*  try {
+           /* FXMLLoader newUserLoader = Main.getSpider().getMain().getAdminLoader();
             Parent adminRoot = (Parent) newUserLoader.load();
             Scene adminScene = new Scene(adminRoot);
             Main.getSpider().getMain().getPrimaryStage().setScene(adminScene);
+
         } catch (IOException e) {
             e.printStackTrace();
             ErrorView.showError(errorTitle, "fel vid Öppnining av admindata..", "starta om denna session..", e);
-        }
+        }*/
 
     }
 
@@ -300,15 +287,7 @@ ArrayList<Integer> bikesInUse = dbaccess.getUsersCurrentBikes(bikeUser.getUserID
     }
 
     public void showChangeUserView(ActionEvent actionEvent) {
-        try {
-
-            FXMLLoader ChangeUserLoader = Main.getSpider().getMain().getChangeUserView();
-            Parent ChangeUserRoot = ChangeUserLoader.load();
-            Scene ChangeUserScean = new Scene(ChangeUserRoot);
-            Main.getSpider().getMain().getPrimaryStage().setScene(ChangeUserScean);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+       Main.getSpider().getMain().showChangeUserView();
     }
 
     public void nextBikesOnList(ActionEvent actionEvent) {
