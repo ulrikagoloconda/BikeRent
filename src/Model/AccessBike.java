@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class AccessBike {
     public static int insertNewBike(Bike newBike) {
-<<<<<<< HEAD
+
       DBType dataBase = null;
       Connection conn = null;
       if(helpers.PCRelated.isThisNiklasPC()){
@@ -51,39 +51,8 @@ public class AccessBike {
         e.printStackTrace();
       }
       return newBike.getBikeID();
-=======
-        DBType dataBase = null;
-        Connection conn = null;
-        if(helpers.PCRelated.isThisNiklasPC()){
-            dataBase = DBType.Niklas;
-        }else{
-            dataBase = DBType.Ulrika;
-        }
-        try {
-             conn = DBUtil.getConnection(dataBase);
-            String sql = "CALL insert_bike(?,?,?,?,?,?)";
-            PreparedStatement cs = conn.prepareStatement(sql);
-            cs.setString(1,newBike.getBrandName());
-            cs.setString(2,newBike.getType());
-            cs.setInt(3, newBike.getModelYear());
-            cs.setString(4, newBike.getColor());
-            cs.setInt(5, newBike.getSize());
-            ByteArrayInputStream bais = newBike.getImageStream();
-            cs.setBinaryStream(6, bais);
-
-          cs.executeQuery();
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return newBike.getBikeID();
->>>>>>> 3bbb2fb6a3039d2c665da5b405999e4aadaf26b7
     }
 
     public static ArrayList<Bike> selectAvailableBikes() {

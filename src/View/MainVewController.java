@@ -84,10 +84,24 @@ public class MainVewController implements Initializable {
         activeLoanLabel.setText("" + bikesInUse.size());
         numberOfLoanedBikesLabel.setText("" + totalBikes.size());
 
+      setstatLabel();
+
     }
 
+  private void setstatLabel() {
+    float free = dbaccess.selectAvailableBikes().size() ;
+    float total = dbaccess.getAllBikes().size();
+    System.out.println("free" + " " + free);
+    System.out.println("tot: " + total);
+    float poc = free/total;
+    System.out.println("poc: " + poc);
+    poc = poc * 100;
+    System.out.println(poc);
+    statLabel.setText("" + poc + " %" );
+  }
 
-    public void searchAvailableBikes(ActionEvent actionEvent) {
+
+  public void searchAvailableBikes(ActionEvent actionEvent) {
         idMap = new HashMap<>();
         executeLoanBtn.setVisible(false);
         netBtn.setVisible(false);
