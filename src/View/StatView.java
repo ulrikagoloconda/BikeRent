@@ -1,12 +1,5 @@
 package View;
 
-import javafx.scene.chart.PieChart;
-
-/**
- * @author Ulrika Goloconda Fahlén
- * @version 1.0
- * @since 2016-09-22
- */
 import helpers.DoughnutChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +7,12 @@ import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.StackPane;
+
+/**
+ * @author Ulrika Goloconda Fahlén
+ * @version 1.0
+ * @since 2016-09-22
+ */
 
 public class StatView {
 
@@ -73,7 +72,8 @@ public class StatView {
       root.getChildren().add(pieChart);
       //här kommer det kluriga..
       Scene statViewScean = new Scene(root, 300, 250);
-      Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);
+      //Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);
+    //TODO ändra detta
 
     }
   }
