@@ -9,29 +9,16 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-
-
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-
 import javafx.scene.control.*;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -86,12 +73,19 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
     }
 
   public void populateUserTextInGUI(BikeUser bikeUser) {
+ArrayList<Integer> bikesInUse = dbaccess.getUsersCurrentBikes(bikeUser.getUserID());
+      ArrayList<Integer> totalBikes = dbaccess.getUsersTotalLoan(bikeUser.getUserID());
     System.out.println("uppdaterar mainGUI!!");
     userNameLabel.setText(bikeUser.getUserName());
     memberLevelLabel.setText("* "+bikeUser.getMemberLevel()+ " *");
+<<<<<<< HEAD
+    activeLoanLabel.setText(""+bikesInUse.size() );
+    numberOfLoanedBikesLabel.setText(""+ totalBikes.size());
+=======
     activeLoanLabel.setText("000");
     numberOfLoanedBikesLabel.setText("111");
     updateStatLabel();
+>>>>>>> master
   }
 
   private void updateStatLabel() {
@@ -134,17 +128,18 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
   }
 
     public void showAdminView(ActionEvent actionEvent) {
+        Main.getSpider().getMain().showAdeminView();
 
-        try {
-
-            FXMLLoader newUserLoader = Main.getSpider().getMain().getAdminLoader();
+      /*  try {
+           /* FXMLLoader newUserLoader = Main.getSpider().getMain().getAdminLoader();
             Parent adminRoot = (Parent) newUserLoader.load();
             Scene adminScene = new Scene(adminRoot);
             Main.getSpider().getMain().getPrimaryStage().setScene(adminScene);
+
         } catch (IOException e) {
             e.printStackTrace();
             ErrorView.showError(errorTitle, "fel vid Öppnining av admindata..", "starta om denna session..", e);
-        }
+        }*/
 
     }
 
@@ -319,15 +314,7 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
     }
 
     public void showChangeUserView(ActionEvent actionEvent) {
-        try {
-
-            FXMLLoader ChangeUserLoader = Main.getSpider().getMain().getChangeUserView();
-            Parent ChangeUserRoot = ChangeUserLoader.load();
-            Scene ChangeUserScean = new Scene(ChangeUserRoot);
-            Main.getSpider().getMain().getPrimaryStage().setScene(ChangeUserScean);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+       Main.getSpider().getMain().showChangeUserView();
     }
 
     public void nextBikesOnList(ActionEvent actionEvent) {
@@ -362,7 +349,6 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
     }
 
     public void setSearchResult(ActionEvent actionEvent) {
-
        String selected = combobox.getSelectionModel().getSelectedItem().toString();
         int bikeID = searchMap.get(selected);
         selectedBikeSearch = dbaccess.getBikeByID(bikeID);
@@ -371,9 +357,12 @@ currentUser = Main.getSpider().getLoginView().getCurrentUser();
         populateGridPane(selectedBikeSearch);
 
     }
+<<<<<<< HEAD
 
   public void showStatClick(ActionEvent actionEvent) {
     StatView.DoughnutChartView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()) );
   }
+=======
+>>>>>>> ba77ae2dbb5cae64b8eb9bd53476b2342ce23209
 }
 

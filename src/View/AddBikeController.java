@@ -50,7 +50,8 @@ public class AddBikeController implements Initializable {
     }
 
     public void showDeleteView(ActionEvent actionEvent) {
-        loginView.showMainGui();
+        Main.getSpider().getLoginView().showMainGui();
+       // loginView.showMainGui();
     }
 
 

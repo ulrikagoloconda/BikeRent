@@ -107,4 +107,14 @@ public class DBAccessImpl implements DeleteUser, InsertNewUser, DBAccess {
     public Bike getBikeByID(int bikeID) {
         return AccessBike.getBikeByID(bikeID);
     }
+
+    @Override
+    public ArrayList<Integer> getUsersCurrentBikes(int userID) {
+        return AccessRentbridge.getUsersCurrnetBikes(userID);
+    }
+
+    @Override
+    public ArrayList<Integer> getUsersTotalLoan(int userID) {
+        return AccessRentbridge.getUsersTotalLoan(userID);
+    }
 }
