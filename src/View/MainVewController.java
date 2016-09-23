@@ -78,14 +78,11 @@ ArrayList<Integer> bikesInUse = dbaccess.getUsersCurrentBikes(bikeUser.getUserID
     System.out.println("uppdaterar mainGUI!!");
     userNameLabel.setText(bikeUser.getUserName());
     memberLevelLabel.setText("* "+bikeUser.getMemberLevel()+ " *");
-<<<<<<< HEAD
+
     activeLoanLabel.setText(""+bikesInUse.size() );
     numberOfLoanedBikesLabel.setText(""+ totalBikes.size());
-=======
-    activeLoanLabel.setText("000");
-    numberOfLoanedBikesLabel.setText("111");
+
     updateStatLabel();
->>>>>>> master
   }
 
   private void updateStatLabel() {
@@ -357,5 +354,10 @@ ArrayList<Integer> bikesInUse = dbaccess.getUsersCurrentBikes(bikeUser.getUserID
         populateGridPane(selectedBikeSearch);
 
     }
+
+  public void showStatClick(ActionEvent actionEvent) {
+    StatView.DoughnutChartView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()) );
+  }
+
 }
 

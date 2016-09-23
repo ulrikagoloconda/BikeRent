@@ -79,7 +79,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Button layoutX="404.0" layoutY="223.0" mnemonicParsing="false" text="Visa statistik" />
+            <Button layoutX="404.0" layoutY="223.0" mnemonicParsing="false" onAction="#showStatClick" text="Visa statistik" />
             <Button fx:id="adminBtn" layoutX="434.0" layoutY="15.0" mnemonicParsing="false" onAction="#showAdminView" text="Administrera Bike Rent" />
             <Button fx:id="executeLoanBtn" layoutX="466.0" layoutY="582.0" mnemonicParsing="false" onAction="#executeBikeLoan" text="Låna cykeln" AnchorPane.bottomAnchor="10.0" />
             <GridPane fx:id="gridPane" layoutX="27.0" layoutY="350.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="226.0" prefWidth="541.0">
