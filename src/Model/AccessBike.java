@@ -18,35 +18,38 @@ import java.util.Map;
  */
 public class AccessBike {
     public static int insertNewBike(Bike newBike) {
-        DBType dataBase = null;
-        if(helpers.PCRelated.isThisNiklasPC()){
-            dataBase = DBType.Niklas;
-        }else{
-            dataBase = DBType.Ulrika;
-        }
+      DBType dataBase = null;
+      Connection conn = null;
+      if(helpers.PCRelated.isThisNiklasPC()){
+        dataBase = DBType.Niklas;
+      }else{
+        dataBase = DBType.Ulrika;
+      }
+      try {
+        conn = DBUtil.getConnection(dataBase);
+        String sql = "CALL insert_bike(?,?,?,?,?,?)";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setString(1,newBike.getBrandName());
+        cs.setString(2,newBike.getType());
+        cs.setInt(3, newBike.getModelYear());
+        cs.setString(4, newBike.getColor());
+        cs.setInt(5, newBike.getSize());
+        ByteArrayInputStream bais = newBike.getImageStream();
+        cs.setBinaryStream(6, bais);
 
-        try {
-            Connection conn = DBUtil.getConnection(dataBase);
-            String sql = "CALL insert_bike(?,?,?,?,?,?,?)";
-            CallableStatement cs = conn.prepareCall(sql);
-            cs.setString(1,newBike.getBrandName());
-            cs.setString(2,newBike.getType());
-            cs.setInt(3, newBike.getModelYear());
-            cs.setString(4, newBike.getColor());
-            cs.setInt(5, newBike.getSize());
-            ByteArrayInputStream bais = newBike.getImageStream();
-            cs.setBinaryStream(6, bais);
-            cs.registerOutParameter(7, Types.INTEGER);
-
-          cs.executeQuery();
-            newBike.setBikeID(cs.getInt(7));
+        cs.executeQuery();
+        //cs.execute();
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return newBike.getBikeID();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      try {
+        conn.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      return newBike.getBikeID();
     }
 
     public static ArrayList<Bike> selectAvailableBikes() {
