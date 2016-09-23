@@ -1,14 +1,12 @@
 package View;
 
-<<<<<<< HEAD
 /**
  * @author Ulrika Goloconda Fahlén
  * @version 1.0
  * @since 2016-09-22
  */
 public class StatView {
-}
-=======
+
 import helpers.DoughnutChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +22,6 @@ import javafx.scene.layout.StackPane;
  * or
  * StatView.DoughnutChartView("labelID1", 50, "labelID2", 50);
  */
-public class StatView {
 
   public static void showStatView(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
 
@@ -76,4 +73,4 @@ public class StatView {
 
     }
   }
->>>>>>> master
+
