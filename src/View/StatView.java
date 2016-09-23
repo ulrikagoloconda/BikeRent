@@ -4,7 +4,6 @@ import helpers.DoughnutChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Side;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.StackPane;
 
@@ -25,30 +24,20 @@ public class StatView {
  * StatView.DoughnutChartView("labelID1", 50, "labelID2", 50);
  */
 
-  public static void showStatView(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
+  public static void showStatView(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2, PieChart pieChart) {
 
-    if ( (stat0To100ID1 + stat0To100ID2 ) != 100){
-     // ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 ));
+    if ((stat0To100ID1 + stat0To100ID2) != 100) {
+      // ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 ));
       stat0To100ID1 = 90;
       stat0To100ID2 = 10;
     }
-
-    PieChart pieChart = new PieChart();
     pieChart.setData(getChartData(labelID1, stat0To100ID1, labelID2, stat0To100ID2));
     pieChart.setTitle("Statistik");
     pieChart.setLegendSide(Side.LEFT);
     pieChart.setClockwise(false);
     pieChart.setLabelsVisible(false);
 
-    StackPane root = new StackPane();
-    root.getChildren().add(pieChart);
-    //TOD här kommer det kluriga..
-  /*  Scene statViewScean = new Scene(root, 300, 250);
-    //Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);
-    //TODO 
-    Scene statViewScean = new Scene(root, 400, 450);
-    Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);
-*/
+
   }
 
   private static ObservableList<PieChart.Data> getChartData(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
@@ -61,7 +50,7 @@ public class StatView {
   }
 
   public static void DoughnutChartView(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
-
+    System.out.println("Körs detta  i StatView !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     if ( (stat0To100ID1 + stat0To100ID2 ) != 100){
       //ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 ));
       stat0To100ID1 = 25;
@@ -73,14 +62,6 @@ public class StatView {
       pieChart.setTitle("Statistik");
       StackPane root = new StackPane();
       root.getChildren().add(pieChart);
-      //TOD här kommer det kluriga..
-/*
-      Scene statViewScean = new Scene(root, 300, 250);
-      //Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);
-    //TODO ändra detta
-      Scene statViewScean = new Scene(root, 400, 450);
-      Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);*/
-
     }
 
   }

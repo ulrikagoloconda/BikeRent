@@ -14,6 +14,8 @@ public class SpiderView {
     private loginVewController loginView;
     private MainVewController mainView;
     private newUserVewController newUserView;
+    private ChangeUserTry changeUserTry;
+    private StatViewController statViewController;
     private Main main;
 
     public SpiderView( ){
@@ -93,5 +95,17 @@ public class SpiderView {
     }
 
     public void setChangeUserTry(ChangeUserTry changeUserTry) {
+        this.changeUserTry = changeUserTry;
+    }
+
+    public ChangeUserTry getChangeUserView(){
+        return changeUserTry;
+    }
+
+    public void setStatViewContrller(StatViewController statViewController) {
+        this.statViewController = statViewController;
+    }
+    public StatViewController getStatViewController(){
+        return statViewController;
     }
 }
