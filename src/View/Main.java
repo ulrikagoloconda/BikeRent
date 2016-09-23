@@ -3,26 +3,30 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     private Stage primaryStage;
-    private  FXMLLoader loginLoader;
-    private  FXMLLoader mainViewLoader;
+    private FXMLLoader loginLoader;
+    private FXMLLoader mainViewLoader;
     private FXMLLoader newUserLoader;
     private FXMLLoader deleteBikeLoader;
-    private FXMLLoader  adminLoader;
+    private FXMLLoader adminLoader;
     private FXMLLoader changeUserViewLoader;
     private FXMLLoader changeTryLoader;
-    private  FXMLLoader addBikeLoader;
-    private  Scene loginScene;
+    private FXMLLoader addBikeLoader;
+    private Scene loginScene;
     private Scene mainScene;
     private Scene adminScene;
     private Scene addBikeScene;
     private Scene deleteBikeScene;
     private Scene changeUserScene;
     private Scene newUserScene;
+   private Scene statViewScean;
+
 
     private static SpiderView spider;
 
@@ -41,10 +45,10 @@ public class Main extends Application {
         this.primaryStage.show();
     }
 
-    public void showLoginView(){
+    public void showLoginView() {
         try {
             primaryStage.setScene(loginScene);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -82,21 +86,53 @@ public class Main extends Application {
         }
     }
 
-  public void showChangeUserView(){
-      if(changeUserScene == null) {
-          try {
-              FXMLLoader changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserView1.fxml"));
-         Parent changeRoot = changeTryLoader.load();
-              changeUserScene = new Scene(changeRoot);
-              primaryStage.setScene(changeUserScene);
-          }catch (Exception e){
-              e.printStackTrace();
-          }
-      } else {
-          primaryStage.setScene(changeUserScene);
-      }
-  }
+    public void showChangeUserView() {
+        if (changeUserScene == null) {
+            try {
+                FXMLLoader changeTryLoader = new FXMLLoader(getClass().getResource("../View/changeUserView1.fxml"));
+                Parent changeRoot = changeTryLoader.load();
+                changeUserScene = new Scene(changeRoot);
+                primaryStage.setScene(changeUserScene);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            primaryStage.setScene(changeUserScene);
+        }
+    }
 
+    public void showStatView(){
+        if(statViewScean == null){
+            try {
+               FXMLLoader statLoader = new FXMLLoader(getClass().getResource("../View/statView.fxml"));
+                Parent statRoot = statLoader.load();
+                statViewScean = new Scene(statRoot);
+                primaryStage.setScene(statViewScean);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        } else {
+            primaryStage.setScene(statViewScean);
+        }
+    }
+
+    public void showStatView1(PieChart pieChart) {
+        //TODO Jag tror itne det här är en så bra modell... Ulrika Goloconda
+        if(statViewScean ==  null) {
+            StackPane root = new StackPane();
+            root.getChildren().add(pieChart);
+             statViewScean = new Scene(root, 300, 250);
+        }
+    }
+
+//TOD här kommer det kluriga..
+  /*  Scene statViewScean = new Scene(root, 300, 250);
+    //Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);
+    //TODO
+    Scene statViewScean = new Scene(root, 400, 450);
+    Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);
+*/
 
     public void showDeleteView() {
         if(deleteBikeScene == null) {

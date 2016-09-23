@@ -51,15 +51,13 @@ public class AddBikeController implements Initializable {
 
     public void showDeleteView(ActionEvent actionEvent) {
         Main.getSpider().getLoginView().showMainGui();
-       // loginView.showMainGui();
     }
 
 
     public void addBike(ActionEvent actionEvent) {
         if (newBike.equals(null)) {
-            // } else if (newBike.getCreatedBy().equals(loginView.getCurrentUser())) {
-            //TODO fixa detta när koden satts ihop
-        } else if (true) {
+            newBike = new Bike();
+        } else {
             if (brandText.getText().length() > 0) {
                 newBike.setBrandName(brandText.getText());
             }
