@@ -33,8 +33,8 @@ public class StatViewController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         Main.getSpider().setStatViewContrller(this);
         dbaccess = new DBAccessImpl();
-        StatView.DoughnutChartView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()) );
-        StatView.DoughnutChartView("Lediga cyklar",25,"Upptagna cyklar", (100-25) );
+        //StatView.DoughnutChartView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()) );
+        //StatView.DoughnutChartView("Lediga cyklar",25,"Upptagna cyklar", (100-25) );
         StatView.showStatView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()),pieChart );
     }
 
@@ -42,12 +42,12 @@ public class StatViewController implements Initializable{
         statLabel.setText(availableBikesStatistic() + "%");
     }
 
-    public int availableBikesStatistic(){
+    public float availableBikesStatistic(){
         System.out.println(dbaccess + " dbaccess ");
-        int part = dbaccess.selectAvailableBikes().size();
+        float part = dbaccess.selectAvailableBikes().size();
 
-        int total = dbaccess.getAllBikes().size();
-        int stat;
+        float total = dbaccess.getAllBikes().size();
+        float stat;
         try {
             stat = ((part / total) * 100);
         } catch (Exception e) {

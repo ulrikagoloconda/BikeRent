@@ -24,7 +24,7 @@ public class StatView {
  * StatView.DoughnutChartView("labelID1", 50, "labelID2", 50);
  */
 
-  public static void showStatView(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2, PieChart pieChart) {
+  public static void showStatView(String labelID1, float stat0To100ID1, String labelID2, float stat0To100ID2, PieChart pieChart) {
 
     if ((stat0To100ID1 + stat0To100ID2) != 100) {
       // ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 ));
@@ -40,7 +40,7 @@ public class StatView {
 
   }
 
-  private static ObservableList<PieChart.Data> getChartData(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
+  private static ObservableList<PieChart.Data> getChartData(String labelID1, float stat0To100ID1, String labelID2, float stat0To100ID2) {
 
     ObservableList<PieChart.Data> answer = FXCollections.observableArrayList();
     answer.addAll(new PieChart.Data(labelID1, stat0To100ID1),
