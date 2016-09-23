@@ -5,6 +5,7 @@ import Model.DBAccessImpl;
 import helpers.DoughnutChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
@@ -35,9 +36,6 @@ public class StatViewController implements Initializable{
         StatView.DoughnutChartView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()) );
         StatView.DoughnutChartView("Lediga cyklar",25,"Upptagna cyklar", (100-25) );
         StatView.showStatView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()),pieChart );
-
-
-
     }
 
     private void updateStatLabel() {
@@ -102,5 +100,9 @@ public class StatViewController implements Initializable{
         pieChart.setTitle("Statistik");
         StackPane root = new StackPane();
         root.getChildren().add(pieChart);
+    }
+
+    public void showMainView(Event event) {
+        Main.getSpider().getMain().showMainView();
     }
 }

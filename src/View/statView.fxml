@@ -14,11 +14,12 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.StatViewController">
    <children>
-      <PieChart fx:id="pieChart" layoutX="50.0" layoutY="159.0" />
-      <Label layoutX="96.0" layoutY="65.0" text="Statistk: ">
+      <PieChart fx:id="pieChart" layoutX="50.0" layoutY="111.0" />
+      <Label layoutX="96.0" layoutY="65.0" text="Bike Rent Statistk ">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <Button layoutX="483.0" layoutY="550.0" mnemonicParsing="false" onMouseClicked="#showMainView" text="Tillbaka " />
    </children>
 </AnchorPane>

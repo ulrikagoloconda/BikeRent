@@ -68,6 +68,8 @@ public class MainVewController implements Initializable {
         dbaccess = new DBAccessImpl();
         currentUser = Main.getSpider().getLoginView().getCurrentUser();
         populateUserTextInGUI(currentUser);
+        executeLoanBtn.setDisable(true);
+                netBtn.setDisable(true);
 
 
     }
@@ -82,28 +84,7 @@ public class MainVewController implements Initializable {
         activeLoanLabel.setText("" + bikesInUse.size());
         numberOfLoanedBikesLabel.setText("" + totalBikes.size());
 
-        // updateStatLabel();
     }
-/*
-  private void updateStatLabel() {
-    statLabel.setText(availableBikesStatistic() + "%");
-  }
-
-  public int availableBikesStatistic(){
-    int part = dbaccess.selectAvailableBikes().size();
-
-    int total = dbaccess.getAllBikes().size();
-    int stat;
-    try {
-      stat = ((part / total) * 100);
-    } catch (Exception e) {
-      e.printStackTrace();
-      ErrorView.showError(errorTitle, "fel vid inläsning av data..","Kontrollera er data.." ,  e);
-      stat = 0;
-    }
-      return stat;
-
-  }*/
 
 
     public void searchAvailableBikes(ActionEvent actionEvent) {
@@ -131,6 +112,7 @@ public class MainVewController implements Initializable {
         if (availableBikes.size() <= 3) {
             netBtn.setVisible(false);
         } else {
+            netBtn.setDisable(false);
             netBtn.setVisible(true);
         }
         String[] topList = {"Bild", "Årsmodell", "Färg", "Cykeltyp", "Modell", "Ledig?"};
@@ -249,6 +231,7 @@ public class MainVewController implements Initializable {
 
 
     public void onClickActions(Node n) {
+
         if (availableBikes == null) {
             executeLoanBtn.setVisible(true);
             selectedFromGrid = selectedBikeSearch.getBikeID();
@@ -258,6 +241,7 @@ public class MainVewController implements Initializable {
             for (Bike b : availableBikes) {
                 if (b.isAvailable()) {
                     available = "Ja";
+                    executeLoanBtn.setDisable(false);
                 } else {
                     available = "Nej";
                 }
