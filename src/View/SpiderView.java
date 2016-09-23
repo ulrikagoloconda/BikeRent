@@ -8,7 +8,7 @@ package View;
 public class SpiderView {
     private  AddBikeController addBikeView;
     private AdminViewController adminView;
-    private ChangeUserTry changeUserTry;
+    //private ChangeUserTry changeUserTry;
     private changeUserVewController changeUserVewController;
     private DeleteBikeViewController deleteView;
     private loginVewController loginView;
@@ -36,13 +36,13 @@ public class SpiderView {
         this.adminView = adminView;
     }
 
-    public ChangeUserTry getChangeUserTry() {
-        return changeUserTry;
-    }
+    //public ChangeUserTry getChangeUserTry() {
+    //    return changeUserTry;
+    //}
 
-    public void setChangeUserTry(ChangeUserTry changeUserTry) {
-        this.changeUserTry = changeUserTry;
-    }
+    //public void setChangeUserTry(ChangeUserTry changeUserTry) {
+    //    this.changeUserTry = changeUserTry;
+    //}
 
     public View.changeUserVewController getChangeUserVewController() {
         return changeUserVewController;
@@ -90,5 +90,8 @@ public class SpiderView {
 
     public void setNewUserView(newUserVewController newUserView) {
         this.newUserView = newUserView;
+    }
+
+    public void setChangeUserTry(ChangeUserTry changeUserTry) {
     }
 }

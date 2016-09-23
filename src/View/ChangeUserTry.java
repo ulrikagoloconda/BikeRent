@@ -49,6 +49,7 @@ public class ChangeUserTry implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //TODO Tänk ut detta 
         Main.getSpider().setChangeUserTry(this);
     }
     public ChangeUserTry() {

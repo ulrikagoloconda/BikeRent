@@ -28,10 +28,11 @@ public class StatView {
   public static void showStatView(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
 
     if ( (stat0To100ID1 + stat0To100ID2 ) != 100){
-      ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 ));
-      stat0To100ID1 = 25;
-      stat0To100ID2 = 75;
+     // ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 ));
+      stat0To100ID1 = 90;
+      stat0To100ID2 = 10;
     }
+
     PieChart pieChart = new PieChart();
     pieChart.setData(getChartData(labelID1, stat0To100ID1, labelID2, stat0To100ID2));
     pieChart.setTitle("Statistik");
@@ -41,11 +42,13 @@ public class StatView {
 
     StackPane root = new StackPane();
     root.getChildren().add(pieChart);
-    //här kommer det kluriga..
-    Scene statViewScean = new Scene(root, 300, 250);
+    //TOD här kommer det kluriga..
+  /*  Scene statViewScean = new Scene(root, 300, 250);
     //Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);
     //TODO 
-
+    Scene statViewScean = new Scene(root, 400, 450);
+    Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);
+*/
   }
 
   private static ObservableList<PieChart.Data> getChartData(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
@@ -60,7 +63,7 @@ public class StatView {
   public static void DoughnutChartView(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
 
     if ( (stat0To100ID1 + stat0To100ID2 ) != 100){
-      ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 ));
+      //ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 ));
       stat0To100ID1 = 25;
       stat0To100ID2 = 75;
     }
@@ -70,11 +73,15 @@ public class StatView {
       pieChart.setTitle("Statistik");
       StackPane root = new StackPane();
       root.getChildren().add(pieChart);
-      //här kommer det kluriga..
+      //TOD här kommer det kluriga..
+/*
       Scene statViewScean = new Scene(root, 300, 250);
       //Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);
     //TODO ändra detta
+      Scene statViewScean = new Scene(root, 400, 450);
+      Main.getSpider().getMain().getPrimaryStage().setScene(statViewScean);*/
 
     }
+
   }
 

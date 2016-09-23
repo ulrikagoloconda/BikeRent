@@ -356,7 +356,9 @@ ArrayList<Integer> bikesInUse = dbaccess.getUsersCurrentBikes(bikeUser.getUserID
     }
 
   public void showStatClick(ActionEvent actionEvent) {
-    StatView.DoughnutChartView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()) );
+    //StatView.DoughnutChartView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()) );
+    StatView.DoughnutChartView("Lediga cyklar",25,"Upptagna cyklar", (100-25) );
+    //StatView.showStatView("Lediga cyklar",availableBikesStatistic(),"Upptagna cyklar", (100-availableBikesStatistic()) );
   }
 
 }
