@@ -1,5 +1,5 @@
 package View;
-//troligen nej..
+//no..
 import Interfaces.DBAccess;
 import Model.BikeUser;
 import Model.DBAccessImpl;

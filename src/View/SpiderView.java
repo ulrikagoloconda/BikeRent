@@ -1,7 +1,7 @@
 package View;
 
 /**
- * @author Marcus Vidén Ulrika, Goloconda Fahlén, Jan Eriksson
+ * @authorUlrika, Goloconda Fahlén
  * @version 1.0
  * @since 2016-09-20
  */

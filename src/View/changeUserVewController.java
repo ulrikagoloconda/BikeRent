@@ -1,5 +1,9 @@
 package View;
-// ja denna..
+/**
+ * @author Niklas Karlsson
+ * @version 1.0
+ * @since 2016-09-15
+ */
 import Interfaces.DBAccess;
 import Model.BikeUser;
 import Model.DBAccessImpl;

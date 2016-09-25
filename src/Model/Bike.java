@@ -5,9 +5,9 @@ import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 
 /**
- * @author Ulrika Goloconda Fahlén
+ * @author Niklas Karlsson
  * @version 1.0
- * @since 2016-09-16
+ * @since 2016-09-15
  */
 public class Bike {
     private int bikeID;

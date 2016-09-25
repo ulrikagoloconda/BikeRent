@@ -19,7 +19,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
- * @author Marcus Vidén Ulrika, Goloconda Fahlén, Jan Eriksson
+ * @author Ulrika, Goloconda Fahlén
  * @version 1.0
  * @since 2016-09-19
  */

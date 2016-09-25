@@ -8,7 +8,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.layout.StackPane;
 
 /**
- * @author Ulrika Goloconda Fahlén
+ * @author Ulrika Goloconda Fahlén, Niklas Karlsson
  * @version 1.0
  * @since 2016-09-22
  */
@@ -50,7 +50,7 @@ public class StatView {
   }
 
   public static void DoughnutChartView(String labelID1, Integer stat0To100ID1, String labelID2, Integer stat0To100ID2) {
-    System.out.println("Körs detta  i StatView !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+   // System.out.println("Körs detta  i StatView !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     if ( (stat0To100ID1 + stat0To100ID2 ) != 100){
       //ErrorView.showError("fel" , "fel i diagram-indata", "summan blev inte 100", new Exception("summan blev inte 100 : " + stat0To100ID1 +"+" + stat0To100ID2 ));
       stat0To100ID1 = 25;

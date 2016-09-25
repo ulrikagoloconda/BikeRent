@@ -6,7 +6,9 @@ import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
 /**
- * Created by NIK1114 on 2016-09-18.
+ * @author Niklas Karlsson
+ * @version 1.0
+ * @since 2016-09-15
  */
 public class DialogView {
 

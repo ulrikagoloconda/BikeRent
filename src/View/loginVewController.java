@@ -18,7 +18,11 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import static Model.DBUtil.processException;
-
+/**
+ * @author Niklas Karlsson
+ * @version 1.0
+ * @since 2016-09-15
+ */
 public class loginVewController implements Initializable{
     @FXML
     private TextField userNameText;

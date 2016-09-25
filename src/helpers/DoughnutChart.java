@@ -1,7 +1,9 @@
 package helpers;
 
 /**
- * Created by NIK1114 on 2016-09-22.
+ * @author Niklas Karlsson
+ * @version 1.0
+ * @since 2016-09-15
  */
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;

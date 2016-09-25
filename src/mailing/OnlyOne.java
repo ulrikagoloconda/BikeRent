@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.net.BindException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
-
+/**
+ * @author Niklas Karlsson
+ * @version 1.0
+ * @since 2016-09-15
+ */
 public interface OnlyOne {
 	
 		static boolean closeThis() {

@@ -1,10 +1,11 @@
 package helpers;
-import javax.swing.*;
 import java.awt.*;
 
 
 /**
  * @author Niklas Karlsson
+ * @version 1.0
+ * @since 2016-09-15
  * All the Screen-helper
  * (and Mouse)
  * 

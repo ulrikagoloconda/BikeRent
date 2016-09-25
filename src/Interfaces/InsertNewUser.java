@@ -3,7 +3,9 @@ package Interfaces;
 import java.sql.SQLException;
 
 /**
- * Created by NIK1114 on 2016-09-15.
+ * @author Niklas Karlsson
+ * @version 1.0
+ * @since 2016-09-15
  */
 public interface InsertNewUser {
 

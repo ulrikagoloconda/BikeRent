@@ -12,6 +12,12 @@ import java.util.Properties;
 //70 send email: http://www.rgagnon.com/javadetails/java-0083.html
 //http://www.codejava.net/java-ee/javamail/send-e-mail-with-attachment-in-java
 
+/**
+ * @author Niklas Karlsson
+ * @version 1.0
+ * @since 2016-09-15
+ */
+
 public interface SentMail extends OnlyOne {
 
   String AdminEmail = "cykeltur@gmail.com";

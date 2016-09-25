@@ -5,7 +5,9 @@ import javafx.scene.layout.Pane;
 import java.awt.*;
 
 /**
- * Created by NIK1114 on 2016-09-16.
+ * @author Niklas Karlsson
+ * @version 1.0
+ * @since 2016-09-15
  */
 public class PCRelated {
 

@@ -10,7 +10,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * Created by NIK1114 on 2016-09-18.
+ * @author Niklas Karlsson
+ * @version 1.0
+ * @since 2016-09-15
  */
 public class ErrorView {
 
